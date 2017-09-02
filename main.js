@@ -5,8 +5,8 @@ let win;
 function createWindow(){
 	// Create browser window
 	win = new BrowserWindow({
-		width: 1200,
-		height: 800
+		width: 1600,
+		height: 900
 	});
 
 	win.loadURL(`file://${__dirname}/dist/index.html`);
