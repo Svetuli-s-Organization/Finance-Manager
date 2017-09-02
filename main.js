@@ -9,7 +9,7 @@ function createWindow(){
 		height: 800
 	});
 
-	win.loadURL(`file://${__dirname}/index.html`);
+	win.loadURL(`file://${__dirname}/dist/index.html`);
 
 	// Open Dev Tools
 	win.webContents.openDevTools();
