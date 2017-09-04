@@ -8,13 +8,11 @@ import { MdButtonModule, MdCheckboxModule } from '@angular/material';
 import { routing } from './app.routes';
 
 import { AppComponent } from './app.component';
-import { TestComponent } from './components/test/test.component';
 import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent,
     MainComponent
   ],
   imports: [
