@@ -9,6 +9,6 @@ body{
 /* END OF CSS RESET */
 
 .main-content{
-	background-color: lightblue;
 	height: 900px;
+	background-color: #ffffff;
 }

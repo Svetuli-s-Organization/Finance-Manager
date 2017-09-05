@@ -4,4 +4,13 @@ md-sidenav {
 
 md-nav-list {
 	padding-top: 0px;
+	height: 900px;
+}
+
+md-nav-list a{
+
+}
+
+md-nav-list a:hover {
+
 }
