@@ -1,10 +1,9 @@
 <md-sidenav-container>
   <md-sidenav mode="side" opened="true">
-		<md-list>
- 			<md-list-item>Pepper</md-list-item>
- 			<md-list-item>Salt</md-list-item>
- 			<md-list-item>Paprika</md-list-item>
-		</md-list>
+		<md-nav-list>
+			<a md-list-item routerLink="/">Home</a>
+   		<a md-list-item routerLink="/test">Test</a>
+		</md-nav-list>
 	</md-sidenav>
 
 	<router-outlet></router-outlet>
