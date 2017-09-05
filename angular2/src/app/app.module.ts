@@ -9,11 +9,15 @@ import { routing } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
+import { TestComponent } from './components/test/test.component';
+import { ContentComponent } from './components/content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    TestComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
