@@ -1,9 +1,9 @@
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './components/main/main.component';
+import { ContentComponent } from './components/content/content.component';
 import { TestComponent } from './components/test/test.component';
 
 const routes: Routes = [
-	{ path: '', component: MainComponent },
+	{ path: '', component: ContentComponent },
 	{ path: 'test', component: TestComponent }
 ];
 
