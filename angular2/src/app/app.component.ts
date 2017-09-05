@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MdSidenavModule, MdListModule } from '@angular/material';
 
 @Component({
   selector: 'app-root',

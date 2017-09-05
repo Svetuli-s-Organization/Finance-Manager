@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MdButtonModule, MdCheckboxModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule, MdSidenavModule, MdListModule } from '@angular/material';
 
 import { routing } from './app.routes';
 
@@ -20,6 +20,8 @@ import { MainComponent } from './components/main/main.component';
 		BrowserAnimationsModule,
 		MdButtonModule,
 		MdCheckboxModule,
+		MdSidenavModule,
+		MdListModule,
 		routing
   ],
   providers: [],
