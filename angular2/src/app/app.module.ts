@@ -10,14 +10,14 @@ import { routing } from './app.routes';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { TestComponent } from './components/test/test.component';
-import { ContentComponent } from './components/content/content.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     TestComponent,
-    ContentComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
