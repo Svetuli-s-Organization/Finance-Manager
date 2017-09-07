@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdTableModule } from '@angular/material';
 
 @Component({
   selector: 'app-add',
