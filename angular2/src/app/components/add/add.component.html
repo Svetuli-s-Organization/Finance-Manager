@@ -1,12 +1,12 @@
 <div class="main-content">
 	<div class="section-wrapper">
 		<md-table #table [dataSource]="dataSource">
-			<ng-container mdColumnDef="food">
-				<md-header-cell *mdHeaderCellDef> Food </md-header-cell>
-				<md-cell *mdCellDef="let element"> {{element.food}} </md-cell>
+			<ng-container *ngFor="let col_ of _columns; let i = index" mdColumnDef="{{ col_ }}">
+				<md-header-cell *mdHeaderCellDef> {{ col_ }} </md-header-cell>
+				<md-cell *mdCellDef> {{_colums[i]}} </md-cell>
 			</ng-container>
 
-			<ng-container mdColumnDef="electricity">
+			<!-- <ng-container mdColumnDef="electricity">
 				<md-header-cell *mdHeaderCellDef> Electricity </md-header-cell>
 				<md-cell *mdCellDef="let element"> {{element.electricity}} </md-cell>
 			</ng-container>
@@ -29,10 +29,10 @@
 			<ng-container mdColumnDef="other">
 				<md-header-cell *mdHeaderCellDef> Other </md-header-cell>
 				<md-cell *mdCellDef="let element"> {{element.other}} </md-cell>
-			</ng-container>
+			</ng-container> -->
 
-			<md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-			<md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+			<md-header-row *mdHeaderRowDef="_colums"></md-header-row>
+			<md-row *mdRowDef="let row; columns: _columns;"></md-row>
 		</md-table>
 	</div>
 </div>

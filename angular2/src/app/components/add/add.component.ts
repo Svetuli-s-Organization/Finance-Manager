@@ -31,25 +31,35 @@ export class AddComponent implements OnInit {
 // }
 
 export class Element {
-	colums: Array<string>;
+	_colums: [string];
 
 	constructor(){
-		this.colums = ['day', 'food', 'electricity', 'water', 'internet', 'tv', 'other'];
+		this._colums = ['month', 'food', 'electricity', 'water', 'internet', 'tv', 'other'];
 	}
 
 	addColumn(col: string){
-		this.colums.push(col);
+		this._colums.push(col);
 	}
 
 	getColumns(){
-		return this.colums;
+		return this._colums;
 	}
 }
 
-const data = [
-  { food: 15.33, electricity: 10.25, water: 1.17, internet: 25, tv: 14.10, other: 25.63 },
-	{ food: 15.33, electricity: 10.25, water: 1.17, internet: 25, tv: 14.10, other: 25.63 },
-];
+// const data = [
+//   { food: 15.33, electricity: 10.25, water: 1.17, internet: 25, tv: 14.10, other: 25.63 },
+// 	{ food: 15.33, electricity: 10.25, water: 1.17, internet: 25, tv: 14.10, other: 25.63 },
+// ];
+
+var data = [];
+let elem = new Element();
+let columns = elem.getColumns();
+let obj = {};
+
+for(let i = 0; i < columns.length; i++){
+	obj[columns[i]] = Math.floor((Math.random() * 10) + 1);
+}
+data.push(obj);
 
 export class ExampleDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
