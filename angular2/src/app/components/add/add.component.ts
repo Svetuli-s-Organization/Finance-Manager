@@ -21,13 +21,29 @@ export class AddComponent implements OnInit {
 
 }
 
-export interface Element {
-  food: number;
-  electricity: number;
-  water: number;
-  internet: number;
-	tv: number;
-	other: number;
+// export interface Element {
+//   food: number;
+//   electricity: number;
+//   water: number;
+//   internet: number;
+// 	tv: number;
+// 	other: number;
+// }
+
+export class Element {
+	colums: Array<string>;
+
+	constructor(){
+		this.colums = ['day', 'food', 'electricity', 'water', 'internet', 'tv', 'other'];
+	}
+
+	addColumn(col: string){
+		this.colums.push(col);
+	}
+
+	getColumns(){
+		return this.colums;
+	}
 }
 
 const data = [
