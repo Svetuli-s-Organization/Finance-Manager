@@ -1,38 +1,38 @@
 <div class="main-content">
 	<div class="section-wrapper">
-		<div class="example-container mat-elevation-z8">
-		  <md-table #table [dataSource]="dataSource">
+		<md-table #table [dataSource]="dataSource">
+			<ng-container mdColumnDef="food">
+				<md-header-cell *mdHeaderCellDef> Food </md-header-cell>
+				<md-cell *mdCellDef="let element"> {{element.food}} </md-cell>
+			</ng-container>
 
-		    <!--- Note that these columns can be defined in any order.
-		          The actual rendered columns are set as a property on the row definition" -->
+			<ng-container mdColumnDef="electricity">
+				<md-header-cell *mdHeaderCellDef> Electricity </md-header-cell>
+				<md-cell *mdCellDef="let element"> {{element.electricity}} </md-cell>
+			</ng-container>
 
-		    <!-- Position Column -->
-		    <ng-container mdColumnDef="position">
-		      <md-header-cell *mdHeaderCellDef> No. </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.position}} </md-cell>
-		    </ng-container>
+			<ng-container mdColumnDef="water">
+				<md-header-cell *mdHeaderCellDef> Water </md-header-cell>
+				<md-cell *mdCellDef="let element"> {{element.water}} </md-cell>
+			</ng-container>
 
-		    <!-- Name Column -->
-		    <ng-container mdColumnDef="name">
-		      <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.name}} </md-cell>
-		    </ng-container>
+			<ng-container mdColumnDef="internet">
+				<md-header-cell *mdHeaderCellDef> Internet </md-header-cell>
+				<md-cell *mdCellDef="let element"> {{element.internet}} </md-cell>
+			</ng-container>
 
-		    <!-- Weight Column -->
-		    <ng-container mdColumnDef="weight">
-		      <md-header-cell *mdHeaderCellDef> Weight </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.weight}} </md-cell>
-		    </ng-container>
+			<ng-container mdColumnDef="tv">
+				<md-header-cell *mdHeaderCellDef> TV </md-header-cell>
+				<md-cell *mdCellDef="let element"> {{element.tv}} </md-cell>
+			</ng-container>
 
-		    <!-- Color Column -->
-		    <ng-container mdColumnDef="symbol">
-		      <md-header-cell *mdHeaderCellDef> Symbol </md-header-cell>
-		      <md-cell *mdCellDef="let element"> {{element.symbol}} </md-cell>
-		    </ng-container>
+			<ng-container mdColumnDef="other">
+				<md-header-cell *mdHeaderCellDef> Other </md-header-cell>
+				<md-cell *mdCellDef="let element"> {{element.other}} </md-cell>
+			</ng-container>
 
-		    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-		    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-		  </md-table>
-		</div>
+			<md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+			<md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+		</md-table>
 	</div>
 </div>
