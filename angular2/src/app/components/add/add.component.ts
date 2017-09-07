@@ -30,14 +30,14 @@ export interface Element {
 	other: number;
 }
 
-const data: Element[] = [
+const data = [
   { food: 15.33, electricity: 10.25, water: 1.17, internet: 25, tv: 14.10, other: 25.63 },
 	{ food: 15.33, electricity: 10.25, water: 1.17, internet: 25, tv: 14.10, other: 25.63 },
 ];
 
 export class ExampleDataSource extends DataSource<any> {
   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Element[]> {
+  connect(): Observable<any> {
     return Observable.of(data);
   }
 
