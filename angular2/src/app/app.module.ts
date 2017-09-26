@@ -11,6 +11,7 @@ import { MainComponent } from './components/main/main.component';
 import { AddComponent } from './components/add/add.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { TestComponent } from './components/test/test.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { TestComponent } from './components/test/test.component';
     MainComponent,
     AddComponent,
     StatisticsComponent,
-    TestComponent
+    TestComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
