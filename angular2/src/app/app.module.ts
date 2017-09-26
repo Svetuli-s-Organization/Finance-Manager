@@ -7,7 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { routing } from './app.routes';
 
 import { AppComponent } from './app.component';
-import { MainComponent } from './components/main/main.component';
 import { AddComponent } from './components/add/add.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { TestComponent } from './components/test/test.component';
@@ -16,7 +15,6 @@ import { HomeComponent } from './components/home/home.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
     AddComponent,
     StatisticsComponent,
     TestComponent,
