@@ -9,12 +9,14 @@ import { routing } from './app.routes';
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { AddComponent } from './components/add/add.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    AddComponent
+    AddComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
