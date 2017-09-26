@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
+import { routing } from './app.routes';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -13,7 +15,8 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+		routing
   ],
   providers: [],
   bootstrap: [AppComponent]
