@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
 import { AddComponent } from './components/add/add.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     AddComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
