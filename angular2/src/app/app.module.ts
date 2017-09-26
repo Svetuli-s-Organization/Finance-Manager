@@ -8,11 +8,13 @@ import { routing } from './app.routes';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './components/main/main.component';
+import { AddComponent } from './components/add/add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
