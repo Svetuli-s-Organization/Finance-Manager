@@ -1,6 +1,7 @@
 {
   "name": "finance-manager",
   "version": "0.0.0",
+  "main": "main.js",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
