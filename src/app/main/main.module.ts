@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainComponent } from './main/main.component';
+import { HomeComponent } from './home/home.component';
 import { AddComponent } from './add/add.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 
@@ -8,7 +8,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
   imports: [
     CommonModule
   ],
-  declarations: [MainComponent, AddComponent, StatisticsComponent],
-  exports: [MainComponent]
+  declarations: [HomeComponent, AddComponent, StatisticsComponent],
+  exports: [HomeComponent]
 })
 export class MainModule { }
