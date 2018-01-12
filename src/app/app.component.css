@@ -29,3 +29,8 @@
 #side-nav li.active a {
   background-color: #eeeeee;
 }
+
+#main-content {
+  height: 100%;
+  padding: 0px;
+}
