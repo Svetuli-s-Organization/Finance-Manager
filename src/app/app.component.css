@@ -1,0 +1,35 @@
+#page-wrapper {
+  width: 1386px;
+  height: 768px;
+}
+
+#main-content {
+  height: 100%;
+}
+
+#main-row {
+  height: 100%;
+}
+
+#side-nav {
+  height: 100%;
+  background-color: #d9d9d9;
+  padding: 0px;
+}
+
+#side-nav li {
+  margin: 0px;
+}
+
+#side-nav li a {
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  padding: 0px;
+  border-radius: 0px;
+  color: #000000;
+}
+
+#side-nav li.active a {
+  background-color: #eeeeee;
+}
