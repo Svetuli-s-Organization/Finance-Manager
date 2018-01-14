@@ -8,7 +8,8 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class AddComponent implements OnInit {
 
-  date: string;
+  inputDate: any;
+  formatedDate: string;
   bsConfig: Partial<BsDatepickerConfig> = {
     containerClass: 'theme-blue'
   };
@@ -18,8 +19,13 @@ export class AddComponent implements OnInit {
   ngOnInit() {
   }
 
-  pickDate(datePicker) {
-    datePicker.show();
+  getDate(datePicker) {
+    this.converDate();
+  }
+
+  converDate() {
+    let dtf = new Intl.DateTimeFormat(['en-GB']);
+    this.formatedDate = dtf.format(this.inputDate);
   }
 
 }

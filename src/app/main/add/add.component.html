@@ -10,9 +10,9 @@
       <div class="col-lg-5 form-group">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" [(ngModel)]="date">
+            <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" [(ngModel)]="inputDate" (bsValueChange)="getDate()">
             <div class="input-group-btn">
-              <button class="btn btn-primary" (click)="pickDate(dp)">Date</button>
+              <button class="btn btn-primary" (click)="dp.show();">Date</button>
             </div>
           </div>
         </div>
