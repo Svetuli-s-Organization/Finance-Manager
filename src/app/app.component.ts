@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  setActive(clicked: any, otherItems: any[]) {
+    clicked.classList.add('active');
+    for(const item of otherItems) {
+      item.classList.remove('active');
+    }
+  }
+
 }
