@@ -21,7 +21,6 @@ export class AddComponent implements OnInit {
 
   setDate() {
     this.converDate();
-    console.log(this.formatedDate);
   }
 
   converDate() {
