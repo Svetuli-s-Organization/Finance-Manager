@@ -4,3 +4,10 @@
 h1, h2, h3, h4, h5, h6 {
   margin: 0px;
 }
+
+.main-title {
+  display: inline-block;
+  font-size: 40px;
+  margin-left: 10px;
+  border-bottom: 3px solid black;
+}
