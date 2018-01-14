@@ -1,1 +1,23 @@
-<p>Add items</p>
+<h1 class="main-title">Add items</h1>
+
+<div class="content">
+
+  <div id="date-picker">
+    <div class="row">
+      <h3 class="col-lg-5 form-label">Pick a date:</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-5 form-group">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig">
+            <div class="input-group-btn">
+              <button class="btn btn-primary" (click)="dp.show() ">Date</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

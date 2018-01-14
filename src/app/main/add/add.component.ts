@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-add',
@@ -6,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+
+  bsConfig: Partial<BsDatepickerConfig> = {
+    containerClass: 'theme-blue'
+  };
 
   constructor() { }
 
