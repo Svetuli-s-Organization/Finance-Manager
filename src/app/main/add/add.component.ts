@@ -8,6 +8,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class AddComponent implements OnInit {
 
+  date: string;
   bsConfig: Partial<BsDatepickerConfig> = {
     containerClass: 'theme-blue'
   };
@@ -15,6 +16,10 @@ export class AddComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  pickDate(datePicker) {
+    datePicker.show();
   }
 
 }
