@@ -1,3 +1,7 @@
 #date-picker .form-group {
   padding-right: 0px;
 }
+
+#date-picker input {
+  width: 405px;
+}
