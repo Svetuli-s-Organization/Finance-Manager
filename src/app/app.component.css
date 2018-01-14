@@ -7,6 +7,10 @@
   height: 100%;
 }
 
+#main-content {
+  padding: 20px;
+}
+
 #side-nav {
   height: 100%;
   background-color: #d9d9d9;
