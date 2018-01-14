@@ -19,8 +19,9 @@ export class AddComponent implements OnInit {
   ngOnInit() {
   }
 
-  getDate(datePicker) {
+  setDate() {
     this.converDate();
+    console.log(this.formatedDate);
   }
 
   converDate() {
