@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-add',
@@ -14,7 +14,9 @@ export class AddComponent implements OnInit {
     containerClass: 'theme-blue'
   };
 
-  constructor() { }
+  constructor(private _localeService: BsLocaleService) {
+    this._localeService.use('en-gb');
+  }
 
   ngOnInit() {
   }

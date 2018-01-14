@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/bs-moment';
+import { enGb } from 'ngx-bootstrap/locale';
+defineLocale('en-gb', enGb);
 
 import { HomeComponent } from './home/home.component';
 import { AddComponent } from './add/add.component';
