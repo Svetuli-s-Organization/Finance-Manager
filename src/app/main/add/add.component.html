@@ -2,7 +2,7 @@
 
 <div class="content">
 
-  <form>
+  <form [formGroup]="addForm">
 
     <div id="date-picker">
       <div class="row">
@@ -12,7 +12,10 @@
         <div class="col-lg-1 form-group">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" name="date" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" [(ngModel)]="inputDate" (ngModelChange)="convertDate()">
+              <input type="text" class="form-control" name="date"
+                bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"
+                formControlName="date">
+
               <div class="input-group-btn">
                 <button class="btn btn-primary" (click)="dp.show();">Date</button>
               </div>
@@ -27,15 +30,15 @@
         <h3 class="col-lg-5 form-label">Add item:</h3>
       </div>
       <div class="row">
-        <form class="form-inline col-lg-5">
+        <div class="form-inline col-lg-5">
           <div class="form-group">
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="price" placeholder="Price">
+            <input type="text" class="form-control" id="price" placeholder="Price" formControlName="price">
           </div>
-          <button type="submit" class="btn btn-primary">Add</button>
-        </form>
+          <button type="submit" class="btn btn-primary" (click)="addItem()">Add</button>
+        </div>
       </div>
     </div>
 
