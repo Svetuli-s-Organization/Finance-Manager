@@ -9,25 +9,26 @@ import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 export class AddComponent implements OnInit {
 
   inputDate: any;
-  formatedDate: string;
+  convertedDate: string;
   bsConfig: Partial<BsDatepickerConfig> = {
-    containerClass: 'theme-blue'
+    containerClass: 'theme-blue',
+    dateInputFormat: 'DD.MM.YYYY'
   };
 
-  constructor(private _localeService: BsLocaleService) {
-    this._localeService.use('en-gb');
-  }
+  constructor() {}
 
   ngOnInit() {
+    this.inputDate = new Date();
+    this.convertDate();
   }
 
-  setDate() {
-    this.converDate();
-  }
+  public convertDate() {
+    let day: number = this.inputDate.getDate();
+    let month: number = this.inputDate.getMonth() + 1;
+    let year: number = this.inputDate.getFullYear();
+    let formatedDate = ('0' + day).slice(-2) + '.' + ('0' + month).slice(-2) + '.' + year;
 
-  converDate() {
-    let dtf = new Intl.DateTimeFormat(['en-GB']);
-    this.formatedDate = dtf.format(this.inputDate);
+    this.convertedDate = formatedDate;
   }
 
 }
