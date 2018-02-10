@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
@@ -12,6 +12,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     BsDatepickerModule.forRoot()
   ],
   declarations: [HomeComponent, AddComponent, StatisticsComponent],
