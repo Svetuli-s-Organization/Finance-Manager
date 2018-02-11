@@ -41,7 +41,40 @@ export class AddComponent implements OnInit {
     if(dateIsInvalid) {
       this.addForm.controls.date.setErrors({ 'incorrect': true });
     }
-    console.log(this.addForm.value);
+
+    this.formatPrice();
+
+    // console.log(this.addForm.controls.price.value);
+    // console.log(this.addForm.value);
+  }
+
+  private formatPrice() {
+    let price: string = this.addForm.controls.price.value;
+
+    let noDecimal: boolean = /^[0-9]{1,}$/.test(price);
+    let longDecimal: boolean = /^[0-9]{1,}\.[0-9]{3,}$/.test(price);
+    let shortDecimal: boolean = /^[0-9]{1,}\.[0-9]{1}$/.test(price);
+    let startsWithZero: boolean = /(^[0][1-9]{1,}$)|(^[0][1-9]{1,}\.[0-9]{0,}$)/.test(price);
+
+    if(startsWithZero) {
+      price = price.slice(1, price.length);
+      this.addForm.controls.price.patchValue(price);
+    }
+
+    if(noDecimal) {
+      price = price + '.00';
+      this.addForm.controls.price.patchValue(price);
+    }
+
+    if(longDecimal) {
+      price = (Math.round(Number(price) * 100) / 100).toString();
+      this.addForm.controls.price.patchValue(price);
+    }
+
+    if(shortDecimal) {
+      price = price + '0';
+      this.addForm.controls.price.patchValue(price);
+    }
   }
 
 }
