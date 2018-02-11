@@ -14,7 +14,7 @@
             <div class="input-group">
               <input type="text" class="form-control" name="date"
                 bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"
-                formControlName="date">
+                formControlName="date" #date>
 
               <div class="input-group-btn">
                 <button class="btn btn-primary" (click)="dp.show();">Date</button>
