@@ -37,7 +37,7 @@
           <div class="form-group">
             <input type="text" class="form-control" id="price" placeholder="Price" formControlName="price">
           </div>
-          <button type="submit" class="btn btn-primary" (click)="addItem()">Add</button>
+          <button class="btn btn-primary" (click)="addItem()" [disabled]="addForm.invalid">Add</button>
         </div>
       </div>
     </div>
