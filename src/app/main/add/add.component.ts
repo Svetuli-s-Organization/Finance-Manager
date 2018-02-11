@@ -30,7 +30,7 @@ export class AddComponent implements OnInit {
     this.addForm = new FormGroup({
       date: new FormControl(this.inputDate),
       name: new FormControl('', [Validators.required]),
-      price: new FormControl('', [numberValidator]),
+      price: new FormControl('', [Validators.required, numberValidator]),
     });
   }
 
