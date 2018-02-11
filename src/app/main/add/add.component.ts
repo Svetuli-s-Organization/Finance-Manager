@@ -35,17 +35,20 @@ export class AddComponent implements OnInit {
   }
 
   public addItem() {
+    this.processDate();
+    this.formatPrice();
+
+    console.log(this.addForm.value);
+    console.log(this.addForm.valid);
+  }
+
+  private processDate() {
     let formatedDate: string = this.date.nativeElement.value;
     let dateIsInvalid: boolean = !/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/.test(formatedDate);
 
     if(dateIsInvalid) {
       this.addForm.controls.date.setErrors({ 'incorrect': true });
     }
-
-    this.formatPrice();
-
-    // console.log(this.addForm.controls.price.value);
-    // console.log(this.addForm.value);
   }
 
   private formatPrice() {
