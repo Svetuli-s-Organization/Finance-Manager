@@ -1,8 +1,10 @@
 module.exports.template = [
     {
-      label: 'Edit',
+      label: 'File',
       submenu: [
-        { label: 'asdf' }
+        { label: 'Open' },
+        { label: 'Save' },
+        { label: 'Save as' },
       ]
     }
   ]
