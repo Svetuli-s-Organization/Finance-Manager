@@ -11,7 +11,7 @@ export class AppComponent {
 
   constructor(private electronService: ElectronService) {
     this.electronService.ipcRenderer.on('open', (event, file) => {
-      console.log(file);
+      console.log(JSON.parse(file));
     });
   }
 
