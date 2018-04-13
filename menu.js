@@ -16,8 +16,10 @@ module.exports = function(window) {
 
 function openFile(win) {
   dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (filePath) => {
-    fs.readFile(filePath[0], 'utf-8', (err, data) => {
-      win.webContents.send('open', data);
-    });
+    if(filePath) {
+      fs.readFile(filePath[0], 'utf-8', (err, data) => {
+        win.webContents.send('open', data);
+      });
+    }
   });
 }
