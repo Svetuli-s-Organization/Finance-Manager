@@ -6,6 +6,8 @@ import { Routing } from './app.routes';
 import { AppComponent } from './app.component';
 import { MainModule } from './main/main.module';
 
+import { NgxElectronModule } from 'ngx-electron';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +15,8 @@ import { MainModule } from './main/main.module';
   imports: [
     BrowserModule,
     Routing,
-    MainModule
+    MainModule,
+    NgxElectronModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
