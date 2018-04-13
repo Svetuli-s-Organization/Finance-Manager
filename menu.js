@@ -2,7 +2,7 @@ const { dialog } = require('electron');
 const fs = require('fs');
 
 module.exports = function(window) {
-  return [
+  const template = [
     {
       label: 'File',
       submenu: [
@@ -12,6 +12,23 @@ module.exports = function(window) {
       ]
     }
   ];
+
+  if(process.env.NODE_ENV !== 'production') {
+    template.push({
+      label: 'Developer tools',
+      submenu: [
+        {
+          label: 'Toggle DevTools',
+          accelerator: 'Ctrl+I',
+          click(item, focusedWindow) {
+            focusedWindow.toggleDevTools();
+          }
+        }
+      ]
+    })
+  }
+
+  return template;
 }
 
 function openFile(win) {
