@@ -3,15 +3,18 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 
+import { Item } from '@main/item';
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
-  styleUrls: ['./add.component.css']
+  styleUrls: ['./add.component.scss']
 })
 export class AddComponent implements OnInit {
 
   inputDate: any;
   addForm: FormGroup;
+  public addedItems: Item[] = [];
 
   @ViewChild('date') date: ElementRef;
 
@@ -38,8 +41,7 @@ export class AddComponent implements OnInit {
     this.processDate();
     this.formatPrice();
 
-    console.log(this.addForm.value);
-    console.log(this.addForm.valid);
+    this.addedItems.push(new Item(this.addForm.value.name, this.addForm.value.price, this.addForm.value.date));
   }
 
   private processDate() {
