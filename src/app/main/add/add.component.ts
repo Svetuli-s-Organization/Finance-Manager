@@ -42,6 +42,7 @@ export class AddComponent implements OnInit {
     this.formatPrice();
 
     this.addedItems.push(new Item(this.addForm.value.name, this.addForm.value.price, this.addForm.value.date));
+    this.addForm.patchValue({ name: '', price: '' });
   }
 
   private processDate() {
