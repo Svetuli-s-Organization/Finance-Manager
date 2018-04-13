@@ -1,16 +1,23 @@
 const { dialog } = require('electron');
+const fs = require('fs');
 
-module.exports.template = [
-  {
-    label: 'File',
-    submenu: [
-      { label: 'Open', click: () => openFile() },
-      { label: 'Save' },
-      { label: 'Save as' },
-    ]
-  }
-]
+module.exports = function(window) {
+  return [
+    {
+      label: 'File',
+      submenu: [
+        { label: 'Open', click: () => openFile(window) },
+        { label: 'Save' },
+        { label: 'Save as' },
+      ]
+    }
+  ];
+}
 
-function openFile() {
-  dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ extensions: ['*'] }]});
+function openFile(win) {
+  dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ extensions: ['*'] }]}, (filePath) => {
+    fs.readFile(filePath[0], 'utf-8', (err, data) => {
+      win.webContents.send('open', data);
+    });
+  });
 }
