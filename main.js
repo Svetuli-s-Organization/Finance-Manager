@@ -1,6 +1,8 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 const url = require('url');
+
+const { template } = require('./menu.js');
 
 let win;
 
@@ -16,11 +18,15 @@ function createWindow () {
     slashes: true
   }));
 
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
 
   win.on('closed', () => {
     win = null;
   });
+
+
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 }
 
 app.on('ready', createWindow);
