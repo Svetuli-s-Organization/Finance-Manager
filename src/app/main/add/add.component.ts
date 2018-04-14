@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
@@ -17,6 +17,7 @@ export class AddComponent implements OnInit {
   public addedItems: Item[] = [];
 
   @ViewChild('date') date: ElementRef;
+  @Output() savedItems: EventEmitter<Item[]> = new EventEmitter();
 
   bsConfig: Partial<BsDatepickerConfig> = {
     containerClass: 'theme-blue',
@@ -47,6 +48,10 @@ export class AddComponent implements OnInit {
 
   public removeItem(addedItemIndex: number) {
     this.addedItems.splice(addedItemIndex, 1);
+  }
+
+  public saveItems() {
+    this.savedItems.emit(this.addedItems);
   }
 
   private processDate() {
