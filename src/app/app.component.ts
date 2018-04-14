@@ -18,7 +18,7 @@ export class AppComponent {
     });
   }
 
-  setActive(clicked: any, otherItems: any[]) {
+public setActive(clicked: any, otherItems: any[]) {
     clicked.classList.add('active');
     for(const item of otherItems) {
       item.classList.remove('active');
