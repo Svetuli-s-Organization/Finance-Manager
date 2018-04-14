@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 
 import { ElectronService } from 'ngx-electron';
 
+import { Item } from '@main/item';
+import { AddComponent } from '@main/add/add.component';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,6 +23,20 @@ export class AppComponent {
     for(const item of otherItems) {
       item.classList.remove('active');
     }
+  }
+
+  private handleSavedItems(items: Item[]) {
+    console.log(items);
+  }
+
+  public onActivate(component) {
+    if(component instanceof AddComponent) {
+      component.savedItems.subscribe(this.handleSavedItems);
+    }
+  }
+
+  public onDeactivate(component) {
+
   }
 
 }

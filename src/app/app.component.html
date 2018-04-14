@@ -7,7 +7,7 @@
     </ul>
 
     <div id="main-content" class="col-xs-11">
-      <router-outlet></router-outlet>
+      <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
     </div>
   </div>
 </div>
