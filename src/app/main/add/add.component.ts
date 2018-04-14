@@ -45,6 +45,10 @@ export class AddComponent implements OnInit {
     this.addForm.patchValue({ name: '', price: '' });
   }
 
+  public removeItem(addedItemIndex: number) {
+    this.addedItems.splice(addedItemIndex, 1);
+  }
+
   private processDate() {
     let formatedDate: string = this.date.nativeElement.value;
     let dateIsInvalid: boolean = !/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/.test(formatedDate);
