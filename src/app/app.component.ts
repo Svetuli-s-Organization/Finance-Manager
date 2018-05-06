@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { ElectronService } from 'ngx-electron';
 
@@ -10,17 +10,25 @@ import { AddComponent } from '@main/add/add.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor(private electronService: ElectronService) {
+  public homeScreen: boolean;
+
+  constructor(private electronService: ElectronService, private ref: ChangeDetectorRef) {
+    this.homeScreen = true;
+  }
+
+  ngOnInit() {
     this.electronService.ipcRenderer.on('open', (event, file) => {
       console.log(JSON.parse(file));
+      this.homeScreen = false;
+      this.ref.detectChanges();
     });
   }
 
   public setActive(clicked: any, otherItems: any[]) {
     clicked.classList.add('active');
-    for(const item of otherItems) {
+    for (const item of otherItems) {
       item.classList.remove('active');
     }
   }
@@ -30,7 +38,7 @@ export class AppComponent {
   }
 
   public onActivate(component) {
-    if(component instanceof AddComponent) {
+    if (component instanceof AddComponent) {
       component.savedItems.subscribe(this.handleSavedItems);
     }
   }
