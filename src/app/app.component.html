@@ -1,5 +1,9 @@
 <div id="page-wrapper">
-  <div id="main-row" class="row no-gutters">
+  <div id="home-screen" class="row no-gutters" *ngIf="homeScreen">
+    <p>Open file</p>
+    <p>Create new file</p>
+  </div>
+  <div id="main-row" class="row no-gutters" *ngIf="!homeScreen">
     <ul id="side-nav" class="nav nav-pills nav-stacked col-xs-1">
       <li role="presentation" class="active" (click)="setActive(navHome, [navAdd, navStatistics])" #navHome><a routerLink="/">Home</a></li>
       <li role="presentation" (click)="setActive(navAdd, [navHome, navStatistics])" #navAdd><a routerLink="/add" >Add</a></li>
