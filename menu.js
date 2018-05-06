@@ -1,12 +1,12 @@
 const { dialog } = require('electron');
 const fs = require('fs');
 
-module.exports = function(window) {
+exports.template = function(window) {
   const template = [
     {
       label: 'File',
       submenu: [
-        { label: 'Open', click: () => openFile(window) },
+        { label: 'Open', click: () => exports.openFile(window) },
         { label: 'Save' },
         { label: 'Save as' },
       ]
@@ -31,7 +31,7 @@ module.exports = function(window) {
   return template;
 }
 
-function openFile(win) {
+exports.openFile = function(win) {
   dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (filePath) => {
     if(filePath) {
       fs.readFile(filePath[0], 'utf-8', (err, data) => {
