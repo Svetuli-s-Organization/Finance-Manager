@@ -1,5 +1,13 @@
 const { dialog } = require('electron');
 const fs = require('fs');
+const Store = require('./store.js');
+
+const store = new Store({
+  configName: 'user-preferences',
+  defaults: {
+    windowBounds: { width: 800, height: 600 }
+  }
+});
 
 exports.template = function(window) {
   const template = [
@@ -35,6 +43,7 @@ exports.openFile = function(win) {
   dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (filePath) => {
     if(filePath) {
       fs.readFile(filePath[0], 'utf-8', (err, data) => {
+        store.set('recentFilePath', filePath[0]);
         win.webContents.send('open', data);
       });
     }
