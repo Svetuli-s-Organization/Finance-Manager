@@ -40,4 +40,8 @@ export class AppComponent implements OnInit {
 
   }
 
+  public openFile() {
+    this.electronService.ipcRenderer.send('open-file');
+  }
+
 }
