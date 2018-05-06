@@ -2,6 +2,7 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const { template } = require('./menu.js');
+const { openFile } = require('./menu.js');
 
 let win;
 
@@ -21,9 +22,12 @@ function createWindow () {
     win = null;
   });
 
-  const template = require('./menu.js')(win);
-  const menu = Menu.buildFromTemplate(template);
+  const menu = Menu.buildFromTemplate(template(win));
   Menu.setApplicationMenu(menu);
+
+  ipcMain.on('open-file', (e, arg) => {
+    openFile(win);
+  });
 }
 
 app.on('ready', createWindow);
