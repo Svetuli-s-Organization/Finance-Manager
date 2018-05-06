@@ -26,13 +26,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  public setActive(clicked: any, otherItems: any[]) {
-    clicked.classList.add('active');
-    for (const item of otherItems) {
-      item.classList.remove('active');
-    }
-  }
-
   private handleSavedItems(items: Item[]) {
     console.log(items);
   }
