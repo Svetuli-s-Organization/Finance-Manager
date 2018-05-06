@@ -8,17 +8,27 @@
 #home-screen {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 10px 0px;
   background-color: $p;
   color: $p-text;
 }
 
-#home-secreen-left-section {
+#home-screen-left-section {
+  padding-left: 10px;
   border-right: 1px solid white;
 }
 
-#home-secreen-right-section {
+#home-screen-left-section p {
+  margin-bottom: 5px;
+}
 
+#home-screen-left-section p:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#home-screen-right-section {
+  padding-left: 10px;
 }
 
 #main-row {
