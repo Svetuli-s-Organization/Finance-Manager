@@ -22,11 +22,7 @@
   padding: 0px;
 }
 
-#side-nav li {
-  margin: 0px;
-}
-
-#side-nav li a {
+#side-nav a {
   height: 60px;
   line-height: 60px;
   text-align: center;
@@ -36,11 +32,11 @@
   transition: background-color 0.15s;
 }
 
-#side-nav li a:hover {
+#side-nav a:hover {
   background-color: #66b3ff;
 }
 
-#side-nav li.active a {
+#side-nav a.active {
   background-color: #fff;
   color: #000;
   transition: background-color 0.5s;

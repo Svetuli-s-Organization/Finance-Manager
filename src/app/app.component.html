@@ -2,15 +2,22 @@
   <div id="home-screen" class="row no-gutters" *ngIf="homeScreen">
     <p>Open file</p>
     <p>Create new file</p>
+    <div class="seperator"></div>
+    <p>Recent files:</p>
+    <ul>
+      <li>File1.fmn</li>
+      <li>File2.fmn</li>
+      <li>File3.fmn</li>
+    </ul>
   </div>
   <div id="main-row" class="row no-gutters" *ngIf="!homeScreen">
-    <ul id="side-nav" class="nav nav-pills nav-stacked col-xs-1">
-      <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
-      <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/add">Add</a></li>
-      <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/statistics">Statistics</a></li>
-    </ul>
+    <div class="nav flex-column nav-pills col-1" id="side-nav" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      <a class="nav-link" routerLink="/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Add</a>
+      <a class="nav-link" routerLink="/statistics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Statistics</a>
+    </div>
 
-    <div id="main-content" class="col-xs-11">
+    <div id="main-content" class="col-11">
       <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
     </div>
   </div>
