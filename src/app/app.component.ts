@@ -58,8 +58,12 @@ export class AppComponent implements OnInit {
 
   }
 
-  public openFile() {
-    this.electronService.ipcRenderer.send('open-file');
+  public openFile(filePath?: string) {
+    if(!filePath) {
+      this.electronService.ipcRenderer.send('open-file');
+    } else {
+      
+    }
   }
 
 }
