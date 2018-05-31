@@ -1,14 +1,14 @@
 <div id="page-wrapper">
   <div id="home-screen" class="row no-gutters" *ngIf="homeScreen">
     <div id="home-screen-left-section" class="col-4">
-      <p (click)="openFile()">Open file</p>
-      <p>Create new file</p>
-      <div class="seperator"></div>
-      <p>Recent files:</p>
-      <ul>
-        <li>File1.fmn</li>
-        <li>File2.fmn</li>
-        <li>File3.fmn</li>
+      <ul class="list">
+        <li><a (click)="openFile()">Open file</a></li>
+        <li><a>Create new file</a></li>
+        <li><div class="seperator"></div></li>
+        <li><a>Recent files:</a></li>
+        <li><a>File1.fmn</a></li>
+        <li><a>File2.fmn</a></li>
+        <li><a>File3.fmn</a></li>
       </ul>
     </div>
 
@@ -18,9 +18,15 @@
   </div>
   <div id="main-row" class="row no-gutters" *ngIf="!homeScreen">
     <div class="nav flex-column nav-pills col-1" id="side-nav" role="tablist" aria-orientation="vertical">
-      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-      <a class="nav-link" routerLink="/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Add</a>
-      <a class="nav-link" routerLink="/statistics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Statistics</a>
+      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #homeEl="routerLinkActive">
+        <img src="assets/icons/home-{{ homeEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
+      </a>
+      <a class="nav-link" routerLink="/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #addEl="routerLinkActive">
+        <img src="assets/icons/plus-{{ addEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
+      </a>
+      <a class="nav-link" routerLink="/statistics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #statsEl="routerLinkActive">
+        <img src="assets/icons/stats-{{ statsEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
+      </a>
     </div>
 
     <div id="main-content" class="col-11">
