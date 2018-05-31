@@ -16,6 +16,16 @@ class Store {
 
   set(key, val) {
     this.data[key] = val;
+    this.updateFile();
+  }
+
+  push(key, val) {
+    if(this.data[key] instanceof Array) {
+      this.data[key].push(val);
+    }
+  }
+
+  updateFile() {
     fs.writeFileSync(this.path, JSON.stringify(this.data));
   }
 }
