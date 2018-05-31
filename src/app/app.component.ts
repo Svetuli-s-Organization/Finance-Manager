@@ -62,7 +62,8 @@ export class AppComponent implements OnInit {
     if(!filePath) {
       this.electronService.ipcRenderer.send('open-file');
     } else {
-      
+      // TODO: Open file ()
+      // TODO: Create file service
     }
   }
 
