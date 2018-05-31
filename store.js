@@ -14,6 +14,10 @@ class Store {
     return this.data[key];
   }
 
+  getAll() {
+    return this.data;
+  }
+
   set(key, val) {
     this.data[key] = val;
     this.updateFile();
