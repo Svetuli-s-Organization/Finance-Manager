@@ -3,6 +3,7 @@ const path = require('path');
 const url = require('url');
 const { template } = require('./menu.js');
 const { openFile } = require('./menu.js');
+const { userPreferencesStore, userMetaDataStore } = require('./stores');
 
 let win;
 
@@ -21,6 +22,8 @@ function createWindow () {
   win.on('closed', () => {
     win = null;
   });
+
+  win.webContents.send('user-preferences', );
 
   const menu = Menu.buildFromTemplate(template(win));
   Menu.setApplicationMenu(menu);

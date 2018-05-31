@@ -2,19 +2,7 @@ const { dialog } = require('electron');
 const fs = require('fs');
 const Store = require('./store.js');
 
-const userPreferencesStore = new Store({
-  configName: 'user-preferences',
-  defaults: {
-    windowBounds: { width: 800, height: 600 }
-  }
-});
-
-const userMetaDataStore = new Store({
-  configName: 'user-metadata',
-  defaults: {
-    recentFilesPaths: []
-  }
-});
+const { userPreferencesStore, userMetaDataStore } = require('./stores');
 
 exports.template = function(window) {
   const template = [
