@@ -39,12 +39,12 @@ exports.openFile = function(win) {
   dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (filePath) => {
     if(filePath) {
       fs.readFile(filePath[0], 'utf-8', (err, data) => {
-        if(!userMetaDataStore.get('recentFilesPaths').find(recentFilePath => recentFilePath == filePath[0])) {
-          let updatedFilesPaths = userMetaDataStore.get('recentFilesPaths');
-          updatedFilesPaths.unshift(filePath[0]);
-          updatedFilesPaths = updatedFilesPaths.slice(0, 3);
-          userMetaDataStore.set('recentFilesPaths', updatedFilesPaths);
-        }
+        let updatedFilesPaths = userMetaDataStore.get('recentFilesPaths');
+        updatedFilesPaths.forEach((updatedFilePath, index) => updatedFilePath == filePath[0] ? updatedFilesPaths.splice(index, 1) : null);
+        updatedFilesPaths.unshift(filePath[0]);
+        updatedFilesPaths = updatedFilesPaths.slice(0, 3);
+        userMetaDataStore.set('recentFilesPaths', updatedFilesPaths);
+
         win.webContents.send('open', data);
       });
     }
