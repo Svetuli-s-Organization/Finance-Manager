@@ -1,15 +1,15 @@
 @import '../variables.scss';
 
 #page-wrapper {
-  width: 1386px;
-  height: 768px;
+  width: 100%;
+  height: 100vh;
 }
 
 #home-screen {
   width: 100%;
   height: 100%;
-  padding: 10px 0px;
-  background-color: $p;
+  padding: 100px 70px;
+  background-color: $p-dark;
   color: $p-text;
 }
 
@@ -18,13 +18,35 @@
   border-right: 1px solid white;
 }
 
-#home-screen-left-section p {
-  margin-bottom: 5px;
+.list {
+  list-style-type: none;
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  li.clickable-list-item {
+    cursor: pointer;
+  }
+
+  li.clickable-list-item:hover {
+    text-decoration: underline;
+  }
+
+  li.seperator {
+    display: block;
+    // width: 95%;
+    height: 1px;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    margin-right: 10px;
+    background-color: #fff;
+  }
 }
 
-#home-screen-left-section p:hover {
-  text-decoration: underline;
-  cursor: pointer;
+.second-lever-list {
+  margin-top: 5px;
+  padding-left: 20px;
 }
 
 #home-screen-right-section {

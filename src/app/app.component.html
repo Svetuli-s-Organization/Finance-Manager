@@ -2,13 +2,15 @@
   <div id="home-screen" class="row no-gutters" *ngIf="homeScreen">
     <div id="home-screen-left-section" class="col-4">
       <ul class="list">
-        <li><a (click)="openFile()">Open file</a></li>
-        <li><a>Create new file</a></li>
-        <li><div class="seperator"></div></li>
+        <li class="clickable-list-item"><a (click)="openFile()">Open file</a></li>
+        <li class="clickable-list-item"><a>Create new file</a></li>
+        <li class="seperator"></li>
         <li><a>Recent files:</a></li>
-        <li><a>File1.fmn</a></li>
-        <li><a>File2.fmn</a></li>
-        <li><a>File3.fmn</a></li>
+        <ul class="list second-lever-list">
+          <li class="clickable-list-item"><a>File1.fmn</a></li>
+          <li class="clickable-list-item"><a>File2.fmn</a></li>
+          <li class="clickable-list-item"><a>File3.fmn</a></li>
+        </ul>
       </ul>
     </div>
 
