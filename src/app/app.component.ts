@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 import { ElectronService } from 'ngx-electron';
 
@@ -12,17 +12,17 @@ import { AddComponent } from '@main/add/add.component';
 })
 export class AppComponent implements OnInit {
 
-  public homeScreen: boolean;
+  public homeScreen: boolean = true;
+  public activeElement: string = 'home';
 
-  constructor(private electronService: ElectronService, private ref: ChangeDetectorRef) {
-    this.homeScreen = true;
-  }
+  constructor(private electronService: ElectronService, private zone: NgZone) {}
 
   ngOnInit() {
     this.electronService.ipcRenderer.on('open', (event, file) => {
-      console.log(JSON.parse(file));
-      this.homeScreen = false;
-      this.ref.detectChanges();
+      this.zone.run(() => {
+        console.log(JSON.parse(file));
+        this.homeScreen = false;
+      });
     });
   }
 
