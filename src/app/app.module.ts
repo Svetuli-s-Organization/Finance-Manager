@@ -8,6 +8,9 @@ import { MainModule } from './main/main.module';
 
 import { NgxElectronModule } from 'ngx-electron';
 
+// Services
+import { UserService } from '@api/electron/user/user.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +21,9 @@ import { NgxElectronModule } from 'ngx-electron';
     MainModule,
     NgxElectronModule,
   ],
-  providers: [],
+  providers: [
+    UserService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
