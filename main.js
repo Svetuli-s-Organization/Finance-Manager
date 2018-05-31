@@ -23,7 +23,8 @@ function createWindow () {
     win = null;
   });
 
-  win.webContents.send('user-preferences', );
+  win.webContents.send('user-preferences', userPreferencesStore.getAll());
+  win.webContents.send('user-metadata', userMetaDataStore.getAll());
 
   const menu = Menu.buildFromTemplate(template(win));
   Menu.setApplicationMenu(menu);
