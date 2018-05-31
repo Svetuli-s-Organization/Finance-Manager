@@ -2,10 +2,17 @@ const { dialog } = require('electron');
 const fs = require('fs');
 const Store = require('./store.js');
 
-const store = new Store({
+const userPreferencesStore = new Store({
   configName: 'user-preferences',
   defaults: {
     windowBounds: { width: 800, height: 600 }
+  }
+});
+
+const userMetaDataStore = new Store({
+  configName: 'user-metadata',
+  defaults: {
+    recentFilesPaths: []
   }
 });
 
@@ -43,7 +50,12 @@ exports.openFile = function(win) {
   dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (filePath) => {
     if(filePath) {
       fs.readFile(filePath[0], 'utf-8', (err, data) => {
-        store.set('recentFilePath', filePath[0]);
+        if(!userMetaDataStore.get('recentFilesPaths').find(recentFilePath => recentFilePath == filePath[0])) {
+          let updatedFilesPaths = userMetaDataStore.get('recentFilesPaths');
+          updatedFilesPaths.unshift(filePath[0]);
+          updatedFilesPaths = updatedFilesPaths.slice(0, 3);
+          userMetaDataStore.set('recentFilesPaths', updatedFilesPaths);
+        }
         win.webContents.send('open', data);
       });
     }
