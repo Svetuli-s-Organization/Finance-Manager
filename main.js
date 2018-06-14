@@ -13,11 +13,15 @@ function createWindow () {
     height: 900
   });
 
-  win.loadURL(url.format({
-    pathname: path.join(__dirname, 'dist/index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+  if(process.env.NODE_ENV === 'production') {
+    win.loadURL(url.format({
+      pathname: path.join(__dirname, 'dist/index.html'),
+      protocol: 'file:',
+      slashes: true
+    }));
+  } else {
+    win.loadURL('http://localhost:4200');
+  }
 
   win.on('closed', () => {
     win = null;
