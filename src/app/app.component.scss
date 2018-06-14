@@ -9,7 +9,7 @@
   width: 100%;
   height: 100%;
   padding: 100px 70px;
-  background-color: $p-dark;
+  background-color: $p;
   color: $p-text;
 }
 
@@ -70,11 +70,12 @@
 
 #main-content {
   padding-left: 30px;
+  padding-right: 30px;
   padding-top: 14px;
 }
 
 #side-nav {
-  width: 100px;
+  width: 70px;
   height: 100%;
   background-color: $p;
   padding: 0px;

@@ -1,9 +1,9 @@
 <div class="row no-gutters">
-  <div id="title" class="col-lg-2">
+  <div id="title" class="col">
     <h1 class="main-title">Add items</h1>
   </div>
 
-  <div id="save-items" class="col-lg-10">
+  <div id="save-items" class="col">
     <button type="button" class="btn btn-primary" [disabled]="addedItems.length == 0" (click)="saveItems()">Save</button>
   </div>
 </div>
@@ -14,20 +14,16 @@
 
     <div id="date-picker">
       <div class="row no-gutters">
-        <h3 class="col-lg-5 form-label">Pick a date:</h3>
+        <h3 class="form-label col">Pick a date:</h3>
       </div>
       <div class="row no-gutters">
-        <div class="col-lg-1 form-group">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" class="form-control" name="date"
-                bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"
-                formControlName="date" #date>
+        <div class="input-group">
+          <input type="text" class="form-control add-input date-input" name="date"
+            bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig"
+            formControlName="date" #date>
 
-              <div class="input-group-btn">
-                <button class="btn btn-primary" (click)="dp.show();">Date</button>
-              </div>
-            </div>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" (click)="dp.show();">Date</button>
           </div>
         </div>
       </div>
@@ -35,18 +31,17 @@
 
     <div id="add-item">
       <div class="row no-gutters">
-        <h3 class="col-lg-5 form-label">Add item:</h3>
+        <h3 class="col form-label">Add item:</h3>
       </div>
-      <div class="row no-gutters">
-        <div class="form-inline col-lg-5">
-          <div class="form-group">
-            <input type="text" class="form-control" id="name" placeholder="Name" formControlName="name">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="price" placeholder="Price" formControlName="price">
-          </div>
-          <button class="btn btn-primary" (click)="addItem()" [disabled]="addForm.invalid">Add</button>
+
+      <div class="row no-gutters form-inline">
+        <div class="add-form-group">
+          <input type="text" class="form-control add-input" id="name" placeholder="Name" formControlName="name">
         </div>
+        <div class="add-form-group">
+          <input type="text" class="form-control add-input" id="price" placeholder="Price" formControlName="price">
+        </div>
+        <button class="btn btn-primary" (click)="addItem()" [disabled]="addForm.invalid">Add</button>
       </div>
     </div>
 

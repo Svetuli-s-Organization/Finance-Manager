@@ -1,14 +1,13 @@
 #save-items button {
   float: right;
-  margin-right: 30px;
 }
 
-#date-picker .form-group {
-  padding-right: 0px;
+#date-picker {
+  margin-bottom: 10px;
 }
 
 #date-picker input {
-  width: 405px;
+  // width: 405px;
 }
 
 #added-items {
@@ -22,4 +21,25 @@
 
 #add-item button {
   width: 58px;
+}
+
+.add-form-group {
+  margin-right: 5px;
+}
+
+.form-group {
+  outline: 1px solid orange;
+}
+
+.form-inline {
+  padding: 0 !important;
+}
+
+.add-input {
+  width: 202px;
+  flex: none;
+}
+
+.date-input {
+  width: 203px;
 }
