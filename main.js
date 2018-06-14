@@ -8,9 +8,14 @@ const { userPreferencesStore, userMetaDataStore } = require('./stores');
 let win;
 
 function createWindow () {
+  const height = require('electron').screen.getPrimaryDisplay().size.height;
+
   win = new BrowserWindow({
     width: 1400,
-    height: 900
+    height: height - 130,
+    minWidth: 992,
+    center: true,
+    useContentSize: true
   });
 
   if(process.env.NODE_ENV === 'production') {
