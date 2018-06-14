@@ -18,8 +18,9 @@
       <p>Donate</p>
     </div>
   </div>
+
   <div id="main-row" class="row no-gutters" *ngIf="!homeScreen">
-    <div class="nav flex-column nav-pills col-1" id="side-nav" role="tablist" aria-orientation="vertical">
+    <div class="nav flex-column nav-pills" id="side-nav" role="tablist" aria-orientation="vertical">
       <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #homeEl="routerLinkActive">
         <img src="assets/icons/home-{{ homeEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
       </a>
@@ -31,7 +32,7 @@
       </a>
     </div>
 
-    <div id="main-content" class="col-11">
+    <div id="main-content" class="col">
       <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
     </div>
   </div>
