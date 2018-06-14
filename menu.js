@@ -35,18 +35,28 @@ exports.template = function(window) {
   return template;
 }
 
-exports.openFile = function(win) {
-  dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (filePath) => {
-    if(filePath) {
-      fs.readFile(filePath[0], 'utf-8', (err, data) => {
-        let updatedFilesPaths = userMetaDataStore.get('recentFilesPaths');
-        updatedFilesPaths.forEach((updatedFilePath, index) => updatedFilePath == filePath[0] ? updatedFilesPaths.splice(index, 1) : null);
-        updatedFilesPaths.unshift(filePath[0]);
-        updatedFilesPaths = updatedFilesPaths.slice(0, 3);
-        userMetaDataStore.set('recentFilesPaths', updatedFilesPaths);
+exports.openFile = function(win, filePath) {
+  if(!filePath) {
+    dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (openedfilePath) => {
+      if(openedfilePath) {
+        fs.readFile(openedfilePath[0], 'utf-8', (err, data) => {
+          updateFilePaths(openedfilePath[0]);
+          win.webContents.send('open', data);
+        });
+      }
+    });
+  } else {
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+      updateFilePaths(filePath);
+      win.webContents.send('open', data);
+    });
+  }
+}
 
-        win.webContents.send('open', data);
-      });
-    }
-  });
+function updateFilePaths(filePath) {
+  let updatedFilesPaths = userMetaDataStore.get('recentFilesPaths');
+  updatedFilesPaths.forEach((updatedFilePath, index) => updatedFilePath == filePath ? updatedFilesPaths.splice(index, 1) : null);
+  updatedFilesPaths.unshift(filePath);
+  updatedFilesPaths = updatedFilesPaths.slice(0, 3);
+  userMetaDataStore.set('recentFilesPaths', updatedFilesPaths);
 }
