@@ -17,6 +17,8 @@ export class AddComponent implements OnInit {
   public addedItems: Item[] = [];
 
   @ViewChild('date') date: ElementRef;
+  @ViewChild('nameInput') nameInput: ElementRef;
+  @ViewChild('priceInput') priceInput: ElementRef;
   @Output() savedItems: EventEmitter<Item[]> = new EventEmitter();
 
   bsConfig: Partial<BsDatepickerConfig> = {
@@ -44,12 +46,18 @@ export class AddComponent implements OnInit {
 
     this.addedItems.push(new Item(this.addForm.value.name, this.addForm.value.price, this.addForm.value.date));
     this.addForm.patchValue({ name: '', price: '' });
+
+    this.nameInput.nativeElement.focus();
   }
 
   public handleKeydownEnter(event: KeyboardEvent) {
     event.preventDefault();
     if(this.addForm.valid) {
       this.addItem();
+    } else {
+      if(this.addForm.value.name && !this.addForm.value.price) {
+        this.priceInput.nativeElement.focus();
+      }
     }
   }
 
