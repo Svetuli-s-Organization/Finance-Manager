@@ -7,7 +7,9 @@
         <li class="seperator"></li>
         <li><a>Recent files:</a></li>
         <ul class="list second-lever-list">
-          <li class="clickable-list-item" *ngFor="let recentFile of recentFiles"><a [title]="recentFile">{{ recentFile }}</a></li>
+          <li class="clickable-list-item" *ngFor="let recentFile of recentFiles; let i = index">
+            <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
+          </li>
         </ul>
       </ul>
     </div>
