@@ -28,11 +28,8 @@ export class AppComponent implements OnInit {
     this.userService.getUserMetaData().then((metaData: any) => {
       this.recentFilesPaths = metaData.recentFilesPaths;
       this.recentFiles = metaData.recentFilesPaths.map((recentFilePath: string) => {
-        if(recentFilePath.includes('/')) {
-          return recentFilePath.split('/')[recentFilePath.split('/').length - 1];
-        } else {
-          return recentFilePath.split('\\')[recentFilePath.split('\\').length - 1];
-        }
+        const pathSeperator: string = recentFilePath.includes('/') ? '/' : '\\';
+        return recentFilePath.split(pathSeperator)[recentFilePath.split(pathSeperator).length - 1];
       });
     });
 
