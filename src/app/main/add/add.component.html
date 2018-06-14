@@ -10,7 +10,7 @@
 
 <div class="content">
 
-  <form [formGroup]="addForm" (ngSubmit)="addItem()">
+  <form [formGroup]="addForm" (ngSubmit)="addItem()" (keydown.enter)="handleKeydownEnter($event)">
 
     <div id="date-picker">
       <div class="row no-gutters">

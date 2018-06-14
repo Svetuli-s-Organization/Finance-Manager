@@ -46,6 +46,13 @@ export class AddComponent implements OnInit {
     this.addForm.patchValue({ name: '', price: '' });
   }
 
+  public handleKeydownEnter(event: KeyboardEvent) {
+    event.preventDefault();
+    if(this.addForm.valid) {
+      this.addItem();
+    }
+  }
+
   public removeItem(addedItemIndex: number) {
     this.addedItems.splice(addedItemIndex, 1);
   }
