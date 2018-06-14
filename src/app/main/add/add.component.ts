@@ -28,8 +28,8 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.inputDate = new Date();
-    let numberValidator = Validators.pattern(/^-?\d*(\.\d+)?$/);
-    let dateValidator = Validators.pattern(/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/); // TODO: fix date validator
+    const numberValidator = Validators.pattern(/^-?\d*(\.\d+)?$/);
+    const dateValidator = Validators.pattern(/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/); // TODO: fix date validator
 
     this.addForm = new FormGroup({
       date: new FormControl(this.inputDate),
@@ -55,8 +55,8 @@ export class AddComponent implements OnInit {
   }
 
   private processDate() {
-    let formatedDate: string = this.date.nativeElement.value;
-    let dateIsInvalid: boolean = !/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/.test(formatedDate);
+    const formatedDate: string = this.date.nativeElement.value;
+    const dateIsInvalid: boolean = !/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/.test(formatedDate);
 
     if(dateIsInvalid) {
       this.addForm.controls.date.setErrors({ 'incorrect': true });
@@ -66,10 +66,10 @@ export class AddComponent implements OnInit {
   private formatPrice() {
     let price: string = this.addForm.controls.price.value;
 
-    let noDecimal: boolean = /^[0-9]{1,}$/.test(price);
-    let longDecimal: boolean = /^[0-9]{1,}\.[0-9]{3,}$/.test(price);
-    let shortDecimal: boolean = /^[0-9]{1,}\.[0-9]{1}$/.test(price);
-    let startsWithZero: boolean = /(^[0][1-9]{1,}$)|(^[0][1-9]{1,}\.[0-9]{0,}$)/.test(price);
+    const noDecimal: boolean = /^[0-9]{1,}$/.test(price);
+    const longDecimal: boolean = /^[0-9]{1,}\.[0-9]{3,}$/.test(price);
+    const shortDecimal: boolean = /^[0-9]{1,}\.[0-9]{1}$/.test(price);
+    const startsWithZero: boolean = /(^[0][1-9]{1,}$)|(^[0][1-9]{1,}\.[0-9]{0,}$)/.test(price);
 
     if(startsWithZero) {
       price = price.slice(1, price.length);
