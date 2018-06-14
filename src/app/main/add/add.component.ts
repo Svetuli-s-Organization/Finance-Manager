@@ -32,7 +32,7 @@ export class AddComponent implements OnInit {
     const dateValidator = Validators.pattern(/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/); // TODO: fix date validator
 
     this.addForm = new FormGroup({
-      date: new FormControl(this.inputDate),
+      date: new FormControl(this.inputDate, [Validators.required]),
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, numberValidator]),
     });
