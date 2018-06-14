@@ -29,6 +29,7 @@ export class AddComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    // TODO: [ADD] tags, label and categories the form
     this.inputDate = new Date();
     const numberValidator = Validators.pattern(/^-?\d*(\.\d+)?$/);
     const dateValidator = Validators.pattern(/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/); // TODO: fix date validator
