@@ -36,7 +36,7 @@ function createWindow () {
   Menu.setApplicationMenu(menu);
 
   ipcMain.on('open-file', (e, arg) => {
-    openFile(win);
+    openFile(win, arg);
   });
 }
 
