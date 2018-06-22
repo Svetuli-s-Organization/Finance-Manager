@@ -12,7 +12,6 @@ import { Item } from '@main/item';
 })
 export class AddComponent implements OnInit {
 
-  inputDate: any;
   addForm: FormGroup;
   public addedItems: Item[] = [];
 
@@ -30,12 +29,11 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     // TODO: [ADD] tags, label and categories the form
-    this.inputDate = new Date();
     const numberValidator = Validators.pattern(/^-?\d*(\.\d+)?$/);
     const dateValidator = Validators.pattern(/^(0[1-9]|[1-2][0-9]|3[0-1])\.(0[1-9]|1[0-2])\.([0-9]){4}$/); // TODO: fix date validator
 
     this.addForm = new FormGroup({
-      date: new FormControl(this.inputDate, [Validators.required]),
+      date: new FormControl(new Date, [Validators.required]),
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, numberValidator]),
     });
