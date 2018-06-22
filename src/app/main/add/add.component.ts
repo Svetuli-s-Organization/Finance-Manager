@@ -12,7 +12,7 @@ import { Item } from '@main/item';
 })
 export class AddComponent implements OnInit {
 
-  addForm: FormGroup;
+  public addForm: FormGroup;
   public addedItems: Item[] = [];
 
   @ViewChild('date') date: ElementRef;
