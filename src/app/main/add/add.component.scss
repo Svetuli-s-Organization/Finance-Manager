@@ -2,19 +2,13 @@
   float: right;
 }
 
-#date-picker {
+.form-row {
   margin-bottom: 10px;
 }
 
-#date-picker input {
-  // width: 405px;
-}
-
 #added-items {
-  width: 460px;
   margin-top: 30px;
-  box-shadow: 3px 3px 6px 1px #e6e6e6;
-  border-radius: 3px;
+  box-shadow: 0px 3px 6px 2px #e6e6e6;
 }
 
 #date-picker button {
@@ -26,7 +20,7 @@
 }
 
 .add-form-group {
-  margin-right: 5px;
+  margin-right: 7px;
 }
 
 .form-group {
@@ -40,9 +34,20 @@
 .add-input {
   width: 202px;
   flex: none;
+  border-radius: 3px !important;
 }
 
 #date-input {
-  width: 203px;
+  // width: 203px;
   z-index: 0 !important;
+}
+
+.form-control-wrapper {
+  width: 300px;
+  margin-right: 10px;
+}
+
+.form-select {
+  width: 100%;
+  border-radius: 3px !important;
 }

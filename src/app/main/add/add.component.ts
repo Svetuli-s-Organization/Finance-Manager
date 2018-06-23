@@ -15,6 +15,10 @@ export class AddComponent implements OnInit {
   public addForm: FormGroup;
   public addedItems: Item[] = [];
 
+  public categories: string[] = ['Food', 'Clothes', 'Going out', 'Games'];
+  public labels: string[] = ['Drink', 'Eat', 'Steam', 'League of Legends'];
+  public tags = ['Monster', 'Chips', 'RP', 'game'];
+
   @ViewChild('date') date: ElementRef;
   @ViewChild('nameInput') nameInput: ElementRef;
   @ViewChild('priceInput') priceInput: ElementRef;
@@ -34,6 +38,9 @@ export class AddComponent implements OnInit {
 
     this.addForm = new FormGroup({
       date: new FormControl(new Date, [Validators.required]),
+      category: new FormControl('', [Validators.required]),
+      label: new FormControl('', [Validators.required]),
+      tags: new FormControl('', [Validators.required]),
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, numberValidator]),
     });
@@ -43,10 +50,12 @@ export class AddComponent implements OnInit {
     this.processDate();
     this.formatPrice();
 
-    this.addedItems.push(new Item(this.addForm.value.name, this.addForm.value.price, this.addForm.value.date));
+    this.addedItems.push(new Item(this.addForm.value.name, this.addForm.value.price, this.addForm.value.category, this.addForm.value.label, this.addForm.value.tags, this.addForm.value.date, new Date()));
     this.addForm.patchValue({ name: '', price: '' });
 
     this.nameInput.nativeElement.focus();
+
+    console.log(this.addedItems);
   }
 
   public handleKeydownEnter(event: KeyboardEvent) {
