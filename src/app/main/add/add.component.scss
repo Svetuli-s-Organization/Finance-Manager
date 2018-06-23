@@ -31,14 +31,17 @@
   padding: 0 !important;
 }
 
+.add-form-control {
+  border-radius: 3px !important;
+  box-shadow: 0px 1px 3px 0px #e6e6e6;
+}
+
 .add-input {
   width: 202px;
   flex: none;
-  border-radius: 3px !important;
 }
 
 #date-input {
-  // width: 203px;
   z-index: 0 !important;
 }
 

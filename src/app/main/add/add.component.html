@@ -16,7 +16,7 @@
       <div class="form-control-wrapper col">
         <h3 class="form-label">Pick a date:</h3>
 
-        <div class="input-group">
+        <div class="input-group add-form-control">
           <input type="text" class="form-control" id="date-input" name="date"
             bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" formControlName="date" #date>
 
@@ -29,7 +29,7 @@
       <div class="form-control-wrapper col">
         <h3 class="form-label">Category</h3>
 
-        <select class="form-control form-select" formControlName="category">
+        <select class="form-control form-select add-form-control" formControlName="category">
           <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
         </select>
       </div>
@@ -37,7 +37,7 @@
       <div class="form-control-wrapper col">
         <h3 class="form-label">Label</h3>
 
-        <select class="form-control form-select" formControlName="label">
+        <select class="form-control form-select add-form-control" formControlName="label">
           <option *ngFor="let label of labels" [value]="label">{{ label }}</option>
         </select>
       </div>
@@ -45,7 +45,7 @@
       <div class="form-control-wrapper col">
         <h3 class="form-label">Tags</h3>
 
-        <select class="form-control form-select" formControlName="tags">
+        <select class="form-control form-select add-form-control" formControlName="tags">
           <option *ngFor="let tag of tags" [value]="tag">{{ tag }}</option>
         </select>
       </div>
@@ -58,10 +58,10 @@
 
       <div class="row no-gutters form-inline">
         <div class="add-form-group">
-          <input type="text" class="form-control add-input" id="name-input" placeholder="Name" formControlName="name" autofocus #nameInput>
+          <input type="text" class="form-control add-form-control add-input" id="name-input" placeholder="Name" formControlName="name" autofocus #nameInput>
         </div>
         <div class="add-form-group">
-          <input type="text" class="form-control add-input" id="price-input" placeholder="Price" formControlName="price" #priceInput>
+          <input type="text" class="form-control add-form-control add-input" id="price-input" placeholder="Price" formControlName="price" #priceInput>
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="addForm.invalid">Add</button>
       </div>
