@@ -7,6 +7,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HomeComponent } from './home/home.component';
 import { AddComponent } from './add/add.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
     ReactiveFormsModule,
     BsDatepickerModule.forRoot()
   ],
-  declarations: [HomeComponent, AddComponent, StatisticsComponent],
+  declarations: [HomeComponent, AddComponent, StatisticsComponent, MainComponent],
   exports: [HomeComponent]
 })
 export class MainModule { }
