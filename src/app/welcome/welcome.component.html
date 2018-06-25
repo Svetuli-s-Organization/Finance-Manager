@@ -1,3 +1,19 @@
-<p>
-  welcome works!
-</p>
+<div id="home-screen" class="row no-gutters">
+  <div id="home-screen-left-section" class="col-4">
+    <ul class="list">
+      <li class="clickable-list-item"><a (click)="openFile()">Open file</a></li>
+      <li class="clickable-list-item"><a>Create new file</a></li>
+      <li class="seperator"></li>
+      <li><a>Recent files:</a></li>
+      <ul class="list second-lever-list">
+        <li class="clickable-list-item" *ngFor="let recentFile of recentFiles; let i = index">
+          <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
+        </li>
+      </ul>
+    </ul>
+  </div>
+
+  <div id="home-screen-right-section" class="col-8">
+    <p>Donate</p>
+  </div>
+</div>

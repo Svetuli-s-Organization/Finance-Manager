@@ -1,23 +1,5 @@
 <div id="page-wrapper">
-  <div id="home-screen" class="row no-gutters" *ngIf="homeScreen">
-    <div id="home-screen-left-section" class="col-4">
-      <ul class="list">
-        <li class="clickable-list-item"><a (click)="openFile()">Open file</a></li>
-        <li class="clickable-list-item"><a>Create new file</a></li>
-        <li class="seperator"></li>
-        <li><a>Recent files:</a></li>
-        <ul class="list second-lever-list">
-          <li class="clickable-list-item" *ngFor="let recentFile of recentFiles; let i = index">
-            <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
-          </li>
-        </ul>
-      </ul>
-    </div>
-
-    <div id="home-screen-right-section" class="col-8">
-      <p>Donate</p>
-    </div>
-  </div>
+  <app-welcome *ngIf="homeScreen"></app-welcome>
 
   <div id="main-row" class="row no-gutters" *ngIf="!homeScreen">
     <div class="nav flex-column nav-pills" id="side-nav" role="tablist" aria-orientation="vertical">

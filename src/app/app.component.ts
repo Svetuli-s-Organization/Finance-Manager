@@ -2,10 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import { ElectronService } from 'ngx-electron';
 
-import { Item } from '@main/item';
 import { AddComponent } from '@main/add/add.component';
-
-import { UserService } from '@api/electron/user/user.service';
+import { Item } from '@main/item';
 
 @Component({
   selector: 'app-root',
@@ -15,23 +13,13 @@ import { UserService } from '@api/electron/user/user.service';
 export class AppComponent implements OnInit {
 
   public homeScreen: boolean = true;
-  public recentFiles: string[];
-  public recentFilesPaths: string[];
 
   constructor(
     private zone: NgZone,
-    private electronService: ElectronService,
-    private userService: UserService) {}
+    private electronService: ElectronService
+  ) {}
 
   ngOnInit() {
-    this.userService.getUserMetaData().then((metaData: any) => {
-      this.recentFilesPaths = metaData.recentFilesPaths;
-      this.recentFiles = metaData.recentFilesPaths.map((recentFilePath: string) => {
-        const pathSeperator: string = recentFilePath.includes('/') ? '/' : '\\';
-        return recentFilePath.split(pathSeperator)[recentFilePath.split(pathSeperator).length - 1];
-      });
-    });
-
     this.electronService.ipcRenderer.on('open', (event, file) => {
       this.zone.run(() => {
         console.log(JSON.parse(file));
@@ -52,11 +40,6 @@ export class AppComponent implements OnInit {
 
   public onDeactivate(component) {
 
-  }
-
-  public openFile(filePath?: string) {
-    // TODO: Create file service
-    this.electronService.ipcRenderer.send('open-file', filePath);
   }
 
 }
