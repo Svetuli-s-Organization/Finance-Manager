@@ -70,13 +70,6 @@
   </form>
 
   <div class="row no-gutters">
-    <!-- <ul *ngIf="addedItems.length > 0" class="list-group col-lg-5" id="added-items">
-      <li class="list-group-item" *ngFor="let addedItem of addedItems; let addedItemIndex = index">
-        {{ addedItem.name }}: {{ addedItem.price }}
-        <button type="button" class="close" aria-label="Close" (click)="removeItem(addedItemIndex)"><span aria-hidden="true">&times;</span></button>
-      </li>
-    </ul> -->
-
     <table *ngIf="addedItems.length > 0" class="table" id="added-items">
       <caption>Added items</caption>
       <thead>
