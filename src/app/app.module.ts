@@ -10,10 +10,12 @@ import { NgxElectronModule } from 'ngx-electron';
 
 // Services
 import { UserService } from '@api/electron/user/user.service';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
