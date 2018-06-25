@@ -38,8 +38,8 @@ export class AddComponent implements OnInit {
     this.addForm = new FormGroup({
       date: new FormControl(new Date, [Validators.required]),
       category: new FormControl('', [Validators.required]),
-      label: new FormControl('', [Validators.required]),
-      tags: new FormControl('', [Validators.required]),
+      label: new FormControl('', []),
+      tags: new FormControl('', []),
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required, numberValidator]),
     });
