@@ -1,3 +1,5 @@
+@import "src/variables";
+
 #save-items button {
   float: right;
 }
@@ -17,6 +19,10 @@
 
 #add-item button {
   width: 58px;
+}
+
+button {
+  background-color: $p-dark !important;
 }
 
 .add-form-group {
