@@ -1,19 +1,27 @@
-<div id="home-screen" class="row no-gutters">
-  <div id="home-screen-left-section" class="col-4">
-    <ul class="list">
-      <li class="clickable-list-item"><a (click)="openFile()">Open file</a></li>
-      <li class="clickable-list-item"><a>Create new file</a></li>
-      <li class="seperator"></li>
-      <li><a>Recent files:</a></li>
-      <ul class="list second-lever-list">
-        <li class="clickable-list-item" *ngFor="let recentFile of recentFiles; let i = index">
-          <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
-        </li>
-      </ul>
-    </ul>
+<div id="container">
+  <div id="header" class="row no-gutters">
+    <h1>Finance Manager</h1>
   </div>
 
-  <div id="home-screen-right-section" class="col-8">
-    <p>Donate</p>
+  <div id="wrapper" class="row no-gutters">
+    <div id="section-wrapper" class="col row no-gutters">
+      <div id="left-section" class="col-4">
+        <ul class="list">
+          <li class="clickable-list-item"><a (click)="openFile()">Open file</a></li>
+          <li class="clickable-list-item"><a>Create new file</a></li>
+          <li class="seperator"></li>
+          <li class="recent-files"><a>Recent files:</a></li>
+          <ul class="list second-lever-list">
+            <li class="clickable-list-item" *ngFor="let recentFile of recentFiles; let i = index">
+              <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
+            </li>
+          </ul>
+        </ul>
+      </div>
+
+      <div id="right-section" class="col-8">
+        <p>Donate</p>
+      </div>
+    </div>
   </div>
 </div>
