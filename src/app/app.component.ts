@@ -15,7 +15,6 @@ import { UserService } from '@api/electron/user/user.service';
 export class AppComponent implements OnInit {
 
   public homeScreen: boolean = true;
-  public activeElement: string = 'home';
   public recentFiles: string[];
   public recentFilesPaths: string[];
 
