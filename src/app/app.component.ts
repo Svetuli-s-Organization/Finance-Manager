@@ -2,9 +2,6 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import { ElectronService } from 'ngx-electron';
 
-import { AddComponent } from '@main/add/add.component';
-import { Item } from '@main/item';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,20 +23,6 @@ export class AppComponent implements OnInit {
         this.welcomeScreen = false;
       });
     });
-  }
-
-  private handleSavedItems(items: Item[]) {
-    console.log(items);
-  }
-
-  public onActivate(component) {
-    if (component instanceof AddComponent) {
-      component.savedItems.subscribe(this.handleSavedItems);
-    }
-  }
-
-  public onDeactivate(component) {
-
   }
 
 }

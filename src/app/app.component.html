@@ -1,21 +1,4 @@
 <div id="page-wrapper">
   <app-welcome *ngIf="welcomeScreen"></app-welcome>
-
-  <div id="main-row" class="row no-gutters" *ngIf="!welcomeScreen">
-    <div class="nav flex-column nav-pills" id="side-nav" role="tablist" aria-orientation="vertical">
-      <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #homeEl="routerLinkActive">
-        <img src="assets/icons/home-{{ homeEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
-      </a>
-      <a class="nav-link" routerLink="/add" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #addEl="routerLinkActive">
-        <img src="assets/icons/plus-{{ addEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
-      </a>
-      <a class="nav-link" routerLink="/statistics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" #statsEl="routerLinkActive">
-        <img src="assets/icons/stats-{{ statsEl.isActive ? 'p' : 'white' }}.svg" width="32" height="32" alt="">
-      </a>
-    </div>
-
-    <div id="main-content" class="col">
-      <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
-    </div>
-  </div>
+  <app-main *ngIf="!welcomeScreen"></app-main>
 </div>
