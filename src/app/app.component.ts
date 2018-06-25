@@ -12,7 +12,7 @@ import { Item } from '@main/item';
 })
 export class AppComponent implements OnInit {
 
-  public homeScreen: boolean = true;
+  public welcomeScreen: boolean = true;
 
   constructor(
     private zone: NgZone,
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     this.electronService.ipcRenderer.on('open', (event, file) => {
       this.zone.run(() => {
         console.log(JSON.parse(file));
-        this.homeScreen = false;
+        this.welcomeScreen = false;
       });
     });
   }
