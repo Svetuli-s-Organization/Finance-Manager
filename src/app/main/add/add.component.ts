@@ -15,9 +15,9 @@ export class AddComponent implements OnInit {
   public addForm: FormGroup;
   public addedItems: Item[] = [];
 
-  public categories: string[] = ['Food', 'Clothes', 'Going out', 'Games'];
-  public labels: string[] = ['Drink', 'Eat', 'Steam', 'League of Legends'];
-  public tags = ['Monster', 'Chips', 'RP', 'game'];
+  public categories: string[] = ['Food', 'Clothes', 'Going out', 'Games', 'Other'];
+  public labels: string[] = ['Drink', 'Eat', 'Steam', 'League of Legends', 'Monster', ];
+  public tags = ['game', 'other'];
 
   @ViewChild('date') date: ElementRef;
   @ViewChild('nameInput') nameInput: ElementRef;
