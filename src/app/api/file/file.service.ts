@@ -11,6 +11,7 @@ import { Tag } from './tag';
 export class FileService {
 
   private fileData: FileData;
+  private lastId: number = 0;
 
   constructor() { }
 
@@ -52,6 +53,11 @@ export class FileService {
 
   public getTag(id: number): Tag {
     return this.fileData.data.tags.find(tag => tag.id === id);
+  }
+
+  public getId(): number {
+    this.fileData.metaData.lastId = ++this.lastId;
+    return this.lastId;
   }
 
 }
