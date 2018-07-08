@@ -2,6 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import { ElectronService } from 'ngx-electron';
 
+import { FileService } from '@api/file/file.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +15,8 @@ export class AppComponent implements OnInit {
 
   constructor(
     private zone: NgZone,
-    private electronService: ElectronService
+    private electronService: ElectronService,
+    private fileService: FileService,
   ) {}
 
   ngOnInit() {
@@ -29,14 +32,16 @@ export class AppComponent implements OnInit {
   }
 
   private setup(file_) {
+    let file;
     try {
-      const file = JSON.parse(file_);
-      console.log(file);
+      file = JSON.parse(file_);
     } catch(err) {
-      console.log('something went wrong');
+      console.log(err);
     }
 
     this.welcomeScreen = false;
+
+    this.fileService.setFile(file);
   }
 
 }
