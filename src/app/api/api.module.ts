@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 // Services
 import { UserService } from '@api/electron/user/user.service';
+import { FileService } from '@api/file/file.service';
 
 @NgModule({
   declarations: [],
@@ -11,6 +12,7 @@ import { UserService } from '@api/electron/user/user.service';
   ],
   providers: [
     UserService,
+    FileService,
   ],
 })
 export class ApiModule { }
