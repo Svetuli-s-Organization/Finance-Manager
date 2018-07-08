@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // TODO: Find a way to get the app version in production
     this.electronService.ipcRenderer.on('console', (event, data) => {
       console.log('[ELECTRON]', data);
     });
