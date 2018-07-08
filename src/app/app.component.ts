@@ -17,10 +17,15 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.electronService.ipcRenderer.on('open', (event, file) => {
+    this.electronService.ipcRenderer.on('open', (event, file_) => {
       this.zone.run(() => {
-        console.log(JSON.parse(file));
-        this.welcomeScreen = false;
+        try {
+          const file = JSON.parse(file_);
+          console.log(file);
+          this.welcomeScreen = false;
+        } catch(err) {
+          console.log('something went wrong');
+        }
       });
     });
   }
