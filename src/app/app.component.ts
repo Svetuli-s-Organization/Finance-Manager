@@ -39,9 +39,8 @@ export class AppComponent implements OnInit {
       console.log(err);
     }
 
-    this.welcomeScreen = false;
-
     this.fileService.setFile(file);
+    this.welcomeScreen = false;
   }
 
 }
