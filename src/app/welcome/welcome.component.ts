@@ -34,4 +34,8 @@ export class WelcomeComponent implements OnInit {
     this.electronService.ipcRenderer.send('open-file', filePath);
   }
 
+  public createNewFile() {
+    this.electronService.ipcRenderer.send('create-new-file');
+  }
+
 }
