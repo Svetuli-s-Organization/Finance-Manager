@@ -10,7 +10,7 @@ exports.template = function(window) {
     {
       label: 'File',
       submenu: [
-        { label: 'New File' },
+        { label: 'New File', click: () => exports.createFile(window) },
         { label: 'Open File', click: () => exports.openFile(window) },
         { label: 'Save' },
         { label: 'Save As' },
