@@ -29,11 +29,11 @@ exports.template = function(window) {
           }
         }
       ]
-    })
+    });
   }
 
   return template;
-}
+};
 
 exports.openFile = function(win, filePath) {
   if(!filePath) {
@@ -51,7 +51,7 @@ exports.openFile = function(win, filePath) {
       win.webContents.send('open', data);
     });
   }
-}
+};
 
 function updateFilePaths(filePath) {
   let updatedFilesPaths = userMetaDataStore.get('recentFilesPaths');
