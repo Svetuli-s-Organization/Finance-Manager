@@ -9,4 +9,8 @@ export class FileService {
 
   constructor() { }
 
+  public setFile(file: FileData) {
+    this.fileData = file;
+  }
+
 }
