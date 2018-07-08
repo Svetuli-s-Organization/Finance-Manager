@@ -1,7 +1,7 @@
 import { Data } from './data';
 import { MetaData } from './meta.data';
 
-export interface FileData {
+export class FileData {
   data: Data;
   metaData: MetaData;
 }
