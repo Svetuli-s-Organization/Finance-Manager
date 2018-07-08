@@ -2,6 +2,7 @@ const { dialog } = require('electron');
 const fs = require('fs');
 const Store = require('./store.js');
 
+const { version } = require('./package.json');
 const { userPreferencesStore, userMetaDataStore } = require('./stores');
 
 exports.template = function(window) {
@@ -37,10 +38,10 @@ exports.template = function(window) {
 
 exports.openFile = function(win, filePath) {
   if(!filePath) {
-    dialog.showOpenDialog({ properties: [ 'openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }]}, (openedfilePath) => {
-      if(openedfilePath) {
-        fs.readFile(openedfilePath[0], 'utf-8', (err, data) => {
-          updateFilePaths(openedfilePath[0]);
+    dialog.showOpenDialog(win, { properties: ['openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }] }, (openedFilePath) => {
+      if(openedFilePath) {
+        fs.readFile(openedFilePath[0], 'utf-8', (err, data) => {
+          updateFilePaths(openedFilePath[0]);
           win.webContents.send('open', data);
         });
       }
@@ -51,6 +52,26 @@ exports.openFile = function(win, filePath) {
       win.webContents.send('open', data);
     });
   }
+};
+
+exports.createFile = function(win) {
+  dialog.showSaveDialog(win, { filters: [{ name: 'Finance Manager File', extensions: ['fmn'] }] }, (savedFilePath) => {
+    const basicFile = {
+      metaData: {
+        appVersion: version,
+        dateCreated: new Date(),
+        dateModified: new Date()
+      }
+    };
+
+    fs.writeFile(savedFilePath, JSON.stringify(basicFile), function(err) {
+      if(err) {
+        return console.log(err);
+      }
+
+      win.webContents.send('open', JSON.stringify(basicFile));
+    });
+  });
 };
 
 function updateFilePaths(filePath) {
