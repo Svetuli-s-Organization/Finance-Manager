@@ -1,8 +1,7 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
-const { template } = require('./menu.js');
-const { openFile } = require('./menu.js');
+const { template, openFile, createFile } = require('./menu.js');
 const { userPreferencesStore, userMetaDataStore } = require('./stores');
 
 let win;
@@ -42,6 +41,10 @@ function createWindow () {
 
   ipcMain.on('open-file', (e, arg) => {
     openFile(win, arg);
+  });
+
+  ipcMain.on('create-new-file', (e, arg) => {
+    createFile(win);
   });
 }
 
