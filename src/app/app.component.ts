@@ -17,17 +17,26 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.electronService.ipcRenderer.on('open', (event, file_) => {
+    this.electronService.ipcRenderer.on('console', (event, data) => {
+      console.log('[ELECTRON]', data);
+    });
+
+    this.electronService.ipcRenderer.on('open', (event, file) => {
       this.zone.run(() => {
-        try {
-          const file = JSON.parse(file_);
-          console.log(file);
-          this.welcomeScreen = false;
-        } catch(err) {
-          console.log('something went wrong');
-        }
+        this.setup(file);
       });
     });
+  }
+
+  private setup(file_) {
+    try {
+      const file = JSON.parse(file_);
+      console.log(file);
+    } catch(err) {
+      console.log('something went wrong');
+    }
+
+    this.welcomeScreen = false;
   }
 
 }
