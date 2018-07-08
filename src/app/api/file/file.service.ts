@@ -55,7 +55,7 @@ export class FileService {
     return this.fileData.data.tags.find(tag => tag.id === id);
   }
 
-  public getId(): number {
+  private getId(): number {
     this.fileData.metaData.lastId = ++this.lastId;
     return this.lastId;
   }
