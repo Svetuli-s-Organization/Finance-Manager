@@ -22,9 +22,16 @@
     ],
     "baseUrl": "./src",
     "paths": {
-      "@app/*": ["./app/*"],
-      "@api/*": ["./app/api/*"],
-      "@main/*": ["./app/main/*"]
-    }
+      "@app/*": [
+        "./app/*"
+      ],
+      "@api/*": [
+        "./app/api/*"
+      ],
+      "@main/*": [
+        "./app/main/*"
+      ]
+    },
+    "module": "es2015"
   }
 }
