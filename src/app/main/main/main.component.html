@@ -11,7 +11,7 @@
     </a>
   </div>
 
-  <div id="main-content" class="col">
-    <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)"></router-outlet>
+  <div id="main-content" class="col" [@navigationChange]="o.activatedRouteData">
+    <router-outlet (activate)="onActivate($event)" (deactivate)="onDeactivate($event)" #o="outlet"></router-outlet>
   </div>
 </div>

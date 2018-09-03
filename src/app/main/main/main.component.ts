@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { AddComponent } from '@main/add/add.component';
 import { Item } from '@main/item';
+import { navigationChange } from '@app/animations';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
+  animations: [
+    navigationChange
+  ]
 })
 export class MainComponent implements OnInit {
 
