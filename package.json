@@ -26,7 +26,7 @@
     "@types/pouchdb": "^6.3.2",
     "bootstrap": "4.0.0-beta.2",
     "core-js": "^2.5.7",
-    "ngx-bootstrap": "^2.0.5",
+    "ngx-bootstrap": "^3.0.1",
     "ngx-electron": "^1.0.4",
     "pouchdb": "^6.4.3",
     "rxjs": "^6.3.1",
