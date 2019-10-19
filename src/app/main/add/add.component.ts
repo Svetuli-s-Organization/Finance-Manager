@@ -19,9 +19,9 @@ export class AddComponent implements OnInit {
   public labels: string[] = ['Drink', 'Eat', 'Steam', 'League of Legends', 'Monster', ];
   public tags = ['game', 'other'];
 
-  @ViewChild('date') date: ElementRef;
-  @ViewChild('nameInput') nameInput: ElementRef;
-  @ViewChild('priceInput') priceInput: ElementRef;
+  @ViewChild('date', { static: true }) date: ElementRef;
+  @ViewChild('nameInput', { static: true }) nameInput: ElementRef;
+  @ViewChild('priceInput', { static: true }) priceInput: ElementRef;
   @Output() savedItems: EventEmitter<Item[]> = new EventEmitter();
 
   bsConfig: Partial<BsDatepickerConfig> = {
