@@ -44,6 +44,7 @@
     "electron": "^1.8.8",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
+    "jshint": "^2.10.2",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
