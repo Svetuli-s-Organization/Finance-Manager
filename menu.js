@@ -69,6 +69,7 @@ exports.createFile = function(win) {
         return console.log(err);
       }
 
+      updateFilePaths(savedFilePath);
       win.webContents.send('open', JSON.stringify(basicFile));
     });
   });
