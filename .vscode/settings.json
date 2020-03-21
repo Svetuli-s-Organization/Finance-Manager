@@ -1,0 +1,26 @@
+{
+	"files.exclude": {
+		"dist": true,
+		"tmp": true,
+		"out-tsc": true,
+		"node_modules": true,
+		".idea": true,
+		"**/.project": true,
+		"**/.classpath": true,
+		"**/.c9/": true,
+		"**/*.launch": true,
+		"**/.settings/": true,
+		"**/*.sublime-workspace": true,
+		".sass-cache": true,
+		"connect.lock": true,
+		"coverage": true,
+		"libpeerconnection.log": true,
+		"**/npm-debug.log": true,
+		"**/testem.log": true,
+		"typings": true,
+		"e2e/*.js": true,
+		"e2e/*.map": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true
+	}
+}
