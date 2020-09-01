@@ -7,6 +7,7 @@ app.whenReady().then(() => {
 	});
 
 	win.loadURL('http://localhost:4200');
+	win.maximize();
 	
 	win.webContents.toggleDevTools();
 });
