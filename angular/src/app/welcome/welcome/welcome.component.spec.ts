@@ -1,25 +1,31 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 
+// External libraries
+import { configureTestSuite, createTestContext, TestCtx } from 'ng-bullet';
+
+// Components
 import { WelcomeComponent } from './welcome.component';
 
 describe('WelcomeComponent', () => {
-  let component: WelcomeComponent;
-  let fixture: ComponentFixture<WelcomeComponent>;
+	let ctx: TestCtx<WelcomeComponent>;
+	let component: WelcomeComponent;
+	let fixture: ComponentFixture<WelcomeComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ WelcomeComponent ]
-    })
-    .compileComponents();
-  }));
+	configureTestSuite((() => {
+		TestBed.configureTestingModule({
+			declarations: [
+				WelcomeComponent,
+			],
+		});
+	}));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(WelcomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+	beforeEach(() => {
+		ctx = createTestContext(WelcomeComponent);
+		component = ctx.component;
+		fixture = ctx.fixture;
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });
