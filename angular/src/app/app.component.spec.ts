@@ -5,6 +5,14 @@ import { configureTestSuite, createTestContext, TestCtx } from 'ng-bullet';
 
 // Components
 import { AppComponent } from './app.component';
+import { Component } from '@angular/core';
+
+@Component({
+	selector: 'app-welcome',
+	template: ``,
+})
+class WelcomeComponentStub {
+}
 
 describe('AppComponent', () => {
 	let ctx: TestCtx<AppComponent>;
@@ -14,7 +22,8 @@ describe('AppComponent', () => {
 	configureTestSuite((() => {
 		TestBed.configureTestingModule({
 			declarations: [
-				AppComponent
+				AppComponent,
+				WelcomeComponentStub,
 			],
 		});
 	}));
