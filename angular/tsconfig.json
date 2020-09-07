@@ -18,6 +18,7 @@
 		"paths": {
 			"@app/*": ["app/*"],
 			"@structures/*": ["app/structures/*"],
+			"@utils/*": ["app/utils/*"],
 			"@modules/*": ["app/modules/*"],
 			"@core/*": ["app/modules/core/*"],
 		}
