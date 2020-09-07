@@ -17,6 +17,7 @@
 		],
 		"paths": {
 			"@app/*": ["app/*"],
+			"@structures/*": ["app/structures/*"],
 			"@modules/*": ["app/modules/*"],
 			"@core/*": ["app/modules/core/*"],
 		}
