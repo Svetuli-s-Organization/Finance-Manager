@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Services
+import { WINDOW_PROVIDERS } from './services/window/window.service';
 import { FileService } from './services/file/file.service';
 
 @NgModule({
@@ -10,6 +11,7 @@ import { FileService } from './services/file/file.service';
 		CommonModule
 	],
 	providers: [
+		WINDOW_PROVIDERS,
 		FileService,
 	],
 })
