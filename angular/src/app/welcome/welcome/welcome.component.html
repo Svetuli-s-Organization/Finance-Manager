@@ -1,23 +1,21 @@
 <div id="container">
-  <div id="header">
-    <h1>Finance Manager</h1>
-  </div>
+	<h1 id="header">Finance Manager</h1>
 
   <div id="wrapper">
     <div id="section-wrapper">
       <div id="left-section" class="section-item">
         <ul class="list">
-          <!-- <li class="clickable-list-item"><a (click)="openFile()">Open file</a></li> -->
-          <li class="clickable-list-item"><a>Open file</a></li>
-          <!-- <li class="clickable-list-item"><a (click)="createNewFile()">Create new file</a></li> -->
-          <li class="clickable-list-item"><a>Create new file</a></li>
+          <!-- <li class="list-item"><a (click)="openFile()">Open file</a></li> -->
+          <li class="list-item clickable"><a>Open file</a></li>
+          <!-- <li class="list-item clickable"><a (click)="createNewFile()">Create new file</a></li> -->
+          <li class="list-item clickable"><a>Create new file</a></li>
           <li class="separator horizontal"></li>
-          <li class="recent-files"><a>Recent files:</a></li>
+          <li class="list-item"><a>Recent files:</a></li>
           <ul class="list second-lever-list">
-            <!-- <li class="clickable-list-item" *ngFor="let recentFile of recentFiles; let i = index">
+            <!-- <li class="list-item" *ngFor="let recentFile of recentFiles; let i = index">
               <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
             </li> -->
-            <li class="clickable-list-item">
+            <li class="list-item clickable">
               <a title="asdf">file.fmn</a>
             </li>
           </ul>
