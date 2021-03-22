@@ -6,7 +6,8 @@
   "license": "ISC",
   "scripts": {
     "start": "electron ./dist/out-tsc/main.js",
-    "tsc-electron": "tsc -w"
+    "tsc-electron": "tsc -w",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
