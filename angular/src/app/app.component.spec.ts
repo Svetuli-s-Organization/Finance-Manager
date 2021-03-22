@@ -1,8 +1,5 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
-// External libraries
-import { configureTestSuite, createTestContext, TestCtx } from 'ng-bullet';
-
 // Components
 import { AppComponent } from './app.component';
 import { Component } from '@angular/core';
@@ -15,23 +12,21 @@ class WelcomeComponentStub {
 }
 
 describe('AppComponent', () => {
-	let ctx: TestCtx<AppComponent>;
 	let component: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
 
-	configureTestSuite((() => {
-		TestBed.configureTestingModule({
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
 			declarations: [
 				AppComponent,
 				WelcomeComponentStub,
 			],
-		});
-	}));
+		}).compileComponents();
+	});
 
 	beforeEach(() => {
-		ctx = createTestContext(AppComponent);
-		component = ctx.component;
-		fixture = ctx.fixture;
+		fixture = TestBed.createComponent(AppComponent);
+		component = fixture.componentInstance;
 	});
 
 	it('should create the app', () => {

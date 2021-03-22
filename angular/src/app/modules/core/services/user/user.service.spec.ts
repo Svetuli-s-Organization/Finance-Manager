@@ -2,9 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { IpcRenderer, IpcRendererEvent } from 'electron';
 
-// External libraries
-import { configureTestSuite } from 'ng-bullet';
-
 // Services
 import { UserService } from './user.service';
 import { ElectronService } from '@core/services/electron/electron.service';
@@ -22,7 +19,7 @@ describe('UserService', () => {
 		service = new UserService(electronService);
 	};
 
-	configureTestSuite(() => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
 				{ provide: ElectronService, useClass: ElectronServiceStub },

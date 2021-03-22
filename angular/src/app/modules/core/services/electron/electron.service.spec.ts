@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-// External libraries
-import { configureTestSuite } from 'ng-bullet';
 import { IpcRenderer } from 'electron';
 
 // Services
@@ -27,7 +25,7 @@ class WindowStub {
 describe('ElectronService', () => {
 	let service: ElectronService;
 
-	configureTestSuite(() => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [
 				{ provide: WINDOW, useClass: WindowStub },

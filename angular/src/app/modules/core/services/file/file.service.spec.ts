@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-// External libraries
-import { configureTestSuite } from 'ng-bullet';
-
 // Services
 import { FileService } from './file.service';
 
@@ -13,7 +10,7 @@ import { testBehaviorSubjectStream } from '@app/utils/testing/observable';
 describe('FileService', () => {
 	let service: FileService;
 
-	configureTestSuite(() => {
+	beforeEach(() => {
 		TestBed.configureTestingModule({});
 	});
 
