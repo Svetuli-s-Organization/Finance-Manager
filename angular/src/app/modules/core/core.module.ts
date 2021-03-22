@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { WINDOW_PROVIDERS } from './services/window/window.service';
 import { ElectronService } from './services/electron/electron.service';
 import { FileService } from './services/file/file.service';
+import { UserService } from './services/user/user.service';
 
 @NgModule({
 	declarations: [],
@@ -13,8 +14,10 @@ import { FileService } from './services/file/file.service';
 	],
 	providers: [
 		WINDOW_PROVIDERS,
+		// Services
 		ElectronService,
 		FileService,
+		UserService,
 	],
 })
 export class CoreModule { }
