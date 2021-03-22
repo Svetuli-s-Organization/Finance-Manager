@@ -5,7 +5,7 @@
   "main": "main.ts",
   "scripts": {
     "start": "npx electron ./dist/out-tsc/main.js",
-    "start:tsc": "tsc -w",
+    "tsc": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
