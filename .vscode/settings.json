@@ -1,9 +1,15 @@
 {
 	"files.exclude": {
 		"dist": true,
+		"electron-app/dist": true,
 		"tmp": true,
 		"out-tsc": true,
+		"bazel-out": true,
 		"node_modules": true,
+		"electron-app/node_modules": true,
+		"angular/node_modules": true,
+		"**/chrome-profiler-events*.json": true,
+		"**/speed-measure-plugin*.json": true,
 		".idea": true,
 		"**/.project": true,
 		"**/.classpath": true,
@@ -16,10 +22,9 @@
 		"coverage": true,
 		"libpeerconnection.log": true,
 		"**/npm-debug.log": true,
+		"**/yarn-error.log": true,
 		"**/testem.log": true,
 		"typings": true,
-		"e2e/*.js": true,
-		"e2e/*.map": true,
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true
 	}

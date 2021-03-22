@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/electron-app/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -9,6 +10,8 @@
 
 # dependencies
 /node_modules
+/electron-app/node_modules
+/angular/node_modules
 
 # profiling files
 chrome-profiler-events*.json
