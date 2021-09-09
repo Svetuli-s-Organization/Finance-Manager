@@ -13,13 +13,9 @@ const ipcRendererStub: IpcRenderer = {
 } as IpcRenderer;
 
 class WindowStub {
-	require(path: string) {
-		if (path === 'electron') {
-			return {
-				ipcRenderer: ipcRendererStub,
-			};
-		}
-	}
+	electron = {
+		ipcRenderer: ipcRendererStub,
+	};
 }
 
 describe('ElectronService', () => {
