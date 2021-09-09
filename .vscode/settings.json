@@ -1,7 +1,6 @@
 {
 	"files.exclude": {
 		"dist": true,
-		"electron-app/dist": true,
 		"tmp": true,
 		"out-tsc": true,
 		"bazel-out": true,
