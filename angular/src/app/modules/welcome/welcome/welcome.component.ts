@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+// Services
+import { ElectronService } from '@core/services/electron/electron.service';
+
 @Component({
 	selector: 'app-welcome',
 	templateUrl: './welcome.component.html',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-	constructor() { }
+	constructor(private electronService: ElectronService) { }
 
 	ngOnInit() {
 	}
