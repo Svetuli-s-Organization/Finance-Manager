@@ -2,9 +2,8 @@
   "name": "finance-manager-electron",
   "version": "0.0.0",
   "description": "The electron part of the application",
-  "main": "main.ts",
   "scripts": {
-    "start": "npx electron ./dist/out-tsc/main.js",
+    "start": "electron ../dist/electron/main.js",
     "tsc": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

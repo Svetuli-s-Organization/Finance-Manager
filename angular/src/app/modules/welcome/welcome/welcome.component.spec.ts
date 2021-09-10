@@ -1,4 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ElectronService } from '@app/modules/core/services/electron/electron.service';
+import { ElectronServiceStub } from '@app/modules/core/services/electron/electron.service.stub';
 
 // Components
 import { WelcomeComponent } from './welcome.component';
@@ -11,6 +13,9 @@ describe('WelcomeComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				WelcomeComponent,
+			],
+			providers: [
+				{ provide: ElectronService, useClass: ElectronServiceStub },
 			],
 		}).compileComponents();
 	});

@@ -1,11 +1,11 @@
 {
 	"compileOnSave": false,
-	"files": [
-		"main.ts"
+	"include": [
+		"*.ts"
 	],
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    "outDir": "../dist/electron",
     "sourceMap": true,
     "declaration": false,
     "module": "commonjs",
