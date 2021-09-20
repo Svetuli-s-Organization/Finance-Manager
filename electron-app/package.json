@@ -2,10 +2,11 @@
   "name": "finance-manager-electron",
   "version": "0.0.0",
   "description": "The electron part of the application",
+	"main": "./dist/main.js",
   "scripts": {
-    "start": "electron-forge start",
-    "tsc": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start dist",
+    "tsc:dev": "tsc -w",
+    "tsc:prod": "tsc",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
@@ -34,7 +35,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+				"asar": true
+			},
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
