@@ -1,3 +1,5 @@
-import * as electron from 'electron';
+import { contextBridge, ipcRenderer } from 'electron';
 
-window.electron = electron;
+contextBridge.exposeInMainWorld('electron', {
+	ipcRenderer
+});

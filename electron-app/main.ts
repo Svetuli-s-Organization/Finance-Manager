@@ -7,14 +7,14 @@ app.whenReady().then(() => {
 		width: 1600,
 		height: 900,
 		webPreferences: {
-			contextIsolation: false,
+			contextIsolation: true,
 			preload: path.join(__dirname, 'preload.js'),
 		}
 	});
 
 	win.loadURL('http://localhost:4200');
 	win.maximize();
-	
+
 	win.webContents.toggleDevTools();
 });
 
