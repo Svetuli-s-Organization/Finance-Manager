@@ -9,6 +9,7 @@ module.exports = function (config) {
 			require('karma-jasmine'),
 			require('karma-phantomjs-launcher'),
 			// require('karma-jasmine-html-reporter'),
+			require('karma-coverage'),
 			require('karma-coverage-istanbul-reporter'),
 			require('@angular-devkit/build-angular/plugins/karma')
 		],
