@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "build:ci": "ng build --prod",
-    "test:ci": "ng test --karma-config ci.karma.conf.js",
+    "test:ci": "ng test --karma-config ci.karma.conf.js --code-coverage",
     "postinstall": "ngcc"
   },
   "dependencies": {
