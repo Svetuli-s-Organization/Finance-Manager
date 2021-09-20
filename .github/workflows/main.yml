@@ -1,4 +1,4 @@
-name: Angular app CI
+name: Build
 
 on:
   push:
