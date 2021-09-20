@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/Ftujio/Finance-Manager#readme",
   "dependencies": {
-    "electron": "^12.0.2"
+    "electron": "^14.0.1"
   }
 }
