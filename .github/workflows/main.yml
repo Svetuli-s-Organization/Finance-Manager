@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-angular:
     runs-on: ubuntu-latest
 
     steps:
