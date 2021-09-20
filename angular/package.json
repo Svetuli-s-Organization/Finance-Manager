@@ -5,6 +5,8 @@
   "author": "Ftujio",
   "license": "ISC",
   "scripts": {
+		"build": "ng build --prod",
+		"test": "ng test",
     "postinstall": "ngcc"
   },
   "dependencies": {
