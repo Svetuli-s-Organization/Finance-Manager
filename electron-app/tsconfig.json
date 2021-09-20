@@ -5,7 +5,7 @@
 	],
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "../dist/electron",
+    "outDir": "./dist",
     "sourceMap": true,
     "declaration": false,
     "module": "commonjs",
