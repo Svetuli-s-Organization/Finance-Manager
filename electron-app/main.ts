@@ -2,20 +2,28 @@ import { app, BrowserWindow } from 'electron';
 
 import * as path from 'path';
 
+import { isProd } from './environment';
+
 app.whenReady().then(() => {
 	const win = new BrowserWindow({
 		width: 1600,
 		height: 900,
+		frame:  true,
 		webPreferences: {
 			contextIsolation: true,
 			preload: path.join(__dirname, 'preload.js'),
 		}
 	});
 
-	win.loadURL('http://localhost:4200');
-	win.maximize();
+
+	if (isProd()) {
+		console.log('PROD');
+		win.loadFile(path.join(__dirname, './angular/index.html'));
+	} else {
+		console.log('DEV');
+		win.loadURL('http://localhost:4200');
+		win.maximize();
+	}
 
 	win.webContents.toggleDevTools();
 });
-
-app.allowRendererProcessReuse = true;
