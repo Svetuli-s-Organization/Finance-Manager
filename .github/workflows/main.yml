@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-					cd ./angular
+					cd ./angular,
 					npm ci
 
       - name: Run unit tests
