@@ -18,11 +18,20 @@ jobs:
         with:
           node-version: 12
 
+      - name: Install global dependencies
+        run: npm ci
+
       - name: Install dependencies
+        working-directory: ./angular
         run: npm ci
 
       - name: Run unit tests
-        run: npm test
-        
+        working-directory: ./angular
+        run: npm run test:ci
+
+      - name: Code coverage
+        uses: codecov/codecov-action@v2.1.0
+
       - name: Build app
-        run: npm build
+        working-directory: ./angular
+        run: npm run build:ci
