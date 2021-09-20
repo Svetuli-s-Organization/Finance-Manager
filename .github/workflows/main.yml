@@ -35,3 +35,27 @@ jobs:
       - name: Build app
         working-directory: ./angular
         run: npm run build:ci
+
+  build-electron:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install dependencies
+        working-directory: ./electron-app
+        run: npm ci
+
+      - name: Typescript
+        working-directory: ./electron-app
+        run: npm run tsc:prod
+
+      - name: Make
+        working-directory: ./electron-app
+        run: npm run make
