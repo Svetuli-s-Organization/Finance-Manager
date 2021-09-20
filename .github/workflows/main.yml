@@ -11,6 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+		defaults:
+			run:
+				working-directory: ./angular
 
     steps:
       - uses: actions/checkout@v2
@@ -19,9 +22,7 @@ jobs:
           node-version: 12
 
       - name: Install dependencies
-        run: |
-          cd ./angular,
-          npm ci
+        run: npm ci
 
       - name: Run unit tests
         run: npm test
