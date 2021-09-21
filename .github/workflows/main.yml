@@ -58,4 +58,8 @@ jobs:
 
       - name: Make
         working-directory: ./electron-app
-        run: npm run make
+        run: |
+          npm run make:win32
+          npm run make:linux
+          npm run make:mas
+          npm run make:darwin
