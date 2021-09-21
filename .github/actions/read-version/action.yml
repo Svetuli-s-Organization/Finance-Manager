@@ -1,0 +1,13 @@
+name: 'Read app version'
+description: 'Read the app version from package.json and store it in a variable'
+inputs:
+  package-path:
+    description: 'Path to the package.json file'
+    required: true
+    default: './'
+outputs:
+  version:
+    description: 'The version of the app read from the provided package.json'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
