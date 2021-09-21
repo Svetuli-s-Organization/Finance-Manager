@@ -38,9 +38,9 @@ jobs:
 
   build-electron:
     strategy:
+      fail-fast: false
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest, macos-latest]
-        make-script: [win32, linux, mas, darwin]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -62,7 +62,7 @@ jobs:
 
       - name: Make
         working-directory: ./electron-app
-        run: npm run make:${{ matrix.make-script }}
+        run: npm run make
 
   # build-electron-win:
   #   runs-on: windows-latest
