@@ -36,7 +36,31 @@ jobs:
         working-directory: ./angular
         run: npm run build:ci
 
-  build-electron:
+  build-electron-win:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install dependencies
+        working-directory: ./electron-app
+        run: npm ci
+
+      - name: Typescript
+        working-directory: ./electron-app
+        run: npm run tsc:prod
+
+      - name: Make
+        working-directory: ./electron-app
+        run: npm run make:win32
+
+  build-electron-linux:
     runs-on: ubuntu-latest
 
     steps:
@@ -58,8 +82,52 @@ jobs:
 
       - name: Make
         working-directory: ./electron-app
-        run: |
-          npm run make:win32
-          npm run make:linux
-          npm run make:mas
-          npm run make:darwin
+        run: npm run make:linux
+
+  build-electron-macos:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install dependencies
+        working-directory: ./electron-app
+        run: npm ci
+
+      - name: Typescript
+        working-directory: ./electron-app
+        run: npm run tsc:prod
+
+      - name: Make
+        working-directory: ./electron-app
+        run: npm run make:mas
+
+  build-electron-darwin:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install dependencies
+        working-directory: ./electron-app
+        run: npm ci
+
+      - name: Typescript
+        working-directory: ./electron-app
+        run: npm run tsc:prod
+
+      - name: Make
+        working-directory: ./electron-app
+        run: npm run make:darwin
