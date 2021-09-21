@@ -27,6 +27,8 @@
 		"**/.DS_Store": true,
 		"**/Thumbs.db": true,
 		"electron-app/out": true,
-		"electron-app/dist": true
+		"electron-app/dist": true,
+		".github/actions/read-version/node_modules": true,
+		".github/actions/read-version/tsc": true
 	}
 }
