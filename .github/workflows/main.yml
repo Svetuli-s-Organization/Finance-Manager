@@ -79,12 +79,12 @@ jobs:
         working-directory: ./electron-app
         run: npm run make
 
-      - name: Read app version
-        id: read-version
-        uses: ./actions/read-version
-        env:
-          VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+      # - name: Read app version
+      #   id: read-version
+      #   uses: ./actions/read-version
+      #   env:
+      #     VERSION: ${{ steps.read-version.outputs.version }}
+      #     ZIP_NAME: release-${{ env.VERSION }}.tar.gz
 
       - name: Create tar
         run: tar -cz -f ./${{ env.ZIP_NAME }} ./out/*
@@ -103,12 +103,12 @@ jobs:
         with:
           node-version: 12
 
-      - name: Read app version
-        id: read-version
-        uses: ./actions/read-version
-        env:
-          VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+      # - name: Read app version
+      #   id: read-version
+      #   uses: ./actions/read-version
+      #   env:
+      #     VERSION: ${{ steps.read-version.outputs.version }}
+      #     ZIP_NAME: release-${{ env.VERSION }}.tar.gz
 
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
