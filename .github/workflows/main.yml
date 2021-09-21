@@ -78,3 +78,43 @@ jobs:
       - name: Make
         working-directory: ./electron-app
         run: npm run make
+
+      - name: Read app version
+        id: read-version
+        uses: ./actions/read-version
+        env:
+          VERSION: ${{ steps.read-version.outputs.version }}
+          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+
+      - name: Create tar
+        run: tar -cz -f ./${{ env.ZIP_NAME }} ./out/*
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: ${{ env.ZIP_NAME }}
+
+  gh-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read app version
+        id: read-version
+        uses: ./actions/read-version
+        env:
+          VERSION: ${{ steps.read-version.outputs.version }}
+          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2.0.10
+        with:
+          name: ${{ env.ZIP_NAME }}
+
+      - name: Release to GitHub
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: ${{ env.ZIP_NAME }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ env.version }}
