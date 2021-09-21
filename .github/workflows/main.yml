@@ -84,7 +84,7 @@ jobs:
         uses: ./.github/actions/read-version
         env:
           VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+          ZIP_NAME: release-$env.VERSION.tar.gz
 
       - name: Create tar
         run: tar -cz -f ./${{ env.ZIP_NAME }} ./out/*
@@ -108,7 +108,7 @@ jobs:
         uses: ./.github/actions/read-version
         env:
           VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+          ZIP_NAME: release-$env.VERSION.tar.gz
 
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
