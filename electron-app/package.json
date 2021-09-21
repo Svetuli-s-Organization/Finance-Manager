@@ -8,7 +8,11 @@
     "tsc:dev": "tsc -w",
     "tsc:prod": "tsc",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "make:win32": "electron-forge make --platform win32",
+    "make:linux": "electron-forge make --platform linux",
+    "make:mas": "electron-forge make --platform mas",
+    "make:darwin": "electron-forge make --platform darwin"
   },
   "repository": {
     "type": "git",
