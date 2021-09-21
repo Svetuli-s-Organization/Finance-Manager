@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
   push:
@@ -25,16 +25,32 @@ jobs:
         working-directory: ./angular
         run: npm ci
 
+      - name: Build app
+        working-directory: ./angular
+        run: npm run build:ci
+
+  test-angular:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Install global dependencies
+        run: npm ci
+
+      - name: Install dependencies
+        working-directory: ./angular
+        run: npm ci
+
       - name: Run unit tests
         working-directory: ./angular
         run: npm run test:ci
 
       - name: Code coverage
         uses: codecov/codecov-action@v2.1.0
-
-      - name: Build app
-        working-directory: ./angular
-        run: npm run build:ci
 
   build-electron:
     strategy:
