@@ -94,30 +94,30 @@ jobs:
         with:
           name: ${{ env.ZIP_NAME }}
 
-  gh-release:
-    runs-on: ubuntu-latest
+  # gh-release:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.4.0
-        with:
-          node-version: 12
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v2.4.0
+  #       with:
+  #         node-version: 12
 
-      - name: Read app version
-        id: read-version
-        uses: ./.github/actions/read-version
-        env:
-          VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+  #     - name: Read app version
+  #       id: read-version
+  #       uses: ./.github/actions/read-version
+  #       env:
+  #         VERSION: ${{ steps.read-version.outputs.version }}
+  #         ZIP_NAME: release-${{ env.VERSION }}.tar.gz
 
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v2.0.10
-        with:
-          name: ${{ env.ZIP_NAME }}
+  #     - name: Download a Build Artifact
+  #       uses: actions/download-artifact@v2.0.10
+  #       with:
+  #         name: ${{ env.ZIP_NAME }}
 
-      - name: Release to GitHub
-      - uses: ncipollo/release-action@v1
-        with:
-          artifacts: ${{ env.ZIP_NAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: v${{ env.version }}
+  #     - name: Release to GitHub
+  #     - uses: ncipollo/release-action@v1
+  #       with:
+  #         artifacts: ${{ env.ZIP_NAME }}
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         tag: v${{ env.version }}
