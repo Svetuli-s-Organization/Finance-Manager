@@ -25,6 +25,8 @@
 		"**/testem.log": true,
 		"typings": true,
 		"**/.DS_Store": true,
-		"**/Thumbs.db": true
+		"**/Thumbs.db": true,
+		"electron-app/out": true,
+		"electron-app/dist": true
 	}
 }
