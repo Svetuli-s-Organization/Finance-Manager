@@ -38,9 +38,8 @@ jobs:
 
   build-electron:
     strategy:
-      fail-fast: false
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest, macos-latest]
+        os: [windows-latest, ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
