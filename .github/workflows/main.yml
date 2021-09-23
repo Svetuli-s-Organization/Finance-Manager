@@ -86,8 +86,7 @@ jobs:
 
       - name: Create tar
         env:
-          VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+          ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
         run: tar -cz -f ./${{ env.ZIP_NAME }} ./out/*
 
       - name: Upload a Build Artifact
@@ -112,8 +111,7 @@ jobs:
 
       - name: Download a Build Artifact
         env:
-          VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
+          ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.ZIP_NAME }}
