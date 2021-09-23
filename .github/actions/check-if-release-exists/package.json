@@ -1,5 +1,5 @@
 {
-  "name": "read-version",
+  "name": "check-if-release-exists",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -11,5 +11,8 @@
     "build": "npm run build:tsc && npm run build:bundle"
   },
   "author": "Ftujio",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tslib": "^2.3.1"
+  }
 }
