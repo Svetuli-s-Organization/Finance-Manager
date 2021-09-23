@@ -93,14 +93,11 @@ jobs:
           echo "::set-output name=zip_name::${{ env.zip_name }}"
           tar -cz -f ./${{ env.zip_name }} ./electron-app/out/*
 
-      - name: Log zip name
-        run: echo ${{ steps.create-tar.outputs.zip_name }}
-
-      # - name: Upload a Build Artifact
-      #   uses: actions/upload-artifact@v2.2.4
-      #   with:
-      #     name: ${{ env.ZIP_NAME }}
-      #     path: ${{ env.ZIP_NAME }}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: ${{ steps.create-tar.outputs.zip_name }}
+          path: ${{ steps.create-tar.outputs.zip_name }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
