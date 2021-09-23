@@ -139,7 +139,9 @@ jobs:
 
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
+        env:
+          version: ${{ steps.read-version.outputs.version }}
         with:
-          artifacts: release-*-${{ steps.read-version.outputs.version }}.tar.gz
+          artifacts: release-windows-latest-${{ version }}.tar.gz, release-ubuntu-latest-${{ version }}.tar.gz, release-macos-latest-${{ version }}.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
