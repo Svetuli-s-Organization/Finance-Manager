@@ -88,11 +88,11 @@ jobs:
       - name: Create tar
         id: create-tar
         run: |
-          echo "::set-env name=ZIP_NAME::release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tar.gz"
-          tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
+          echo "::set-output name=zip_name::release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tar.gz"
+          tar -cz -f ./${{ steps.create-tar.outputs.zip_name }} ./electron-app/out/*
 
       - name: Log zip name
-        run: echo ${{ env.ZIP_NAME }}
+        run: echo ${{ steps.create-tar.outputs.zip_name }}
 
       # - name: Upload a Build Artifact
       #   uses: actions/upload-artifact@v2.2.4
