@@ -53,6 +53,7 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
 
   build-electron:
+    needs: build-angular
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
@@ -95,6 +96,8 @@ jobs:
           name: ${{ env.ZIP_NAME }}
 
   gh-release:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: build-electron
     runs-on: ubuntu-latest
 
     steps:
