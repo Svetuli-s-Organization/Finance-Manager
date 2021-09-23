@@ -87,7 +87,7 @@ jobs:
       - name: Create tar
         id: create-tar
         env:
-          zip-name: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tgz
+          zip-name: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.zip
         run: |
           tar -cz -f ./${{ env.zip-name }} -C ./electron-app/out/make .
           echo "::set-output name=zip-name::${{ env.zip-name }}"
@@ -116,7 +116,7 @@ jobs:
       - name: Download build artifact for windows
         id: download-windows-artifact
         env:
-          zip-name: release-windows-latest-${{ steps.read-version.outputs.version }}.tgz
+          zip-name: release-windows-latest-${{ steps.read-version.outputs.version }}.zip
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.zip-name }}
@@ -125,7 +125,7 @@ jobs:
       - name: Download build artifact for linux
         id: download-linux-artifact
         env:
-          zip-name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.tgz
+          zip-name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.zip
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.zip-name }}
@@ -134,7 +134,7 @@ jobs:
       - name: Download build artifact for mac
         id: download-mac-artifact
         env:
-          zip-name: release-macos-latest-${{ steps.read-version.outputs.version }}.tgz
+          zip-name: release-macos-latest-${{ steps.read-version.outputs.version }}.zip
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.zip-name }}
@@ -145,6 +145,6 @@ jobs:
         env:
           version: ${{ steps.read-version.outputs.version }}
         with:
-          artifacts: release-windows-latest-${{ env.version }}.tgz, release-ubuntu-latest-${{ env.version }}.tgz, release-macos-latest-${{ env.version }}.tgz
+          artifacts: release-windows-latest-${{ env.version }}.zip, release-ubuntu-latest-${{ env.version }}.zip, release-macos-latest-${{ env.version }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
