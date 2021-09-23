@@ -115,6 +115,9 @@ jobs:
       - name: Check if release exists
         id: check-if-release-exists
         uses: ./.github/actions/check-if-release-exists
+        with:
+          tag: ${{ steps.read-version.outputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
