@@ -576,6 +576,7 @@ try {
     const file = (0, fs_1.readFileSync)(packagePath, 'utf-8');
     const json = JSON.parse(file);
     const version = json.version;
+    console.log('!!!VERSION: ', version);
     core.setOutput('version', version);
 }
 catch (error) {
