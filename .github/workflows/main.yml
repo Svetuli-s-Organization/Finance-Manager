@@ -88,7 +88,7 @@ jobs:
       - name: Create tar
         id: create-tar
         run: |
-          ::set-env name=ZIP_NAME::release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tar.gz
+          echo "::set-env name=ZIP_NAME::release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tar.gz"
           tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
 
       - name: Log zip name
