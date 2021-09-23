@@ -86,11 +86,10 @@ jobs:
 
       - name: Create tar
         id: create-tar
-        working-directory: ./electron-app/out/make
         env:
           zip-name: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tgz
         run: |
-          tar -cz -f ./${{ env.zip-name }} ./*
+          tar -cz -f ./${{ env.zip-name }} -C ./electron-app/out/make .
           echo "::set-output name=zip-name::${{ env.zip-name }}"
 
       - name: Upload a Build Artifact
