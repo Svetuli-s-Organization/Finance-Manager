@@ -88,12 +88,13 @@ jobs:
         env:
           ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
         run: tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
+        run: echo ${{ env.ZIP_NAME }}
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
           name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          path: ./${{ env.ZIP_NAME }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
