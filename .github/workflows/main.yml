@@ -84,11 +84,20 @@ jobs:
         id: read-version
         uses: ./.github/actions/read-version
 
+      - name: Create tar
+        id: create-tar
+        working-directory: ./electron-app/out/make
+        env:
+          zip-name: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}.tgz
+        run: |
+          tar -cz -f ./${{ env.zip-name }} ./*
+          echo "::set-output name=zip-name::${{ env.zip-name }}"
+
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}
-          path: ./electron-app/out/make
+          name: ${{ steps.create-tar.outputs.zip-name }}
+          path: ${{ steps.create-tar.outputs.zip-name }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -108,35 +117,35 @@ jobs:
       - name: Download build artifact for windows
         id: download-windows-artifact
         env:
-          zip_name: release-windows-latest-${{ steps.read-version.outputs.version }}
+          zip-name: release-windows-latest-${{ steps.read-version.outputs.version }}.tgz
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.zip_name }}
-          path: ${{ env.zip_name }}
+          name: ${{ env.zip-name }}
+          path: ${{ env.zip-name }}
 
       - name: Download build artifact for linux
         id: download-linux-artifact
         env:
-          zip_name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}
+          zip-name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.tgz
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.zip_name }}
-          path: ${{ env.zip_name }}
+          name: ${{ env.zip-name }}
+          path: ${{ env.zip-name }}
 
       - name: Download build artifact for mac
         id: download-mac-artifact
         env:
-          zip_name: release-macos-latest-${{ steps.read-version.outputs.version }}
+          zip-name: release-macos-latest-${{ steps.read-version.outputs.version }}.tgz
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.zip_name }}
-          path: ${{ env.zip_name }}
+          name: ${{ env.zip-name }}
+          path: ${{ env.zip-name }}
 
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         env:
           version: ${{ steps.read-version.outputs.version }}
         with:
-          artifacts: release-windows-latest-${{ env.version }}, release-ubuntu-latest-${{ env.version }}, release-macos-latest-${{ env.version }}
+          artifacts: release-windows-latest-${{ env.version }}.tgz, release-ubuntu-latest-${{ env.version }}.tgz, release-macos-latest-${{ env.version }}.tgz
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
