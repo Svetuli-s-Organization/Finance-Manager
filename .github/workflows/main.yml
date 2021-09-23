@@ -114,34 +114,40 @@ jobs:
         uses: ./.github/actions/read-version
 
       - name: Download build artifact for windows
+        id: download-windows-artifact
         env:
           zip_name: release-windows-latest-${{ steps.read-version.outputs.version }}.tar.gz
+        run: echo "::set-output name=zip_name::${{ env.zip_name }}"
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          name: ${{ env.zip_name }}
+          path: ${{ env.zip_name }}
 
       - name: Download build artifact for linux
+        id: download-linux-artifact
         env:
           zip_name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.tar.gz
+        run: echo "::set-output name=zip_name::${{ env.zip_name }}"
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          name: ${{ env.zip_name }}
+          path: ${{ env.zip_name }}
 
       - name: Download build artifact for mac
+        id: download-mac-artifact
         env:
           zip_name: release-macos-latest-${{ steps.read-version.outputs.version }}.tar.gz
+        run: echo "::set-output name=zip_name::${{ env.zip_name }}"
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          name: ${{ env.zip_name }}
+          path: ${{ env.zip_name }}
 
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         env:
           version: ${{ steps.read-version.outputs.version }}
         with:
-          artifacts: release-windows-latest-${{ version }}.tar.gz, release-ubuntu-latest-${{ version }}.tar.gz, release-macos-latest-${{ version }}.tar.gz
+          artifacts: ${{ steps.download-windows-artifact.outputs.zip_name }}, ${{ steps.download-linux-artifact.outputs.zip_name }}, ${{ steps.download-mac-artifact.outputs.zip_name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
