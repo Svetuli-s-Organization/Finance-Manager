@@ -87,8 +87,9 @@ jobs:
       - name: Create tar
         env:
           ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
-        run: tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
-        run: echo ${{ env.ZIP_NAME }}
+        run: |
+          tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
+          echo ${{ env.ZIP_NAME }}
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
