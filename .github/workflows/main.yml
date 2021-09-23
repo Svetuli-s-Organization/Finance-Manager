@@ -162,7 +162,7 @@ jobs:
           path: ${{ env.zip-name }}
 
       - name: Release to GitHub
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.8.9
         env:
           version: ${{ steps.read-version.outputs.version }}
         with:
