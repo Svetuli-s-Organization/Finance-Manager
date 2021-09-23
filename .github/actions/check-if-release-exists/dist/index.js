@@ -8849,11 +8849,7 @@ function run() {
             const { owner, repo } = github.context.repo;
             const response = yield octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
             if (response.status === 404) {
-                core.warning(`Tag ${tag} already exists`);
-                core.setOutput('exists', true);
-            }
-            else if (response.status === 200) {
-                core.setOutput('exists', false);
+                core.setFailed(`Tag ${tag} already exists`);
             }
         }
         catch (error) {
