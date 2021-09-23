@@ -1,0 +1,15 @@
+name: 'Check if a release exists'
+description: 'Check if a release exists. The action gives a warning if it exists and sets the output "exists" to true.'
+inputs:
+  tag:
+    description: 'Path to the package.json file'
+    required: true
+  token:
+    description: 'GitHub token'
+    required: true
+outputs:
+  exists:
+    description: 'A boolean value that indicates if the provided tag already exists.'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
