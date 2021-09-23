@@ -93,6 +93,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.4
         with:
           name: ${{ env.ZIP_NAME }}
+          path: ${{ env.ZIP_NAME }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
@@ -115,6 +116,7 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.ZIP_NAME }}
+          path: ${{ env.ZIP_NAME }}
 
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
