@@ -83,11 +83,11 @@ jobs:
       - name: Read app version
         id: read-version
         uses: ./.github/actions/read-version
+
+      - name: Create tar
         env:
           VERSION: ${{ steps.read-version.outputs.version }}
           ZIP_NAME: release-${{ env.VERSION }}.tar.gz
-
-      - name: Create tar
         run: tar -cz -f ./${{ env.ZIP_NAME }} ./out/*
 
       - name: Upload a Build Artifact
@@ -109,11 +109,11 @@ jobs:
       - name: Read app version
         id: read-version
         uses: ./.github/actions/read-version
+
+      - name: Download a Build Artifact
         env:
           VERSION: ${{ steps.read-version.outputs.version }}
           ZIP_NAME: release-${{ env.VERSION }}.tar.gz
-
-      - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.ZIP_NAME }}
