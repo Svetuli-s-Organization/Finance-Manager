@@ -85,7 +85,7 @@ jobs:
         uses: ./.github/actions/read-version
         env:
           VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-$VERSION.tar.gz
+          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
 
       - name: Create tar
         run: tar -cz -f ./${{ env.ZIP_NAME }} ./out/*
