@@ -106,12 +106,12 @@ jobs:
       - name: Read app version
         id: read-version
         uses: ./.github/actions/read-version
-        env:
-          VERSION: ${{ steps.read-version.outputs.version }}
-          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
 
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2.0.10
+        env:
+          VERSION: ${{ steps.read-version.outputs.version }}
+          ZIP_NAME: release-${{ env.VERSION }}.tar.gz
         with:
           name: ${{ env.ZIP_NAME }}
 
