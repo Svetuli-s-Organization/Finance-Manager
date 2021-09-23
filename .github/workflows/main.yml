@@ -85,12 +85,11 @@ jobs:
         id: read-version
         uses: ./.github/actions/read-version
 
-      - name: Create env variable ZIP_NAME
-        env:
-          ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
-
       - name: Create tar
-        run: tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
+        id: create-tar
+        run: |
+          tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
+          ::set-env name=ZIP_NAME::release-${{ ${{ matrix.os }} }}-${{ steps.read-version.outputs.version }}.tar.gz
 
       - name: Log zip name
         run: echo ${{ env.ZIP_NAME }}
