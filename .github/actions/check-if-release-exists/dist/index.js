@@ -8847,9 +8847,16 @@ function run() {
             const token = core.getInput('token');
             const octokit = github.getOctokit(token);
             const { owner, repo } = github.context.repo;
-            const response = yield octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
-            if (response.status === 200) {
-                core.setFailed(`Tag ${tag} already exists`);
+            try {
+                const response = yield octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
+                if (response.status === 200) {
+                    core.setFailed(`Tag ${tag} already exists`);
+                }
+            }
+            catch (error) {
+                if (error.status !== 404) {
+                    core.setFailed(error.message);
+                }
             }
         }
         catch (error) {

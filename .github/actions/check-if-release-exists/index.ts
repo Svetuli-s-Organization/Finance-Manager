@@ -8,9 +8,15 @@ async function run() {
 		const octokit = github.getOctokit(token);
 		const { owner, repo } = github.context.repo;
 
-		const response = await octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
-		if (response.status as number === 200) {
-			core.setFailed(`Tag ${tag} already exists`);
+		try {
+			const response = await octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
+			if (response.status as number === 200) {
+				core.setFailed(`Tag ${tag} already exists`);
+			}
+		} catch (error) {
+			if (error.status !== 404) {
+				core.setFailed(error.message);
+			}
 		}
 	} catch (error) {
 		core.setFailed(error.message);
