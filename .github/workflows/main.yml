@@ -53,7 +53,8 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
 
   build-electron:
-    needs: build-angular
+    # TMP
+    # needs: build-angular
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
@@ -87,15 +88,16 @@ jobs:
       - name: Create tar
         env:
           ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
-        run: |
-          tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
-          echo ${{ env.ZIP_NAME }}
+        run: tar -cz -f ./${{ env.ZIP_NAME }} ./electron-app/out/*
 
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.2.4
-        with:
-          name: ${{ env.ZIP_NAME }}
-          path: ./${{ env.ZIP_NAME }}
+      - name: Log zip name
+        run: echo ${{ env.ZIP_NAME }}
+
+      # - name: Upload a Build Artifact
+      #   uses: actions/upload-artifact@v2.2.4
+      #   with:
+      #     name: ${{ env.ZIP_NAME }}
+      #     path: ${{ env.ZIP_NAME }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
