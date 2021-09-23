@@ -53,8 +53,7 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
 
   build-electron:
-    # TMP
-    # needs: build-angular
+    needs: build-angular
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
@@ -114,9 +113,25 @@ jobs:
         id: read-version
         uses: ./.github/actions/read-version
 
-      - name: Download a Build Artifact
+      - name: Download build artifact for windows
         env:
-          ZIP_NAME: release-${{ steps.read-version.outputs.version }}.tar.gz
+          zip_name: release-windows-latest-${{ steps.read-version.outputs.version }}.tar.gz
+        uses: actions/download-artifact@v2.0.10
+        with:
+          name: ${{ env.ZIP_NAME }}
+          path: ${{ env.ZIP_NAME }}
+
+      - name: Download build artifact for linux
+        env:
+          zip_name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.tar.gz
+        uses: actions/download-artifact@v2.0.10
+        with:
+          name: ${{ env.ZIP_NAME }}
+          path: ${{ env.ZIP_NAME }}
+
+      - name: Download build artifact for mac
+        env:
+          zip_name: release-macos-latest-${{ steps.read-version.outputs.version }}.tar.gz
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ env.ZIP_NAME }}
@@ -125,6 +140,6 @@ jobs:
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
         with:
-          artifacts: ${{ env.ZIP_NAME }}
+          artifacts: release-*-${{ steps.read-version.outputs.version }}.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
