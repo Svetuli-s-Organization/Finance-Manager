@@ -114,32 +114,37 @@ jobs:
         uses: ./.github/actions/read-version
 
       - name: Download build artifact for windows
+        id: download-windows-artifact
         env:
           zip_name: release-windows-latest-${{ steps.read-version.outputs.version }}.tar.gz
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          name: ${{ env.zip_name }}
+          path: ${{ env.zip_name }}
 
       - name: Download build artifact for linux
+        id: download-linux-artifact
         env:
           zip_name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.tar.gz
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          name: ${{ env.zip_name }}
+          path: ${{ env.zip_name }}
 
       - name: Download build artifact for mac
+        id: download-mac-artifact
         env:
           zip_name: release-macos-latest-${{ steps.read-version.outputs.version }}.tar.gz
         uses: actions/download-artifact@v2.0.10
         with:
-          name: ${{ env.ZIP_NAME }}
-          path: ${{ env.ZIP_NAME }}
+          name: ${{ env.zip_name }}
+          path: ${{ env.zip_name }}
 
       - name: Release to GitHub
         uses: ncipollo/release-action@v1
+        env:
+          version: ${{ steps.read-version.outputs.version }}
         with:
-          artifacts: release-*-${{ steps.read-version.outputs.version }}.tar.gz
+          artifacts: release-windows-latest-${{ env.version }}.tar.gz, release-ubuntu-latest-${{ env.version }}.tar.gz, release-macos-latest-${{ env.version }}.tar.gz
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
