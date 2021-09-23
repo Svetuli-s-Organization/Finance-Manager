@@ -98,9 +98,27 @@ jobs:
           name: ${{ steps.create-tar.outputs.zip-name }}
           path: ${{ steps.create-tar.outputs.zip-name }}
 
+  check-if-release-exists:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Read app version
+        id: read-version
+        uses: ./.github/actions/read-version
+
+      - name: Check if release exists
+        id: check-if-release-exists
+        uses: ./.github/actions/check-if-release-exists
+
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
-    needs: build-electron
+    needs: [build-electron, check-if-release-exists]
     runs-on: ubuntu-latest
 
     steps:
