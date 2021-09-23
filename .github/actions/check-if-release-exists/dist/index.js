@@ -8844,12 +8844,9 @@ function run() {
     return (0, tslib_1.__awaiter)(this, void 0, void 0, function* () {
         try {
             const tag = core.getInput('tag');
-            const token = core.getInput('tag');
+            const token = core.getInput('token');
             const octokit = github.getOctokit(token);
             const { owner, repo } = github.context.repo;
-            console.log(`token: ${token}`);
-            console.log(`owner: ${owner}`);
-            console.log(`repo: ${repo}`);
             const response = yield octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
             if (response.status === 404) {
                 core.setFailed(`Tag ${tag} already exists`);
