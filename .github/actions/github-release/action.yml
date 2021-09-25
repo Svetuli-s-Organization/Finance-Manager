@@ -1,0 +1,15 @@
+name: 'Make a GitHub release'
+description: ''
+inputs:
+  tag:
+    description: ''
+    required: true
+  token:
+    description: 'GitHub token'
+    required: true
+  artifacts:
+    description: 'Comma separated list of artifact names'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

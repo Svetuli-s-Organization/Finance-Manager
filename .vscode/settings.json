@@ -31,6 +31,8 @@
 		".github/actions/read-version/tsc": true,
 		".github/actions/node_modules": true,
 		".github/actions/check-if-release-exists/node_modules": true,
-		".github/actions/check-if-release-exists/tsc": true
+		".github/actions/check-if-release-exists/tsc": true,
+		".github/actions/github-release/node_modules": true,
+		".github/actions/github-release/tsc": true
 	}
 }

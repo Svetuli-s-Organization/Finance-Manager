@@ -161,8 +161,17 @@ jobs:
           name: ${{ env.zip-name }}
           path: ${{ env.zip-name }}
 
+      # - name: Release to GitHub
+      #   uses: ncipollo/release-action@v1.8.9
+      #   env:
+      #     version: ${{ steps.read-version.outputs.version }}
+      #   with:
+      #     artifacts: release-windows-latest-${{ env.version }}.zip, release-ubuntu-latest-${{ env.version }}.zip, release-macos-latest-${{ env.version }}.zip
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     tag: v${{ env.version }}
+
       - name: Release to GitHub
-        uses: ncipollo/release-action@v1.8.9
+        uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
         with:
