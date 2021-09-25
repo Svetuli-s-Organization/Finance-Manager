@@ -22,7 +22,7 @@ async function run() {
 		const release = await repos.createRelease({ owner, repo, tag_name: tag });
 
 		const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
-			const artifactFile = readFileSync(artifactName, 'utf-8');
+			const artifactFile = readFileSync(`./${artifactName}`, 'utf-8');
 			return repos.uploadReleaseAsset({
 				owner,
 				repo,
