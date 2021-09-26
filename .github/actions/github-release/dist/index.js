@@ -8839,6 +8839,7 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(9854);
 const fs_1 = __nccwpck_require__(5747);
+const path = __nccwpck_require__(5622);
 const core = __nccwpck_require__(5316);
 const github = __nccwpck_require__(2189);
 function run() {
@@ -8857,8 +8858,7 @@ function run() {
             yield git.createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
             const release = yield repos.createRelease({ owner, repo, tag_name: tag });
             const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
-                core.info(`Reading artifact ./${artifactName}`);
-                const artifactFile = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
+                const artifactFile = (0, fs_1.readFileSync)(path.join(__dirname, `${artifactName}`), 'base64');
                 return repos.uploadReleaseAsset({
                     owner,
                     repo,

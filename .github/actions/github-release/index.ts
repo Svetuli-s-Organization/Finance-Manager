@@ -1,4 +1,5 @@
 import { readFileSync } from 'fs';
+import * as path from 'path';
 
 import * as core from '@actions/core';
 import * as github from '@actions/github';
@@ -22,8 +23,7 @@ async function run() {
 		const release = await repos.createRelease({ owner, repo, tag_name: tag });
 
 		const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
-			core.info(`Reading artifact ./${artifactName}`);
-			const artifactFile = readFileSync(`./${artifactName}`, 'base64');
+			const artifactFile = readFileSync(path.join(__dirname, `${artifactName}`), 'base64');
 			return repos.uploadReleaseAsset({
 				owner,
 				repo,
