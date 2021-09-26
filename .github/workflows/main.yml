@@ -161,9 +161,6 @@ jobs:
           name: ${{ env.zip-name }}
           path: ${{ env.zip-name }}
 
-      - name: ls
-        run: ls
-
       # - name: Release to GitHub
       #   uses: ncipollo/release-action@v1.8.9
       #   env:
