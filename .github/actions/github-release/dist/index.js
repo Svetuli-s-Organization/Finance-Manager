@@ -8858,12 +8858,15 @@ function run() {
             const release = yield repos.createRelease({ owner, repo, tag_name: tag });
             const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
                 core.info(`Reading artifact ./${artifactName}`);
-                const artifactFile = (0, fs_1.readFileSync)(`./${artifactName}`, 'utf-8');
+                const artifactFile = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
                 return repos.uploadReleaseAsset({
                     owner,
                     repo,
                     release_id: release.data.id,
                     name: tag,
+                    mediaType: {
+                        format: 'base64'
+                    },
                     data: artifactFile,
                 });
             });

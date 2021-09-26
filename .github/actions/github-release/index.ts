@@ -23,12 +23,15 @@ async function run() {
 
 		const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
 			core.info(`Reading artifact ./${artifactName}`);
-			const artifactFile = readFileSync(`./${artifactName}`, 'utf-8');
+			const artifactFile = readFileSync(`./${artifactName}`, 'base64');
 			return repos.uploadReleaseAsset({
 				owner,
 				repo,
 				release_id: release.data.id,
 				name: tag,
+				mediaType: {
+					format: 'base64'
+				},
 				data: artifactFile,
 			});
 		});
