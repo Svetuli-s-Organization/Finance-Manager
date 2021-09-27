@@ -8863,11 +8863,11 @@ function run() {
                     owner,
                     repo,
                     headers: {
-                        'content-type': 'application/zip',
-                        'content-length': artifactFileSize,
+                        'Content-Type': 'application/zip',
+                        'Content-Length': artifactFileSize,
                     },
                     release_id: release.data.id,
-                    name: tag,
+                    name: `${tag}.zip`,
                     data: artifactFile,
                 });
             });
