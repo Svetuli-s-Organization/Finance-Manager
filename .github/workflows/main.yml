@@ -191,9 +191,7 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: release-${{ matrix.os-image }}
-
-      - name: ls
-        run: ls -la
+          path: release-${{ matrix.os-image }}
 
       - name: Release to GitHub
         uses: ./.github/actions/github-release
