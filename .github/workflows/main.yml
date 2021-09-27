@@ -85,11 +85,10 @@ jobs:
         uses: ./.github/actions/read-version
 
       - name: Upload a Build Artifact
-        working-directory: ./electron-app/out
         uses: actions/upload-artifact@v2.2.4
         with:
           name: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}
-          path: ./make
+          path: ./electron-app/out/make
 
   check-if-release-exists:
     if: ${{ github.ref == 'refs/heads/master' }}
