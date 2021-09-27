@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs';
-import { exec } from 'child_process';
 import * as path from 'path';
 
 import * as core from '@actions/core';
@@ -26,24 +25,12 @@ async function run() {
 
 		const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
 			core.info(`Trying to release asset ${artifactName}`);
-			exec('ls', (err, stdout) => {
-				core.info('ls output:');
-				core.info(stdout);
-			});
 			const artifactFullPath = path.join(artifactsPath, artifactName);
 			core.info(`artifact full path: ${artifactFullPath}`);
-			try {
-				const artifactFile = readFileSync(artifactFullPath, 'base64');
-				core.info(artifactFile);
-			} catch (error) {
-				core.info(`OOPS: ${error.message}`);
-			}
-			try {
-				const artifactFile2 = readFileSync(`./${artifactName}`, 'base64');
-				core.info(artifactFile2);
-			} catch (error) {
-				core.info(`OOPS: ${error.message}`);
-			}
+			const artifactFile = readFileSync(artifactFullPath, 'base64');
+			core.info(artifactFile);
+			const artifactFile2 = readFileSync(`./${artifactName}`, 'base64');
+			core.info(artifactFile2);
 			// return repos.uploadReleaseAsset({
 			// 	owner,
 			// 	repo,

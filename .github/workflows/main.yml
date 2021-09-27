@@ -170,6 +170,9 @@ jobs:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       #     tag: v${{ env.version }}
 
+      - name: ls
+        run: ls -la
+
       - name: Release to GitHub
         uses: ./.github/actions/github-release
         env:

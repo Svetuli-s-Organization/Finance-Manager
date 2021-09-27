@@ -8688,14 +8688,6 @@ module.exports = require("assert");
 
 /***/ }),
 
-/***/ 3129:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("child_process");
-
-/***/ }),
-
 /***/ 8614:
 /***/ ((module) => {
 
@@ -8847,7 +8839,6 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(9854);
 const fs_1 = __nccwpck_require__(5747);
-const child_process_1 = __nccwpck_require__(3129);
 const path = __nccwpck_require__(5622);
 const core = __nccwpck_require__(5316);
 const github = __nccwpck_require__(2189);
@@ -8869,26 +8860,12 @@ function run() {
             const release = yield repos.createRelease({ owner, repo, tag_name: tag });
             const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
                 core.info(`Trying to release asset ${artifactName}`);
-                (0, child_process_1.exec)('ls', (err, stdout) => {
-                    core.info('ls output:');
-                    core.info(stdout);
-                });
                 const artifactFullPath = path.join(artifactsPath, artifactName);
                 core.info(`artifact full path: ${artifactFullPath}`);
-                try {
-                    const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
-                    core.info(artifactFile);
-                }
-                catch (error) {
-                    core.info(`OOPS: ${error.message}`);
-                }
-                try {
-                    const artifactFile2 = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
-                    core.info(artifactFile2);
-                }
-                catch (error) {
-                    core.info(`OOPS: ${error.message}`);
-                }
+                const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
+                core.info(artifactFile);
+                const artifactFile2 = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
+                core.info(artifactFile2);
                 // return repos.uploadReleaseAsset({
                 // 	owner,
                 // 	repo,
