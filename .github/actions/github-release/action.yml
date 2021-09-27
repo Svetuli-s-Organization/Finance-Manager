@@ -10,6 +10,10 @@ inputs:
   artifacts:
     description: 'Comma separated list of artifact names'
     required: true
+  artifacts-path:
+    description: 'Path to the folder that contains the artifacts'
+    required: true
+    default: '.'
 runs:
   using: 'node12'
   main: 'dist/index.js'

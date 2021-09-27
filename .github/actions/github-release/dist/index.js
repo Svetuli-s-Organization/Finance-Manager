@@ -8848,7 +8848,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(9854);
 const fs_1 = __nccwpck_require__(5747);
 const child_process_1 = __nccwpck_require__(3129);
-const path = __nccwpck_require__(5622);
 const core = __nccwpck_require__(5316);
 const github = __nccwpck_require__(2189);
 function run() {
@@ -8857,6 +8856,7 @@ function run() {
             const tag = core.getInput('tag');
             const token = core.getInput('token');
             const artifacts = core.getInput('artifacts');
+            const artifactsPath = core.getInput('artifacts-path');
             const artifactsList = artifacts.split(', ');
             const { owner, repo } = github.context.repo;
             const { sha } = github.context;
@@ -8872,9 +8872,9 @@ function run() {
                     core.info('ls output:');
                     core.info(stdout);
                 });
-                const artifactFilePath = path.join(__dirname, artifactName);
-                core.info(`artifact path: ${artifactFilePath}`);
-                const artifactFile = (0, fs_1.readFileSync)(artifactFilePath, 'base64');
+                const artifactFullPath = `${artifactsPath}/${artifactName}`;
+                core.info(`artifact full path: ${artifactFullPath}`);
+                const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
                 return repos.uploadReleaseAsset({
                     owner,
                     repo,

@@ -10,6 +10,7 @@ async function run() {
 		const tag = core.getInput('tag');
 		const token = core.getInput('token');
 		const artifacts = core.getInput('artifacts');
+		const artifactsPath = core.getInput('artifacts-path');
 		const artifactsList = artifacts.split(', ');
 
 		const { owner, repo } = github.context.repo;
@@ -29,9 +30,9 @@ async function run() {
 				core.info('ls output:');
 				core.info(stdout);
 			});
-			const artifactFilePath = path.join(__dirname, artifactName);
-			core.info(`artifact path: ${artifactFilePath}`);
-			const artifactFile = readFileSync(artifactFilePath, 'base64');
+			const artifactFullPath = `${artifactsPath}/${artifactName}`;
+			core.info(`artifact full path: ${artifactFullPath}`);
+			const artifactFile = readFileSync(artifactFullPath, 'base64');
 			return repos.uploadReleaseAsset({
 				owner,
 				repo,
