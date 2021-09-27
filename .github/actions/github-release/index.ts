@@ -1,5 +1,4 @@
-import { readFileSync } from 'fs';
-import * as path from 'path';
+import { readFileSync, statSync } from 'fs';
 
 import * as core from '@actions/core';
 import * as github from '@actions/github';
@@ -9,7 +8,6 @@ async function run() {
 		const tag = core.getInput('tag');
 		const token = core.getInput('token');
 		const artifacts = core.getInput('artifacts');
-		const artifactsPath = core.getInput('artifacts-path');
 		const artifactsList = artifacts.split(', ');
 
 		const { owner, repo } = github.context.repo;
@@ -24,21 +22,18 @@ async function run() {
 		const release = await repos.createRelease({ owner, repo, tag_name: tag });
 
 		const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
-			core.info(`Trying to release asset ${artifactName}`);
-			const artifactFullPath = path.join(artifactsPath, artifactName);
-			core.info(`artifact full path: ${artifactFullPath}`);
-			// const artifactFile = readFileSync(artifactFullPath, 'base64');
-			const artifactFile = readFileSync(`./${artifactName}`, 'base64');
-			// core.info(artifactFile);
+			const artifactFileSize = statSync(`./${artifactName}`).size;
+			const artifactFile = readFileSync(`./${artifactName}`);
 			return repos.uploadReleaseAsset({
 				owner,
 				repo,
+				headers: {
+					'content-type': 'binary/octet-stream',
+        	'content-length': artifactFileSize,
+				},
 				release_id: release.data.id,
 				name: tag,
-				mediaType: {
-					format: 'base64'
-				},
-				data: artifactFile,
+				data: artifactFile as any,
 			});
 		});
 
