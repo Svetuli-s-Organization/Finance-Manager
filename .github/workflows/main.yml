@@ -132,29 +132,15 @@ jobs:
         with:
           path: ./artifacts
 
-      - name: ls
-        working-directory: ./artifacts
-        run: ls -la -R
-
-      - name: Create zips
-        id: create-zips
-        env:
-          windows-artifact-name: release-windows-latest-${{ steps.read-version.outputs.version }}
-          linux-artifact-name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}
-          mac-artifact-name: release-macos-latest-${{ steps.read-version.outputs.version }}
-        run: |
-          tar -cz -f ./${{ env.windows-artifact-name }}.zip -C ./artifacts/${{ env.windows-artifact-name }} .
-          tar -cz -f ./${{ env.linux-artifact-name }}.zip -C ./artifacts/${{ env.linux-artifact-name }} .
-          tar -cz -f ./${{ env.mac-artifact-name }}.zip -C ./artifacts/${{ env.mac-artifact-name }} .
-          echo "::set-output name=windows-zip-name::${{ env.windows-artifact-name }}.zip"
-          echo "::set-output name=linux-zip-name::${{ env.linux-artifact-name }}.zip"
-          echo "::set-output name=mac-zip-name::${{ env.mac-artifact-name }}.zip"
-
       - name: Release to GitHub
         uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
+          windows-artifact: release-windows-latest-${{ steps.read-version.outputs.version }}/squirrel.windows/x64/finance-manager-electron-0.1.0 Setup.exe
+          linux-deb-artifact: release-ubuntu-latest-${{ steps.read-version.outputs.version }}/deb/x64/finance-manager-electron_0.1.0_amd64.deb
+          linux-rpm-artifact: release-ubuntu-latest-${{ steps.read-version.outputs.version }}/rpm/x64/finance-manager-electron-0.1.0-1.x86_64.rpm
+          mac-artifact: release-macos-latest-${{ steps.read-version.outputs.version }}/zip/darwin/x64/finance-manager-electron-darwin-x64-0.1.0.zip
         with:
-          artifacts: ${{ steps.create-zips.outputs.windows-zip-name }}, ${{ steps.create-zips.outputs.linux-zip-name }}, ${{ steps.create-zips.outputs.mac-zip-name }}
+          artifacts: ${{ env.windows-artifact }}, ${{ env.linux-deb-artifact }}, ${{ env.linux-rpm-artifact }}, ${{ env.mac-artifact }}
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}

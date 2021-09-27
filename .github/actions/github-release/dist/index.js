@@ -8867,7 +8867,7 @@ function run() {
                         'Content-Length': artifactFileSize,
                     },
                     release_id: release.data.id,
-                    name: `./${artifactName}`,
+                    name: artifactName,
                     data: artifactFile,
                 });
             });
