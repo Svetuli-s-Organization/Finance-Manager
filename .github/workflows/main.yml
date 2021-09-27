@@ -17,6 +17,10 @@ jobs:
       - uses: actions/setup-node@v2.4.0
         with:
           node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install global dependencies
         run: npm ci
@@ -37,6 +41,10 @@ jobs:
       - uses: actions/setup-node@v2.4.0
         with:
           node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install global dependencies
         run: npm ci
@@ -71,6 +79,10 @@ jobs:
       - uses: actions/setup-node@v2.4.0
         with:
           node-version: 12
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
       - name: Install global dependencies
         run: npm ci
@@ -94,7 +106,7 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: release-${{ matrix.os }}
+          name: release-${{ matrix.os-image }}
           path: ./electron-app/out/make
 
   check-if-release-exists:
@@ -146,24 +158,24 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows
+          - name: windows
             os-image: windows-latest
             package-path: squirrel.windows/x64/finance-manager-electron-{0} Setup.exe
             release-asset-name: finance-manager-{0}-windows-installer-x64.exe
-          - os: linux-deb
+          - name: linux deb
             os-image: ubuntu-latest
             package-path: /deb/x64/finance-manager-electron_{0}_amd64.deb
             release-asset-name: finance-manager-{0}-deb-x64.deb
-          - os: macos
+          - name: linux rpm
             os-image: ubuntu-latest
             package-path: /rpm/x64/finance-manager-electron-{0}-1.x86_64.rpm
             release-asset-name: finance-manager-{0}-rpm-x64.rpm
-          - os: macos
+          - name: macos
             os-image: macos-latest
             package-path: /zip/darwin/x64/finance-manager-electron-darwin-x64-{0}.zip
             release-asset-name: finance-manager-{0}-macos-x64.zip
     runs-on: ${{ matrix.os-image }}
-    name: GitHub release for ${{ matrix.os }}
+    name: GitHub release for ${{ matrix.name }}
 
     steps:
       - uses: actions/checkout@v2
@@ -175,16 +187,16 @@ jobs:
         id: read-version
         uses: ./.github/actions/read-version
 
-      - name: Download ${{ matrix.os }} build artifact
+      - name: Download ${{ matrix.name }} build artifact
         uses: actions/download-artifact@v2.0.10
         with:
-          name: release-${{ matrix.os }}
+          name: release-${{ matrix.os-image }}
 
       - name: Release to GitHub
         uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
-          artifact: release-${{ matrix.os }}/${{ format(matrix.package-path, steps.read-version.outputs.version) }}
+          artifact: release-${{ matrix.os-image }}/${{ format(matrix.package-path, steps.read-version.outputs.version) }}
           release-asset-name: ${{ format(matrix.release-asset-name, env.version) }}
         with:
           artifact: ${{ env.artifact }}
