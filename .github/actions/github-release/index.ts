@@ -30,7 +30,7 @@ async function run() {
 				core.info('ls output:');
 				core.info(stdout);
 			});
-			const artifactFullPath = `${artifactsPath}/${artifactName}`;
+			const artifactFullPath = path.join(artifactsPath, artifactName);
 			core.info(`artifact full path: ${artifactFullPath}`);
 			const artifactFile = readFileSync(artifactFullPath, 'base64');
 			return repos.uploadReleaseAsset({

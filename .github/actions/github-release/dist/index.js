@@ -8848,6 +8848,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(9854);
 const fs_1 = __nccwpck_require__(5747);
 const child_process_1 = __nccwpck_require__(3129);
+const path = __nccwpck_require__(5622);
 const core = __nccwpck_require__(5316);
 const github = __nccwpck_require__(2189);
 function run() {
@@ -8872,7 +8873,7 @@ function run() {
                     core.info('ls output:');
                     core.info(stdout);
                 });
-                const artifactFullPath = `${artifactsPath}/${artifactName}`;
+                const artifactFullPath = path.join(artifactsPath, artifactName);
                 core.info(`artifact full path: ${artifactFullPath}`);
                 const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
                 return repos.uploadReleaseAsset({
