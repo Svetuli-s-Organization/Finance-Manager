@@ -113,7 +113,8 @@ jobs:
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
-    needs: [build-electron, check-if-release-exists]
+    # needs: [build-electron, check-if-release-exists]
+    needs: [check-if-release-exists]
     runs-on: ubuntu-latest
 
     steps:
