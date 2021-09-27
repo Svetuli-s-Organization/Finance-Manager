@@ -127,31 +127,40 @@ jobs:
         with:
           node-version: 12
 
+      - name: Read app version
+        id: read-version
+        uses: ./.github/actions/read-version
+
       - name: Create tag
         uses: ./.github/actions/github-tag
+        env:
+          version: ${{ steps.read-version.outputs.version }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v${{ env.version }}
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
-    needs: [build-electron, check-if-release-exists]
+    needs: [build-electron, create-tag]
     strategy:
       matrix:
         include:
           - os: windows
             os-image: windows-latest
-            package-path: squirrel.windows/x64/finance-manager-electron-0.1.0 Setup.exe
-            release-asset-name: finance-manager-windows-installer-x64.exe
+            package-path: squirrel.windows/x64/finance-manager-electron-{0} Setup.exe
+            release-asset-name: finance-manager-{0}-windows-installer-x64.exe
           - os: linux-deb
             os-image: ubuntu-latest
-            package-path: /deb/x64/finance-manager-electron_0.1.0_amd64.deb
-            release-asset-name: finance-manager-deb-x64.deb
+            package-path: /deb/x64/finance-manager-electron_{0}_amd64.deb
+            release-asset-name: finance-manager-{0}-deb-x64.deb
           - os: macos
             os-image: ubuntu-latest
-            package-path: /rpm/x64/finance-manager-electron-0.1.0-1.x86_64.rpm
-            release-asset-name: finance-manager-rpm-x64.rpm
+            package-path: /rpm/x64/finance-manager-electron-{0}-1.x86_64.rpm
+            release-asset-name: finance-manager-{0}-rpm-x64.rpm
           - os: macos
             os-image: macos-latest
-            package-path: /zip/darwin/x64/finance-manager-electron-darwin-x64-0.1.0.zip
-            release-asset-name: finance-manager-macos-x64.zip
+            package-path: /zip/darwin/x64/finance-manager-electron-darwin-x64-{0}.zip
+            release-asset-name: finance-manager-{0}-macos-x64.zip
     runs-on: ${{ matrix.os-image }}
 
     steps:
@@ -175,8 +184,8 @@ jobs:
         uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
-          artifact: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}/${{ matrix.package-path }}
-          release-asset-name: ${{ matrix.release-asset-name }}
+          artifact: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}/${{ format(matrix.package-path, env.version) }}
+          release-asset-name: ${{ format(matrix.release-asset-name, env.version) }}
         with:
           artifact: ${{ env.artifact }}
           release-asset-name: ${{ env.release-asset-name }}
