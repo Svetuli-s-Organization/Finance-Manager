@@ -8862,20 +8862,19 @@ function run() {
                 core.info(`Trying to release asset ${artifactName}`);
                 const artifactFullPath = path.join(artifactsPath, artifactName);
                 core.info(`artifact full path: ${artifactFullPath}`);
-                const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
-                core.info(artifactFile);
-                const artifactFile2 = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
-                core.info(artifactFile2);
-                // return repos.uploadReleaseAsset({
-                // 	owner,
-                // 	repo,
-                // 	release_id: release.data.id,
-                // 	name: tag,
-                // 	mediaType: {
-                // 		format: 'base64'
-                // 	},
-                // 	data: artifactFile,
-                // });
+                // const artifactFile = readFileSync(artifactFullPath, 'base64');
+                const artifactFile = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
+                // core.info(artifactFile);
+                return repos.uploadReleaseAsset({
+                    owner,
+                    repo,
+                    release_id: release.data.id,
+                    name: tag,
+                    mediaType: {
+                        format: 'base64'
+                    },
+                    data: artifactFile,
+                });
             });
             yield Promise.all(uploadReleaseAssetPromises);
         }
