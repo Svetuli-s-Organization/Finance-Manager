@@ -23,7 +23,10 @@ async function run() {
 		const release = await repos.createRelease({ owner, repo, tag_name: tag });
 
 		const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
-			exec('ls');
+			exec('ls', (err, stdout) => {
+				core.info('ls output:');
+				core.info(stdout);
+			});
 			const artifactFile = readFileSync(`./${artifactName}`, 'base64');
 			return repos.uploadReleaseAsset({
 				owner,

@@ -8866,7 +8866,10 @@ function run() {
             yield git.createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
             const release = yield repos.createRelease({ owner, repo, tag_name: tag });
             const uploadReleaseAssetPromises = artifactsList.map(artifactName => {
-                (0, child_process_1.exec)('ls');
+                (0, child_process_1.exec)('ls', (err, stdout) => {
+                    core.info('ls output:');
+                    core.info(stdout);
+                });
                 const artifactFile = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
                 return repos.uploadReleaseAsset({
                     owner,
