@@ -178,4 +178,4 @@ jobs:
           artifacts: release-windows-latest-${{ env.version }}.zip, release-ubuntu-latest-${{ env.version }}.zip, release-macos-latest-${{ env.version }}.zip
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
-          artifacts-path: ${{ GITHUB_WORKSPACE }}
+          artifacts-path: ${{ env.GITHUB_WORKSPACE }}
