@@ -133,7 +133,8 @@ jobs:
           path: ./artifacts
 
       - name: ls
-        run: ls -la
+        working-directory: ./artifacts
+        run: ls -la -R
 
       - name: Create zips
         id: create-zips
@@ -157,4 +158,3 @@ jobs:
           artifacts: ${{ steps.create-zips.outputs.windows-zip-name }}, ${{ steps.create-zips.outputs.linux-zip-name }}, ${{ steps.create-zips.outputs.mac-zip-name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}
-          artifacts-path: ${{ github.workspace }}

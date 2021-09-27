@@ -8867,7 +8867,7 @@ function run() {
                         'Content-Length': artifactFileSize,
                     },
                     release_id: release.data.id,
-                    name: `${tag}.zip`,
+                    name: `./${artifactName}`,
                     data: artifactFile,
                 });
             });
