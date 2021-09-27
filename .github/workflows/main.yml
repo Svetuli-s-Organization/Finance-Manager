@@ -174,16 +174,16 @@ jobs:
       - name: Create zips
         id: create-zips
         env:
-          windows-zip-name: release-windows-latest-${{ steps.read-version.outputs.version }}.zip
-          linux-zip-name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}.zip
-          mac-zip-name: release-macos-latest-${{ steps.read-version.outputs.version }}.zip
+          windows-artifact-name: release-windows-latest-${{ steps.read-version.outputs.version }}
+          linux-artifact-name: release-ubuntu-latest-${{ steps.read-version.outputs.version }}
+          mac-artifact-name: release-macos-latest-${{ steps.read-version.outputs.version }}
         run: |
-          tar -cz -f ./${{ env.windows-zip-name }} -C ./artifacts/${{ env.windows-zip-name }} .
-          tar -cz -f ./${{ env.linux-zip-name }} -C ./artifacts/${{ env.linux-zip-name }} .
-          tar -cz -f ./${{ env.mac-zip-name }} -C ./artifacts/${{ env.mac-zip-name }} .
-          echo "::set-output name=windows-zip-name::${{ env.windows-zip-name }}"
-          echo "::set-output name=linux-zip-name::${{ env.linux-zip-name }}"
-          echo "::set-output name=mac-zip-name::${{ env.mac-zip-name }}"
+          tar -cz -f ./${{ env.windows-artifact-name }}.zip -C ./artifacts/${{ env.windows-artifact-name }} .
+          tar -cz -f ./${{ env.linux-artifact-name }}.zip -C ./artifacts/${{ env.linux-artifact-name }} .
+          tar -cz -f ./${{ env.mac-artifact-name }}.zip -C ./artifacts/${{ env.mac-artifact-name }} .
+          echo "::set-output name=windows-zip-name::${{ env.windows-artifact-name }}.zip"
+          echo "::set-output name=linux-zip-name::${{ env.linux-artifact-name }}.zip"
+          echo "::set-output name=mac-zip-name::${{ env.mac-artifact-name }}.zip"
 
       - name: Release to GitHub
         uses: ./.github/actions/github-release
