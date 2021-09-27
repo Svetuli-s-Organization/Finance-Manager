@@ -7,13 +7,12 @@ inputs:
   token:
     description: 'GitHub token'
     required: true
-  artifacts:
-    description: 'Comma separated list of artifact names'
+  artifact:
+    description: 'Path to the artifact that will be uploaded as a release asset.'
     required: true
-  artifacts-path:
-    description: 'Path to the folder that contains the artifacts'
+  release-asset-name:
+    description: 'The name of the asset that will be uploaded to the release.'
     required: true
-    default: '.'
 runs:
   using: 'node12'
   main: 'dist/index.js'

@@ -56,8 +56,14 @@ jobs:
     needs: build-angular
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+        include:
+          - os: windows
+            os-image: windows-latest
+          - os: linux
+            os-image: ubuntu-latest
+          - os: macos
+            os-image: macos-latest
+    runs-on: ${{ matrix.os-image }}
 
     steps:
       - uses: actions/checkout@v2
@@ -111,10 +117,42 @@ jobs:
           tag: v${{ steps.read-version.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
+  create-tag:
+    needs: [check-if-release-exists]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Create tag
+          uses: ./.github/actions/github-tag
+
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
     needs: [build-electron, check-if-release-exists]
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - os: windows
+            os-image: windows-latest
+            package-path: squirrel.windows/x64/finance-manager-electron-0.1.0 Setup.exe
+            release-asset-name: finance-manager-windows-installer-x64.exe
+          - os: linux-deb
+            os-image: ubuntu-latest
+            package-path: /deb/x64/finance-manager-electron_0.1.0_amd64.deb
+            release-asset-name: finance-manager-deb-x64.deb
+          - os: macos
+            os-image: ubuntu-latest
+            package-path: /rpm/x64/finance-manager-electron-0.1.0-1.x86_64.rpm
+            release-asset-name: finance-manager-rpm-x64.rpm
+          - os: macos
+            os-image: macos-latest
+            package-path: /zip/darwin/x64/finance-manager-electron-darwin-x64-0.1.0.zip
+            release-asset-name: finance-manager-macos-x64.zip
+    runs-on: ${{ matrix.os-image }}
 
     steps:
       - uses: actions/checkout@v2
@@ -126,21 +164,21 @@ jobs:
         id: read-version
         uses: ./.github/actions/read-version
 
-      - name: Download build artifacts
-        id: download-artifacts
+      - name: Download ${{ matrix.os }} build artifact
         uses: actions/download-artifact@v2.0.10
+        env:
+          version: ${{ steps.read-version.outputs.version }}
         with:
-          path: ./artifacts
+          name: release-${{ matrix.os }}-${{ env.version }}
 
       - name: Release to GitHub
         uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
-          windows-artifact: artifacts/release-windows-latest-${{ steps.read-version.outputs.version }}/squirrel.windows/x64/finance-manager-electron-0.1.0 Setup.exe
-          linux-deb-artifact: artifacts/release-ubuntu-latest-${{ steps.read-version.outputs.version }}/deb/x64/finance-manager-electron_0.1.0_amd64.deb
-          linux-rpm-artifact: artifacts/release-ubuntu-latest-${{ steps.read-version.outputs.version }}/rpm/x64/finance-manager-electron-0.1.0-1.x86_64.rpm
-          mac-artifact: artifacts/release-macos-latest-${{ steps.read-version.outputs.version }}/zip/darwin/x64/finance-manager-electron-darwin-x64-0.1.0.zip
+          artifact: release-${{ matrix.os }}-${{ steps.read-version.outputs.version }}/${{ matrix.package-path }}
+          release-asset-name: ${{ matrix.release-asset-name }}
         with:
-          artifacts: ${{ env.windows-artifact }}, ${{ env.linux-deb-artifact }}, ${{ env.linux-rpm-artifact }}, ${{ env.mac-artifact }}
+          artifact: ${{ env.artifact }}
+          release-asset-name: ${{ env.release-asset-name }}
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ env.version }}

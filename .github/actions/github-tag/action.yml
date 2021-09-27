@@ -1,0 +1,12 @@
+name: 'Make a GitHub tag'
+description: ''
+inputs:
+  tag:
+    description: ''
+    required: true
+  token:
+    description: 'GitHub token'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
