@@ -136,10 +136,10 @@ jobs:
         uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
-          windows-artifact: release-windows-latest-${{ steps.read-version.outputs.version }}/squirrel.windows/x64/finance-manager-electron-0.1.0 Setup.exe
-          linux-deb-artifact: release-ubuntu-latest-${{ steps.read-version.outputs.version }}/deb/x64/finance-manager-electron_0.1.0_amd64.deb
-          linux-rpm-artifact: release-ubuntu-latest-${{ steps.read-version.outputs.version }}/rpm/x64/finance-manager-electron-0.1.0-1.x86_64.rpm
-          mac-artifact: release-macos-latest-${{ steps.read-version.outputs.version }}/zip/darwin/x64/finance-manager-electron-darwin-x64-0.1.0.zip
+          windows-artifact: artifacts/release-windows-latest-${{ steps.read-version.outputs.version }}/squirrel.windows/x64/finance-manager-electron-0.1.0 Setup.exe
+          linux-deb-artifact: artifacts/release-ubuntu-latest-${{ steps.read-version.outputs.version }}/deb/x64/finance-manager-electron_0.1.0_amd64.deb
+          linux-rpm-artifact: artifacts/release-ubuntu-latest-${{ steps.read-version.outputs.version }}/rpm/x64/finance-manager-electron-0.1.0-1.x86_64.rpm
+          mac-artifact: artifacts/release-macos-latest-${{ steps.read-version.outputs.version }}/zip/darwin/x64/finance-manager-electron-darwin-x64-0.1.0.zip
         with:
           artifacts: ${{ env.windows-artifact }}, ${{ env.linux-deb-artifact }}, ${{ env.linux-rpm-artifact }}, ${{ env.mac-artifact }}
           token: ${{ secrets.GITHUB_TOKEN }}
