@@ -128,7 +128,7 @@ jobs:
           node-version: 12
 
       - name: Create tag
-          uses: ./.github/actions/github-tag
+        uses: ./.github/actions/github-tag
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
