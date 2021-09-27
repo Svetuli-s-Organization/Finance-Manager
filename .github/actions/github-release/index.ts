@@ -28,7 +28,7 @@ async function run() {
 				owner,
 				repo,
 				headers: {
-					'content-type': 'binary/octet-stream',
+					'content-type': 'application/zip',
         	'content-length': artifactFileSize,
 				},
 				release_id: release.data.id,
