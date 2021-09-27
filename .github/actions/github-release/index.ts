@@ -33,16 +33,19 @@ async function run() {
 			const artifactFullPath = path.join(artifactsPath, artifactName);
 			core.info(`artifact full path: ${artifactFullPath}`);
 			const artifactFile = readFileSync(artifactFullPath, 'base64');
-			return repos.uploadReleaseAsset({
-				owner,
-				repo,
-				release_id: release.data.id,
-				name: tag,
-				mediaType: {
-					format: 'base64'
-				},
-				data: artifactFile,
-			});
+			core.info(artifactFile);
+			const artifactFile2 = readFileSync(`./${artifactName}`, 'base64');
+			core.info(artifactFile2);
+			// return repos.uploadReleaseAsset({
+			// 	owner,
+			// 	repo,
+			// 	release_id: release.data.id,
+			// 	name: tag,
+			// 	mediaType: {
+			// 		format: 'base64'
+			// 	},
+			// 	data: artifactFile,
+			// });
 		});
 
 		await Promise.all(uploadReleaseAssetPromises);
