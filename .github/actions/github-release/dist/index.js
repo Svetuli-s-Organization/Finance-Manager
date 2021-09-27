@@ -8875,10 +8875,20 @@ function run() {
                 });
                 const artifactFullPath = path.join(artifactsPath, artifactName);
                 core.info(`artifact full path: ${artifactFullPath}`);
-                const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
-                core.info(artifactFile);
-                const artifactFile2 = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
-                core.info(artifactFile2);
+                try {
+                    const artifactFile = (0, fs_1.readFileSync)(artifactFullPath, 'base64');
+                    core.info(artifactFile);
+                }
+                catch (error) {
+                    core.info(`OOPS: ${error.message}`);
+                }
+                try {
+                    const artifactFile2 = (0, fs_1.readFileSync)(`./${artifactName}`, 'base64');
+                    core.info(artifactFile2);
+                }
+                catch (error) {
+                    core.info(`OOPS: ${error.message}`);
+                }
                 // return repos.uploadReleaseAsset({
                 // 	owner,
                 // 	repo,

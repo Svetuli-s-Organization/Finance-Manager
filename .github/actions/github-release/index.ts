@@ -32,10 +32,18 @@ async function run() {
 			});
 			const artifactFullPath = path.join(artifactsPath, artifactName);
 			core.info(`artifact full path: ${artifactFullPath}`);
-			const artifactFile = readFileSync(artifactFullPath, 'base64');
-			core.info(artifactFile);
-			const artifactFile2 = readFileSync(`./${artifactName}`, 'base64');
-			core.info(artifactFile2);
+			try {
+				const artifactFile = readFileSync(artifactFullPath, 'base64');
+				core.info(artifactFile);
+			} catch (error) {
+				core.info(`OOPS: ${error.message}`);
+			}
+			try {
+				const artifactFile2 = readFileSync(`./${artifactName}`, 'base64');
+				core.info(artifactFile2);
+			} catch (error) {
+				core.info(`OOPS: ${error.message}`);
+			}
 			// return repos.uploadReleaseAsset({
 			// 	owner,
 			// 	repo,
