@@ -192,6 +192,9 @@ jobs:
         with:
           name: release-${{ matrix.os-image }}
 
+      - name: ls
+        run: ls -la
+
       - name: Release to GitHub
         uses: ./.github/actions/github-release
         env:
