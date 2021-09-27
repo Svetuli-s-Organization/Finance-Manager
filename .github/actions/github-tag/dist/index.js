@@ -8849,8 +8849,10 @@ function run() {
             const { sha } = github.context;
             const octokit = github.getOctokit(token);
             const { createTag, createRef } = octokit.rest.git;
+            const { createRelease } = octokit.rest.repos;
             yield createTag({ owner, repo, tag, message: '', object: sha, type: 'commit' });
             yield createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
+            yield createRelease({ owner, repo, tag_name: tag });
         }
         catch (error) {
             core.setFailed(error.message);

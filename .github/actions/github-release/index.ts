@@ -13,9 +13,9 @@ async function run() {
 		const { owner, repo } = github.context.repo;
 
 		const octokit = github.getOctokit(token);
-		const { createRelease, uploadReleaseAsset } = octokit.rest.repos;
+		const { getReleaseByTag, uploadReleaseAsset } = octokit.rest.repos;
 
-		const release = await createRelease({ owner, repo, tag_name: tag });
+		const release = await getReleaseByTag({ owner, repo, tag });
 		const artifactFileSize = statSync(`./${artifact}`).size;
 		const artifactFile = readFileSync(`./${artifact}`);
 		await uploadReleaseAsset({

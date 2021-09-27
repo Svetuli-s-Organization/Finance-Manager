@@ -8850,8 +8850,8 @@ function run() {
             const releaseAssetName = core.getInput('release-asset-name');
             const { owner, repo } = github.context.repo;
             const octokit = github.getOctokit(token);
-            const { createRelease, uploadReleaseAsset } = octokit.rest.repos;
-            const release = yield createRelease({ owner, repo, tag_name: tag });
+            const { getReleaseByTag, uploadReleaseAsset } = octokit.rest.repos;
+            const release = yield getReleaseByTag({ owner, repo, tag });
             const artifactFileSize = (0, fs_1.statSync)(`./${artifact}`).size;
             const artifactFile = (0, fs_1.readFileSync)(`./${artifact}`);
             yield uploadReleaseAsset({

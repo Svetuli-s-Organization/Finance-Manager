@@ -1,5 +1,3 @@
-import { readFileSync, statSync } from 'fs';
-
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 
@@ -13,9 +11,11 @@ async function run() {
 
 		const octokit = github.getOctokit(token);
 		const { createTag, createRef } = octokit.rest.git;
+		const { createRelease } = octokit.rest.repos;
 
 		await createTag({ owner, repo, tag, message: '', object: sha, type: 'commit' });
 		await createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
+		await createRelease({ owner, repo, tag_name: tag });
 	} catch (error) {
 		core.setFailed(error.message);
 	}
