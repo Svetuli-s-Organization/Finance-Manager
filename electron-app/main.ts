@@ -1,8 +1,12 @@
 import { app, BrowserWindow } from 'electron';
 
-import * as path from 'path';
+import updater from 'update-electron-app';
+
+import path from 'path';
 
 import { isProd } from './environment';
+
+updater();
 
 app.whenReady().then(() => {
 	const win = new BrowserWindow({
