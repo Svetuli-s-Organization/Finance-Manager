@@ -8850,7 +8850,7 @@ function run() {
             try {
                 const response = yield octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
                 if (response.status === 200) {
-                    core.setFailed(`Tag ${tag} already exists`);
+                    core.setOutput('exists', true);
                 }
             }
             catch (error) {
