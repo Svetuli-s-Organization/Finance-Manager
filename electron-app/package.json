@@ -2,7 +2,7 @@
   "name": "finance-manager-electron",
   "version": "0.1.0",
   "description": "The electron part of the application",
-	"main": "./dist/main.js",
+  "main": "./dist/main.js",
   "scripts": {
     "start": "electron-forge start dist",
     "tsc:dev": "tsc -w",
@@ -30,19 +30,37 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "@electron-forge/publisher-github": "^6.0.0-beta.61",
     "@types/node": "^14.14.35",
     "electron": "14.0.1",
     "typescript": "^4.2.3"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^2.0.1"
   },
   "config": {
     "forge": {
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "Ftujio",
+              "name": "Finance-Manager"
+            }
+          }
+        }
+      ],
       "packagerConfig": {
-				"asar": true,
-				"platform": ["darwin", "linux", "mas", "win32"]
-			},
+        "asar": true,
+        "platform": [
+          "darwin",
+          "linux",
+          "mas",
+          "win32"
+        ]
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",

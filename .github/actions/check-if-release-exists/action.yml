@@ -7,6 +7,10 @@ inputs:
   token:
     description: 'GitHub token'
     required: true
+outputs:
+  exists:
+    description: 'Indicates whether the release version exists or not.'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

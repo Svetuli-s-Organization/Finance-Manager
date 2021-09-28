@@ -11,7 +11,7 @@ async function run() {
 		try {
 			const response = await octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
 			if (response.status as number === 200) {
-				core.setFailed(`Tag ${tag} already exists`);
+				core.setOutput('exists', true);
 			}
 		} catch (error) {
 			if (error.status !== 404) {
