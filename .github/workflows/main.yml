@@ -138,6 +138,7 @@ jobs:
 
   create-tag:
     needs: [check-if-release-exists]
+    if: ${{ jobs.check-if-release-exists.outputs.exists != true }}
     runs-on: ubuntu-latest
 
     steps:
