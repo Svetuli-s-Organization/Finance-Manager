@@ -1,7 +1,7 @@
 {
   "name": "finance-manager-electron",
   "version": "0.1.0",
-  "description": "The electron part of the application",
+  "description": "",
   "main": "./dist/main.js",
   "scripts": {
     "start": "electron-forge start dist",

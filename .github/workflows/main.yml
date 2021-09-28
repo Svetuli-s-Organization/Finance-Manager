@@ -133,7 +133,6 @@ jobs:
         uses: ./.github/actions/read-version
 
       - name: Check if release exists
-        id: check-if-release-exists
         uses: ./.github/actions/check-if-release-exists
         with:
           tag: v${{ steps.read-version.outputs.version }}
