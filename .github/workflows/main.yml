@@ -138,7 +138,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      exists: ${{ steps.release-check.outputs.exists }}
+      exists: ${{ steps.check-if-release-exists.outputs.exists }}
 
     steps:
       - uses: actions/checkout@v2
@@ -151,6 +151,7 @@ jobs:
         uses: ./.github/actions/read-version
 
       - name: Check if release exists
+        id: check-if-release-exists
         uses: ./.github/actions/check-if-release-exists
         with:
           tag: v${{ steps.read-version.outputs.version }}
