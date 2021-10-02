@@ -27,9 +27,6 @@ jobs:
       - name: Echo
         run: echo ${{ steps.release-check.outputs.exists }}
 
-      - name: Set job output
-        run:
-
   other-job:
     needs: check-if-release-exists
     # if: ${{ needs.check-if-release-exists.outputs.exists != true }}
