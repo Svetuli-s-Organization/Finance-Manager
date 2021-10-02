@@ -18,7 +18,11 @@ jobs:
         uses: ./.github/actions/read-version
 
       - name: Check if release exists
+        id: release-check
         uses: ./.github/actions/check-if-release-exists
         with:
           tag: v${{ steps.read-version.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Echo
+        run: echo ${{ steps.release-check.outputs.exists }}
