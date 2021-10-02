@@ -8849,6 +8849,8 @@ function run() {
             const { owner, repo } = github.context.repo;
             try {
                 const response = yield octokit.rest.git.getRef({ owner, repo, ref: `tags/${tag}` });
+                core.info(response.status.toString());
+                // const response = await octokit.rest.repos.getReleaseByTag({ owner, repo, tag });
                 if (response.status === 200) {
                     core.setOutput('exists', true);
                 }
