@@ -1,7 +1,7 @@
 {
   "name": "finance-manager-electron",
   "version": "0.1.0",
-  "description": "",
+  "description": "App for managing your expenses and finances.",
   "main": "./dist/main.js",
   "scripts": {
     "start": "electron-forge start dist",
