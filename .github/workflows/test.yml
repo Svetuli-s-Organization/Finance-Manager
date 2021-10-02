@@ -26,3 +26,20 @@ jobs:
 
       - name: Echo
         run: echo ${{ steps.release-check.outputs.exists }}
+
+      - name: Set job output
+        run:
+
+  other-job:
+    needs: check-if-release-exists
+    # if: ${{ needs.check-if-release-exists.outputs.exists != true }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.4.0
+        with:
+          node-version: 12
+
+      - name: Echo
+        run: echo ${{ needs.check-if-release-exists.outputs.exists }}
