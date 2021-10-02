@@ -20,8 +20,8 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: 'angular/node_modules'
-          key: ${{ runner.os }}-node-v2-${{ hashFiles('angular/package-lock.json') }}
+          path: './angular/node_modules'
+          key: ${{ runner.os }}-node-v2-${{ hashFiles('./angular/package-lock.json') }}
 
       - name: Install global dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
@@ -47,8 +47,8 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: 'angular/node_modules'
-          key: ${{ runner.os }}-node-v2-${{ hashFiles('angular/package-lock.json') }}
+          path: './angular/node_modules'
+          key: ${{ runner.os }}-node-v2-${{ hashFiles('./angular/package-lock.json') }}
 
       - name: Install global dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
@@ -88,13 +88,13 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: 'node_modules'
-          key: ${{ runner.os }}-node-v2-${{ hashFiles('package-lock.json') }}
+          path: './node_modules'
+          key: ${{ runner.os }}-node-v2-${{ hashFiles('./package-lock.json') }}
       - uses: actions/cache@v2
         id: npm-cache-electron
         with:
-          path: 'electron-app/node_modules'
-          key: ${{ runner.os }}-node-v2-${{ hashFiles('electron-app/package-lock.json') }}
+          path: './electron-app/node_modules'
+          key: ${{ runner.os }}-node-v2-${{ hashFiles('./electron-app/package-lock.json') }}
 
       - name: Install global dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
