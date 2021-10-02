@@ -21,12 +21,12 @@ jobs:
         id: npm-cache
         with:
           path: './node_modules'
-          key: ${{ runner.os }}-node-v3-${{ hashFiles('./package-lock.json') }}
+          key: ${{ runner.os }}-node-v4-${{ hashFiles('./package-lock.json') }}
       - uses: actions/cache@v2
         id: npm-cache-angular
         with:
           path: './angular/node_modules'
-          key: ${{ runner.os }}-node-v3-${{ hashFiles('./angular/package-lock.json') }}
+          key: ${{ runner.os }}-node-v4-${{ hashFiles('./angular/package-lock.json') }}
 
       - name: Install global dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
@@ -52,13 +52,13 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: './angular/node_modules'
-          key: ${{ runner.os }}-node-v3-${{ hashFiles('./angular/package-lock.json') }}
+          path: './node_modules'
+          key: ${{ runner.os }}-node-v4-${{ hashFiles('./package-lock.json') }}
       - uses: actions/cache@v2
         id: npm-cache-angular
         with:
           path: './angular/node_modules'
-          key: ${{ runner.os }}-node-v3-${{ hashFiles('./angular/package-lock.json') }}
+          key: ${{ runner.os }}-node-v4-${{ hashFiles('./angular/package-lock.json') }}
 
       - name: Install global dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
@@ -99,12 +99,12 @@ jobs:
         id: npm-cache
         with:
           path: './node_modules'
-          key: ${{ runner.os }}-node-v3-${{ hashFiles('./package-lock.json') }}
+          key: ${{ runner.os }}-node-v4-${{ hashFiles('./package-lock.json') }}
       - uses: actions/cache@v2
         id: npm-cache-electron
         with:
           path: './electron-app/node_modules'
-          key: ${{ runner.os }}-node-v3-${{ hashFiles('./electron-app/package-lock.json') }}
+          key: ${{ runner.os }}-node-v4-${{ hashFiles('./electron-app/package-lock.json') }}
 
       - name: Install global dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
