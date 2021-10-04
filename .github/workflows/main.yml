@@ -41,6 +41,12 @@ jobs:
         working-directory: ./angular
         run: npm run build:ci
 
+      - name: Upload angular build artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: angular-build
+          path: ./angular/dist
+
   test-angular:
     runs-on: ubuntu-latest
 
@@ -121,6 +127,12 @@ jobs:
           touch .env
           echo NODE_ENV='production' >> .env
           cat .env
+
+      - name: Download angular build artifact
+        uses: actions/download-artifact@v2.0.10
+        with:
+          name: angular-build
+          path: ./angular
 
       - name: Bundle the app with webpack
         working-directory: ./electron-app
