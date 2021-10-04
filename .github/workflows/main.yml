@@ -231,8 +231,8 @@ jobs:
           name: release-${{ matrix.os-image }}
           path: release-${{ matrix.os-image }}
 
-      - name: Release to GitHub
-        uses: ./.github/actions/github-release
+      - name: Add build assets to GitHub release
+        uses: ./.github/actions/github-release-assets
         env:
           version: ${{ steps.read-version.outputs.version }}
           artifact: release-${{ matrix.os-image }}/${{ format(matrix.package-path, steps.read-version.outputs.version) }}
