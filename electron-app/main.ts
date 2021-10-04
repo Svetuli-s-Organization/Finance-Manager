@@ -6,6 +6,11 @@ import path from 'path';
 
 import { isProd } from './environment';
 
+// Handle creating/removing shortcuts on Windows when installing/uninstalling.
+if (require('electron-squirrel-startup')) {
+  app.quit();
+}
+
 dotenv.config();
 updater();
 
@@ -26,8 +31,8 @@ app.whenReady().then(() => {
 	} else {
 		console.log('DEV');
 		win.loadURL('http://localhost:4200');
-		win.maximize();
+		win.webContents.toggleDevTools();
 	}
 
-	win.webContents.toggleDevTools();
+	win.maximize();
 });
