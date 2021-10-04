@@ -165,7 +165,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   create-tag:
-    needs: check-if-release-exists
+    needs: [check-if-release-exists, build-electron]
     if: ${{ needs.check-if-release-exists.outputs.exists != 'true' }}
     runs-on: ubuntu-latest
 
@@ -192,7 +192,7 @@ jobs:
 
   gh-release:
     if: ${{ github.ref == 'refs/heads/master' }}
-    needs: [build-electron, create-tag]
+    needs: create-tag
     strategy:
       matrix:
         include:
