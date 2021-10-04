@@ -213,7 +213,6 @@ jobs:
             package-path: zip/darwin/x64/finance-manager-electron-darwin-x64-{0}.zip
             release-asset-name: finance-manager-{0}-macos-x64.zip
     runs-on: ${{ matrix.os-image }}
-    name: GitHub release for ${{ matrix.name }}
 
     steps:
       - uses: actions/checkout@v2
