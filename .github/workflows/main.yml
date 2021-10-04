@@ -132,7 +132,7 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: angular-build
-          path: ./angular
+          path: ./electron-app/dist/angular
 
       - name: Bundle the app with webpack
         working-directory: ./electron-app
