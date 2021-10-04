@@ -32,7 +32,6 @@ app.whenReady().then(() => {
 		console.log('DEV');
 		win.loadURL('http://localhost:4200');
 		win.maximize();
+		win.webContents.toggleDevTools();
 	}
-
-	win.webContents.toggleDevTools();
 });
