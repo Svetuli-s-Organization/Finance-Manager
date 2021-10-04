@@ -115,6 +115,13 @@ jobs:
         working-directory: ./electron-app
         run: npm ci
 
+      - name: Set .env file
+        working-directory: ./electron-app
+        run: |
+          touch .env
+          echo NODE_ENV='production' >> .env
+          cat .env
+
       - name: Typescript
         working-directory: ./electron-app
         run: npm run tsc:prod
