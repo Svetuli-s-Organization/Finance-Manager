@@ -7,8 +7,6 @@
     "start": "electron-forge start",
     "webpack": "webpack --config webpack.config.js",
     "webpack:dev": "webpack --config webpack.config.js --watch --mode development",
-    "tsc:dev": "tsc -w",
-    "tsc:prod": "tsc",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "make:win32": "electron-forge make --platform win32",
