@@ -164,7 +164,7 @@ jobs:
           tag: v${{ steps.read-version.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  create-tag:
+  create-release:
     needs: [check-if-release-exists, build-electron]
     if: ${{ needs.check-if-release-exists.outputs.exists != 'true' }}
     runs-on: ubuntu-latest
