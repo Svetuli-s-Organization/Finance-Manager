@@ -1,5 +1,3 @@
-import { readFileSync, statSync } from 'fs';
-
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 
@@ -7,28 +5,17 @@ async function run() {
 	try {
 		const tag = core.getInput('tag');
 		const token = core.getInput('token');
-		const artifact = core.getInput('artifact');
-		const releaseAssetName = core.getInput('release-asset-name');
 
 		const { owner, repo } = github.context.repo;
+		const { sha } = github.context;
 
 		const octokit = github.getOctokit(token);
-		const { getReleaseByTag, uploadReleaseAsset } = octokit.rest.repos;
+		const { createTag, createRef } = octokit.rest.git;
+		const { createRelease } = octokit.rest.repos;
 
-		const release = await getReleaseByTag({ owner, repo, tag });
-		const artifactFileSize = statSync(`./${artifact}`).size;
-		const artifactFile = readFileSync(`./${artifact}`);
-		await uploadReleaseAsset({
-			owner,
-			repo,
-			headers: {
-				'Content-Type': 'application/octet-stream',
-				'Content-Length': artifactFileSize,
-			},
-			release_id: release.data.id,
-			name: releaseAssetName,
-			data: artifactFile as any,
-		});
+		await createTag({ owner, repo, tag, message: '', object: sha, type: 'commit' });
+		await createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
+		await createRelease({ owner, repo, name: tag, tag_name: tag });
 	} catch (error) {
 		core.setFailed(error.message);
 	}

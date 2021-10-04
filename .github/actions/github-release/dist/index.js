@@ -8838,7 +8838,6 @@ var exports = __webpack_exports__;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(9854);
-const fs_1 = __nccwpck_require__(5747);
 const core = __nccwpck_require__(5316);
 const github = __nccwpck_require__(2189);
 function run() {
@@ -8846,25 +8845,14 @@ function run() {
         try {
             const tag = core.getInput('tag');
             const token = core.getInput('token');
-            const artifact = core.getInput('artifact');
-            const releaseAssetName = core.getInput('release-asset-name');
             const { owner, repo } = github.context.repo;
+            const { sha } = github.context;
             const octokit = github.getOctokit(token);
-            const { getReleaseByTag, uploadReleaseAsset } = octokit.rest.repos;
-            const release = yield getReleaseByTag({ owner, repo, tag });
-            const artifactFileSize = (0, fs_1.statSync)(`./${artifact}`).size;
-            const artifactFile = (0, fs_1.readFileSync)(`./${artifact}`);
-            yield uploadReleaseAsset({
-                owner,
-                repo,
-                headers: {
-                    'Content-Type': 'application/octet-stream',
-                    'Content-Length': artifactFileSize,
-                },
-                release_id: release.data.id,
-                name: releaseAssetName,
-                data: artifactFile,
-            });
+            const { createTag, createRef } = octokit.rest.git;
+            const { createRelease } = octokit.rest.repos;
+            yield createTag({ owner, repo, tag, message: '', object: sha, type: 'commit' });
+            yield createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
+            yield createRelease({ owner, repo, name: tag, tag_name: tag });
         }
         catch (error) {
             core.setFailed(error.message);

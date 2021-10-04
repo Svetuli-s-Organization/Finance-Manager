@@ -1,4 +1,4 @@
-name: 'Make a GitHub release'
+name: 'Make a GitHub tag'
 description: ''
 inputs:
   tag:
@@ -6,12 +6,6 @@ inputs:
     required: true
   token:
     description: 'GitHub token'
-    required: true
-  artifact:
-    description: 'Path to the artifact that will be uploaded as a release asset.'
-    required: true
-  release-asset-name:
-    description: 'The name of the asset that will be uploaded to the release.'
     required: true
 runs:
   using: 'node12'
