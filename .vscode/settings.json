@@ -32,9 +32,10 @@
 		".github/actions/node_modules": true,
 		".github/actions/check-if-release-exists/node_modules": true,
 		".github/actions/check-if-release-exists/tsc": true,
+		".github/actions/github-release-assets/node_modules": true,
+		".github/actions/github-release-assets/tsc": true,
 		".github/actions/github-release/node_modules": true,
 		".github/actions/github-release/tsc": true,
-		".github/actions/github-tag/node_modules": true,
-		".github/actions/github-tag/tsc": true
+		"**/*.env": false
 	}
 }
