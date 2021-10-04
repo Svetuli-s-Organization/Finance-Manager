@@ -1,11 +1,12 @@
 import { app, BrowserWindow } from 'electron';
-
+import dotenv from 'dotenv';
 import updater from 'update-electron-app';
 
 import path from 'path';
 
 import { isProd } from './environment';
 
+dotenv.config();
 updater();
 
 app.whenReady().then(() => {
@@ -18,7 +19,6 @@ app.whenReady().then(() => {
 			preload: path.join(__dirname, 'preload.js'),
 		}
 	});
-
 
 	if (isProd()) {
 		console.log('PROD');
