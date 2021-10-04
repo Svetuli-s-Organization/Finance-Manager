@@ -15,7 +15,7 @@ async function run() {
 
 		await createTag({ owner, repo, tag, message: '', object: sha, type: 'commit' });
 		await createRef({ owner, repo, ref: `refs/tags/${tag}`, sha });
-		await createRelease({ owner, repo, tag_name: tag });
+		await createRelease({ owner, repo, name: tag, tag_name: tag });
 	} catch (error) {
 		core.setFailed(error.message);
 	}
