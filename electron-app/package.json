@@ -1,6 +1,6 @@
 {
   "name": "finance-manager-electron",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "App for managing your expenses and finances.",
   "main": "./dist/main.js",
   "scripts": {
@@ -36,6 +36,7 @@
     "typescript": "^4.2.3"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "update-electron-app": "^2.0.1"
   },
