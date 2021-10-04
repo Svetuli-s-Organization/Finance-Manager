@@ -1,6 +1,6 @@
 {
-  "name": "github-release",
-  "version": "1.0.0",
+  "name": "github-release-assets",
+  "version": "1.0.1",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
