@@ -182,8 +182,8 @@ jobs:
         id: read-version
         uses: ./.github/actions/read-version
 
-      - name: Create tag
-        uses: ./.github/actions/github-tag
+      - name: Create a GitHub release
+        uses: ./.github/actions/github-release
         env:
           version: ${{ steps.read-version.outputs.version }}
         with:
