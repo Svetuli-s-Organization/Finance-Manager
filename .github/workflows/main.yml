@@ -122,9 +122,9 @@ jobs:
           echo NODE_ENV='production' >> .env
           cat .env
 
-      - name: Typescript
+      - name: Bundle the app with webpack
         working-directory: ./electron-app
-        run: npm run tsc:prod
+        run: npm run webpack
 
       - name: Make
         working-directory: ./electron-app
