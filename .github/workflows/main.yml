@@ -138,10 +138,6 @@ jobs:
         working-directory: ./electron-app
         run: npm run webpack
 
-      - name: LS
-        working-directory: ./electron-app/dist
-        run: ls -R
-
       - name: Make
         working-directory: ./electron-app
         run: npm run make
