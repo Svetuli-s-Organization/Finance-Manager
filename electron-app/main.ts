@@ -22,7 +22,8 @@ app.whenReady().then(() => {
 		webPreferences: {
 			contextIsolation: true,
 			preload: path.join(__dirname, 'preload.js'),
-		}
+		},
+		show: false,
 	});
 
 	if (isProd()) {
@@ -35,4 +36,5 @@ app.whenReady().then(() => {
 	}
 
 	win.maximize();
+	win.show();
 });
