@@ -18,7 +18,7 @@ app.whenReady().then(() => {
 	const win = new BrowserWindow({
 		width: 1600,
 		height: 900,
-		frame:  true,
+		frame: false,
 		webPreferences: {
 			contextIsolation: true,
 			preload: path.join(__dirname, 'preload.js'),
@@ -35,6 +35,8 @@ app.whenReady().then(() => {
 		win.webContents.toggleDevTools();
 	}
 
-	win.maximize();
-	win.show();
+	win.on('ready-to-show', () => {
+		win.show();
+		win.maximize();
+	});
 });
