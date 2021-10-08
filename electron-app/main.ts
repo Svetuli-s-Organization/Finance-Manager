@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import dotenv from 'dotenv';
 import updater from 'update-electron-app';
 
@@ -39,4 +39,7 @@ app.whenReady().then(() => {
 		win.show();
 		win.maximize();
 	});
+
+	// Build an empty menu because the menu is part of the renderer
+	Menu.setApplicationMenu(null);
 });
