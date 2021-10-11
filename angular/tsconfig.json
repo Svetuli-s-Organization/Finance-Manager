@@ -21,6 +21,7 @@
 			"@utils/*": ["app/utils/*"],
 			"@core/*": ["app/core/*"],
 			"@welcome/*": ["app/welcome/*"],
+			"@menu/*": ["app/menu/*"],
 		}
   },
   "angularCompilerOptions": {
