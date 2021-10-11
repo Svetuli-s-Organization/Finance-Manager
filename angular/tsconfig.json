@@ -20,7 +20,7 @@
 			"@structures/*": ["app/structures/*"],
 			"@utils/*": ["app/utils/*"],
 			"@modules/*": ["app/modules/*"],
-			"@core/*": ["app/modules/core/*"]
+			"@core/*": ["app/core/*"]
 		}
   },
   "angularCompilerOptions": {
