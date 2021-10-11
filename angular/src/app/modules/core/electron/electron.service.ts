@@ -4,7 +4,7 @@ import { Injectable, Inject } from '@angular/core';
 import { IpcRenderer } from 'electron';
 
 // Services
-import { WINDOW } from '@core/services/window/window.service';
+import { WINDOW } from '@core/window/window.service';
 
 @Injectable({
 	providedIn: 'root'

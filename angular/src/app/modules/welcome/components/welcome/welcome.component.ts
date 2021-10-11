@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Services
-import { ElectronService } from '@core/services/electron/electron.service';
+import { ElectronService } from '@core/electron/electron.service';
 
 @Component({
 	selector: 'app-welcome',

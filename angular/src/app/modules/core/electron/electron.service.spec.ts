@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { IpcRenderer } from 'electron';
 
 // Services
-import { WINDOW } from '@core/services/window/window.service';
+import { WINDOW } from '@core/window/window.service';
 import { ElectronService } from './electron.service';
 
 // Utils

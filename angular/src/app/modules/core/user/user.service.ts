@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 
 // Services
-import { ElectronService } from '@core/services/electron/electron.service';
+import { ElectronService } from '@core/electron/electron.service';
 
 // Classes and Interfaces
 import { UserMetadata } from '@structures/user';

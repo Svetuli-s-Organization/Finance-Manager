@@ -4,11 +4,11 @@ import { IpcRenderer, IpcRendererEvent } from 'electron';
 
 // Services
 import { UserService } from './user.service';
-import { ElectronService } from '@core/services/electron/electron.service';
+import { ElectronService } from '@core/electron/electron.service';
 
 // Service stubs
-import { ElectronServiceStub } from '@core/services/electron/electron.service.stub';
-import { UserMetadata } from '@app/structures/user';
+import { ElectronServiceStub } from '@core/electron/electron.service.stub';
+import { UserMetadata } from '@structures/user';
 
 describe('UserService', () => {
 	let service: UserService;
