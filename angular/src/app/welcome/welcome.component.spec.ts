@@ -1,6 +1,9 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { ElectronService } from '@app/modules/core/services/electron/electron.service';
-import { ElectronServiceStub } from '@app/modules/core/services/electron/electron.service.stub';
+
+// Services
+import { ElectronService } from '@core/electron/electron.service';
+// Service stubs
+import { ElectronServiceStub } from '@core/electron/electron.service.stub';
 
 // Components
 import { WelcomeComponent } from './welcome.component';

@@ -19,8 +19,8 @@
 			"@app/*": ["app/*"],
 			"@structures/*": ["app/structures/*"],
 			"@utils/*": ["app/utils/*"],
-			"@modules/*": ["app/modules/*"],
-			"@core/*": ["app/core/*"]
+			"@core/*": ["app/core/*"],
+			"@welcome/*": ["app/welcome/*"],
 		}
   },
   "angularCompilerOptions": {

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 // Modules
 import { CoreModule } from '@core/core.module';
-import { WelcomeModule } from '@modules/welcome/welcome.module';
+import { WelcomeModule } from '@welcome/welcome.module';
 
 @NgModule({
 	declarations: [
