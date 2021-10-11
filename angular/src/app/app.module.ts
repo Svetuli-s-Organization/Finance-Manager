@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 // Modules
 import { CoreModule } from '@core/core.module';
 import { WelcomeModule } from '@welcome/welcome.module';
+import { MenuModule } from '@menu/menu.module';
 
 @NgModule({
 	declarations: [
@@ -17,6 +18,7 @@ import { WelcomeModule } from '@welcome/welcome.module';
 		// Modules
 		CoreModule,
 		WelcomeModule,
+		MenuModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent]
