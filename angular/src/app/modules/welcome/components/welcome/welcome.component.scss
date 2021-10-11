@@ -4,8 +4,8 @@
 	display: flex;
 	flex-direction: column;
   height: 100%;
-	background-color: #fff;
-	color: $p-darker;
+	background-color: var(--primary-bg);
+	color: var(--primary-text);
 }
 
 #header {
@@ -26,10 +26,11 @@
 #section-wrapper {
 	display: flex;
 	min-height: 150px;
-  border-left: 8px solid $p-dark;
+  border-left: 8px solid var(--secondary-bg);
   padding: 10px;
-	box-shadow: 2px 2px 17px 0px #cccccc;
+	box-shadow: 2px 2px 17px 0px var(--primary-bg-shadow);
 	font-weight: 700;
+	background-color: var(--primary-bg);
 
 	.section-item {
 		overflow: hidden;
@@ -69,8 +70,8 @@
 			padding: 0px 8px;
 
 			&.clickable:hover {
-				background-color: $p-dark;
-				color: #fff;
+				background-color: var(--secondary-bg);
+				color: var(--secondary-text);
 				box-shadow: 3px 3px 8px 1px #e6e6e6;
 			}
 		}
@@ -85,7 +86,7 @@
 .separator {
 	$size: 3px;
 	display: block;
-	background-color: $p-dark;
+	background-color: var(--secondary-bg);
 
 	&.horizontal {
 		width: 100% !important;
