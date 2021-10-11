@@ -1,10 +1,14 @@
 @use 'styles/reset';
 @use 'styles/css-root-variables';
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+
 html {
 	width: 100vw;
 	height: 100vh;
 	overflow: hidden;
+
+	font-family: 'Noto Sans', sans-serif;
 }
 
 body, app-root, app-welcome {
