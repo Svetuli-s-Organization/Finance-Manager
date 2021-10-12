@@ -16,5 +16,6 @@ export class ElectronService {
 	constructor(@Inject(WINDOW) private window: Window) {
 		const { ipcRenderer } = this.window.electron;
 		this.ipcRenderer = ipcRenderer;
+		this.ipcRenderer.send('renderer-ready');
 	}
 }
