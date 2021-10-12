@@ -1,7 +1,10 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
 
 // External libraries
 import { Subject } from 'rxjs';
+
+// Services
+import { ElectronService } from '@core/electron/electron.service';
 
 @Component({
 	selector: 'app-menu',
@@ -74,9 +77,23 @@ export class MenuComponent implements OnInit, OnChanges {
 
 	clickedMenuItem: MenuItem = null;
 
-	constructor() { }
+	maximized: boolean;
+
+	constructor(
+		private cd: ChangeDetectorRef,
+		private electronService: ElectronService,
+	) { }
 
 	ngOnInit() {
+		this.electronService.ipcRenderer.on('window-maximize', () => {
+			this.maximized = true;
+			this.cd.detectChanges();
+		});
+
+		this.electronService.ipcRenderer.on('window-unmaximize', () => {
+			this.maximized = false;
+			this.cd.detectChanges();
+		});
 	}
 
 	ngOnChanges() {
