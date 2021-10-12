@@ -50,10 +50,10 @@ describe('AppComponent', () => {
 		});
 
 		it(`should display the menu and welcome components`, () => {
-			const menuComponent = de.query(By.css('app-menu'));
+			const titlebarComponent = de.query(By.css('app-titlebar'));
 			const welcomeComponent = de.query(By.css('app-welcome'));
 
-			expect(menuComponent).toBeTruthy();
+			expect(titlebarComponent).toBeTruthy();
 			expect(welcomeComponent).toBeTruthy();
 		});
 	});
