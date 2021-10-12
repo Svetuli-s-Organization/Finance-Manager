@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+// Services
+import { TitlebarService } from './titlebar/titlebar.service';
+
+// Components
 import { MenuComponent } from './menu.component';
 
 @NgModule({
@@ -9,7 +14,9 @@ import { MenuComponent } from './menu.component';
 	imports: [
 		CommonModule,
 	],
-	providers: [],
+	providers: [
+		TitlebarService,
+	],
 	exports: [
 		MenuComponent,
 	],
