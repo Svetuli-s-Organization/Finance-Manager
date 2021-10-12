@@ -1,2 +1,2 @@
-<app-menu></app-menu>
-<app-welcome></app-welcome>
+<app-menu [focusLoseSubject]="clickSubject"></app-menu>
+<app-welcome (clickEvent)="clickSubject.next()"></app-welcome>

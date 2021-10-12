@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 
 // Services
 import { ElectronService } from '@core/electron/electron.service';
@@ -10,9 +10,16 @@ import { ElectronService } from '@core/electron/electron.service';
 })
 export class WelcomeComponent implements OnInit {
 
+	@Output() clickEvent: EventEmitter<void> = new EventEmitter();
+
 	constructor(private electronService: ElectronService) { }
 
 	ngOnInit() {
+	}
+
+	@HostListener('click')
+	handleClick() {
+		this.clickEvent.next();
 	}
 
 }
