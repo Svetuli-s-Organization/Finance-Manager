@@ -22,7 +22,7 @@
 			"@utils/*": ["app/utils/*"],
 			"@core/*": ["app/core/*"],
 			"@welcome/*": ["app/welcome/*"],
-			"@menu/*": ["app/menu/*"],
+			"@titlebar/*": ["app/titlebar/*"],
 		}
   },
   "angularCompilerOptions": {
