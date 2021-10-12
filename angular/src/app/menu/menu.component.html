@@ -1,1 +1,41 @@
-<p>menu works!</p>
+<ul class="menu">
+	<li *ngFor="let menuItem of menuItems"
+		[class.active]="clickedMenuItem?.id === menuItem.id"
+		(mouseover)="toggleActiveMenuItem(menuItem)"
+		(click)="toggleClickedMenuItem(menuItem)">
+		<div>{{ menuItem.name }}</div>
+		<ul *ngIf="menuItem.subMenu && clickedMenuItem?.id === menuItem.id">
+			<li *ngFor="let subMenuItem of menuItem.subMenu" [class.separator]="subMenuItem.id === 'separator'">
+				{{ subMenuItem.name }}
+
+				<div class="line" *ngIf="subMenuItem.id === 'separator'"></div>
+			</li>
+		</ul>
+	</li>
+</ul>
+
+<div class="window-icons">
+	<div class="window-icon window-icon-minimize">
+		<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+			<path d="M14 8v1H3V8h11z"/>
+		</svg>
+	</div>
+
+	<div class="window-icon window-icon-restore">
+		<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+			<path d="M3 5v9h9V5H3zm8 8H4V6h7v7z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M5 5h1V4h7v7h-1v1h2V3H5v2z"/>
+		</svg>
+	</div>
+
+	<!-- <div class="window-icon window-icon-maximize">
+		<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+			<path d="M3 3v10h10V3H3zm9 9H4V4h8v8z"/>
+		</svg>
+	</div> -->
+
+	<div class="window-icon window-icon-close">
+		<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M7.116 8l-4.558 4.558.884.884L8 8.884l4.558 4.558.884-.884L8.884 8l4.558-4.558-.884-.884L8 7.116 3.442 2.558l-.884.884L7.116 8z"/>
+		</svg>
+	</div>
+</div>

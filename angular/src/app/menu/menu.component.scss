@@ -1,0 +1,137 @@
+$height: 30px;
+
+:host {
+	display: flex;
+	justify-content: space-between;
+	height: $height;
+	background-color: var(--secondary-dark);
+	color: var(--secondary-text);
+	z-index: 200;
+	-webkit-app-region: drag;
+}
+
+ul {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	user-select: none;
+	background-color: var(--secondary-dark);
+	z-index: 100;
+}
+
+ul.menu {
+	li {
+		display: flex;
+		align-items: center;
+		font-size: 12px;
+		padding: 0.3em .8em;
+		position: relative;
+		white-space: nowrap;
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		min-width: 200px;
+		height: auto;
+		padding: 5px 0;
+		position: absolute;
+		top: $height;
+		left: 0;
+
+		li {
+			display: flex;
+			justify-content: flex-start;
+			width: 100%;
+			padding: 0.3em 20px;
+
+			&:not(:last-child) {
+				margin-bottom: 5px;
+			}
+
+			&:not(.separator) {
+				cursor: pointer;
+
+				&:hover {
+					background-color: var(--secondary-light);
+				}
+			}
+
+			&.separator {
+				height: 1px !important;
+				padding: 0 5px;
+
+				div.line {
+					width: 100%;
+					height: 100%;
+					background-color: var(--secondary-text);
+				}
+			}
+		}
+	}
+
+	> li {
+		height: 100%;
+		line-height: $height;
+
+		&:hover {
+			background-color: var(--secondary-bg);
+		}
+
+		&.active {
+			background-color: var(--secondary-bg);
+		}
+
+		> ul {
+			top: $height;
+			left: 0;
+
+			li {
+				display: flex;
+				justify-content: flex-start;
+				width: 100%;
+				height: 25px;
+
+				&:not(.separator):hover {
+					background-color: var(--secondary-light);
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 5px;
+				}
+			}
+		}
+	}
+}
+
+.window-icons {
+	display: flex;
+
+	.window-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 46px;
+
+		&:hover {
+			background-color: var(--secondary-bg);
+		}
+
+		&.window-icon-close:hover {
+			background-color: #e81123e6;
+		}
+
+		svg {
+			height: 100%;
+		}
+	}
+}
+
+.click-out-frame {
+	width: 100vw;
+	height: calc(100vh - #{$height});
+	position: absolute;
+	top: $height;
+	z-index: 10;
+}
