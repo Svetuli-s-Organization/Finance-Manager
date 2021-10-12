@@ -13,9 +13,8 @@ export class ElectronService {
 	send: RendererAPISendFn;
 
 	constructor(@Inject(WINDOW) private window: Window) {
-		const { on, send } = this.window.rendererAPI;
-		this.on = on;
-		this.send = send;
+		this.on = this.window.rendererAPI.on;
+		this.send = this.window.rendererAPI.send;
 
 		this.send('renderer-ready');
 	}
