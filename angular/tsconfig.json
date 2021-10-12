@@ -16,6 +16,7 @@
       "dom"
 		],
 		"paths": {
+      "@electron-app/*": ["../../electron-app/*"],
 			"@app/*": ["app/*"],
 			"@structures/*": ["app/structures/*"],
 			"@utils/*": ["app/utils/*"],
