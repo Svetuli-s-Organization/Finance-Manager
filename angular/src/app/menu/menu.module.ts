@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Services
-import { TitlebarService } from './titlebar/titlebar.service';
+import { TitlebarService } from './titlebar.service';
 
 // Components
 import { MenuComponent } from './menu.component';

@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular
 import { Subject } from 'rxjs';
 
 // Services
-import { TitlebarService } from './titlebar/titlebar.service';
+import { TitlebarService } from './titlebar.service';
 
 @Component({
 	selector: 'app-menu',

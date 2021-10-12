@@ -6,9 +6,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MenuComponent } from './menu.component';
 
 // Services
-import { TitlebarService } from './titlebar/titlebar.service';
+import { TitlebarService } from './titlebar.service';
 // Service stubs
-import { getTitlebarServiceStub } from './titlebar/titlebar.service.stub';
+import { getTitlebarServiceStub } from './titlebar.service.stub';
 
 describe('MenuComponent', () => {
 	let component: MenuComponent;
