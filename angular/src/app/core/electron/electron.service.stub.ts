@@ -1,8 +1,4 @@
-class IpcRendererStub {
+export class ElectronServiceStub {
 	on() {}
 	send() {}
-}
-
-export class ElectronServiceStub {
-	ipcRenderer = new IpcRendererStub();
 }
