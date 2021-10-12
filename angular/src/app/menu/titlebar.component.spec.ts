@@ -3,23 +3,23 @@ import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 // Components
-import { MenuComponent } from './menu.component';
+import { TitlebarComponent } from './titlebar.component';
 
 // Services
 import { TitlebarService } from './titlebar.service';
 // Service stubs
 import { getTitlebarServiceStub } from './titlebar.service.stub';
 
-describe('MenuComponent', () => {
-	let component: MenuComponent;
-	let fixture: ComponentFixture<MenuComponent>;
+describe('TitlebarComponent', () => {
+	let component: TitlebarComponent;
+	let fixture: ComponentFixture<TitlebarComponent>;
 
 	const { titlebarServiceStub, windowMaximizedSubject, windowUnmaximizedSubject } = getTitlebarServiceStub();
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [
-				MenuComponent,
+				TitlebarComponent,
 			],
 			providers: [
 				{ provide: TitlebarService, useValue: titlebarServiceStub },
@@ -29,7 +29,7 @@ describe('MenuComponent', () => {
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(MenuComponent);
+		fixture = TestBed.createComponent(TitlebarComponent);
 		component = fixture.componentInstance;
 	});
 

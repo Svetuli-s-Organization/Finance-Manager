@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { TitlebarService } from './titlebar.service';
 
 // Components
-import { MenuComponent } from './menu.component';
+import { TitlebarComponent } from './titlebar.component';
 
 @NgModule({
 	declarations: [
-		MenuComponent,
+		TitlebarComponent,
 	],
 	imports: [
 		CommonModule,
@@ -18,7 +18,7 @@ import { MenuComponent } from './menu.component';
 		TitlebarService,
 	],
 	exports: [
-		MenuComponent,
+		TitlebarComponent,
 	],
 })
 export class TitlebarModule { }

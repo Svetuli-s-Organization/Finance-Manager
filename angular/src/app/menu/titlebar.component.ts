@@ -7,11 +7,11 @@ import { Subject } from 'rxjs';
 import { TitlebarService } from './titlebar.service';
 
 @Component({
-	selector: 'app-menu',
-	templateUrl: './menu.component.html',
-	styleUrls: ['./menu.component.scss']
+	selector: 'app-titlebar',
+	templateUrl: './titlebar.component.html',
+	styleUrls: ['./titlebar.component.scss']
 })
-export class MenuComponent implements OnInit, OnChanges {
+export class TitlebarComponent implements OnInit, OnChanges {
 
 	@Input() focusLoseSubject: Subject<void>;
 

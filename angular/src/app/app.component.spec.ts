@@ -13,10 +13,10 @@ class WelcomeComponentStub {
 }
 
 @Component({
-	selector: 'app-menu',
+	selector: 'app-titlebar',
 	template: ``,
 })
-class MenuComponentStub {
+class TitlebarComponentStub {
 }
 
 describe('AppComponent', () => {
@@ -29,7 +29,7 @@ describe('AppComponent', () => {
 			declarations: [
 				AppComponent,
 				WelcomeComponentStub,
-				MenuComponentStub,
+				TitlebarComponentStub,
 			],
 		}).compileComponents();
 	});
