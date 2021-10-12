@@ -21,4 +21,4 @@ import { MenuComponent } from './menu.component';
 		MenuComponent,
 	],
 })
-export class MenuModule { }
+export class TitlebarModule { }
