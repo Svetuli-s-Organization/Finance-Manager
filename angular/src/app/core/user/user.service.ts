@@ -18,13 +18,13 @@ export class UserService {
 	public userMetadata: Observable<UserMetadata> = this.userMetadataSubject.asObservable();
 
 	constructor(private electronService: ElectronService) {
-		this.electronService.ipcRenderer.send('user-service-ready');
+		this.electronService.send('user-service-ready');
 
 		this.setUserMetadata();
 	}
 
 	private setUserMetadata() {
-		this.electronService.ipcRenderer.on('user-metadata', (event, data) => {
+		this.electronService.on('user-metadata', (data: UserMetadata) => {
 			this.userMetadataSubject.next(data);
 		});
 	}

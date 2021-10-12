@@ -85,12 +85,12 @@ export class MenuComponent implements OnInit, OnChanges {
 	) { }
 
 	ngOnInit() {
-		this.electronService.ipcRenderer.on('window-maximize', () => {
+		this.electronService.on('window-maximize', () => {
 			this.maximized = true;
 			this.cd.detectChanges();
 		});
 
-		this.electronService.ipcRenderer.on('window-unmaximize', () => {
+		this.electronService.on('window-unmaximize', () => {
 			this.maximized = false;
 			this.cd.detectChanges();
 		});
