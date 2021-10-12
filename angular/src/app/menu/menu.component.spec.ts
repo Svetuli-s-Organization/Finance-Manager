@@ -1,4 +1,5 @@
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 // External libraries
@@ -15,7 +16,6 @@ import { ElectronServiceStub } from '@core/electron/electron.service.stub';
 describe('MenuComponent', () => {
 	let component: MenuComponent;
 	let fixture: ComponentFixture<MenuComponent>;
-	let de: DebugElement;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
@@ -32,7 +32,6 @@ describe('MenuComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(MenuComponent);
 		component = fixture.componentInstance;
-		let de = fixture.debugElement;
 	});
 
 	it('should create', () => {
@@ -70,8 +69,25 @@ describe('MenuComponent', () => {
 	});
 
 	describe(`template`, () => {
+		let de: DebugElement;
+
 		beforeEach(() => {
 			fixture.detectChanges();
+			de = fixture.debugElement;
+		});
+
+		it(`should display the restore icon when #maximized is true`, () => {
+			component.maximized = true;
+			fixture.detectChanges();
+			const iconWrapper = de.query(By.css('.window-icon-restore'));
+			expect(iconWrapper).toBeTruthy();
+		});
+
+		it(`should display the maximize icon when #maximized is false`, () => {
+			component.maximized = false;
+			fixture.detectChanges();
+			const iconWrapper = de.query(By.css('.window-icon-maximize'));
+			expect(iconWrapper).toBeTruthy();
 		});
 	});
 });
