@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, Menu, ipcMain } from 'electron';
 import dotenv from 'dotenv';
 import updater from 'update-electron-app';
 
@@ -36,8 +36,19 @@ app.whenReady().then(() => {
 	}
 
 	win.on('ready-to-show', () => {
-		win.show();
 		win.maximize();
+	});
+
+	ipcMain.once('renderer-ready', () => {
+		win.webContents.send('window-maximize');
+
+		win.on('maximize', () => {
+			win.webContents.send('window-maximize');
+		});
+
+		win.on('unmaximize', () => {
+			win.webContents.send('window-unmaximize');
+		});
 	});
 
 	// Build an empty menu because the menu is part of the renderer
