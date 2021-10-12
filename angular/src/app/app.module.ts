@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 // Modules
 import { CoreModule } from '@core/core.module';
 import { WelcomeModule } from '@welcome/welcome.module';
-import { TitlebarModule } from '@menu/titlebar.module';
+import { TitlebarModule } from '@titlebar/titlebar.module';
 
 @NgModule({
 	declarations: [
