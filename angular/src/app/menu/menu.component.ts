@@ -4,7 +4,7 @@ import { ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular
 import { Subject } from 'rxjs';
 
 // Services
-import { ElectronService } from '@core/electron/electron.service';
+import { TitlebarService } from './titlebar/titlebar.service';
 
 @Component({
 	selector: 'app-menu',
@@ -81,16 +81,16 @@ export class MenuComponent implements OnInit, OnChanges {
 
 	constructor(
 		private cd: ChangeDetectorRef,
-		private electronService: ElectronService,
+		private titlebarService: TitlebarService,
 	) { }
 
 	ngOnInit() {
-		this.electronService.on('window-maximize', () => {
+		this.titlebarService.windowMaximized.subscribe(() => {
 			this.maximized = true;
 			this.cd.detectChanges();
 		});
 
-		this.electronService.on('window-unmaximize', () => {
+		this.titlebarService.windowUnmaximized.subscribe(() => {
 			this.maximized = false;
 			this.cd.detectChanges();
 		});
