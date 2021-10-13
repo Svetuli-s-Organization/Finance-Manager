@@ -1,4 +1,4 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
@@ -17,6 +17,7 @@ class WelcomeComponentStub {
 	template: ``,
 })
 class TitlebarComponentStub {
+	@Input() focusLoseSubject: any;
 }
 
 describe('AppComponent', () => {
