@@ -39,12 +39,4 @@ $height: 30px;
 		flex: 1;
 		-webkit-app-region: drag;
 	}
-
-	.click-out-frame {
-		width: 100vw;
-		height: calc(100vh - #{$height});
-		position: absolute;
-		top: $height;
-		z-index: 10;
-	}
 }
