@@ -6,10 +6,12 @@ import { TitlebarService } from './titlebar.service';
 
 // Components
 import { TitlebarComponent } from './titlebar.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
 	declarations: [
 		TitlebarComponent,
+		MenuComponent,
 	],
 	imports: [
 		CommonModule,

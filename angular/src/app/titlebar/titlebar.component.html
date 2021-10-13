@@ -1,19 +1,5 @@
 <div class="titlebar">
-	<ul class="menu">
-		<li *ngFor="let menuItem of menuItems"
-			[class.active]="clickedMenuItem?.id === menuItem.id"
-			(mouseover)="toggleActiveMenuItem(menuItem)"
-			(click)="toggleClickedMenuItem(menuItem)">
-			<div>{{ menuItem.name }}</div>
-			<ul *ngIf="menuItem.subMenu && clickedMenuItem?.id === menuItem.id">
-				<li *ngFor="let subMenuItem of menuItem.subMenu" [class.separator]="subMenuItem.id === 'separator'">
-					{{ subMenuItem.name }}
-
-					<div class="line" *ngIf="subMenuItem.id === 'separator'"></div>
-				</li>
-			</ul>
-		</li>
-	</ul>
+	<app-menu [focusLoseSubject]="focusLoseSubject"></app-menu>
 
 	<div class="titlebar-drag"></div>
 
