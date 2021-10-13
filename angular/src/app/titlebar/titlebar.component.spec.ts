@@ -65,25 +65,25 @@ describe('TitlebarComponent', () => {
 		});
 
 		it(`#minimizeWindow should call #sendWindowMinimizeEvent from TitlebarService`, () => {
-			const sendWindowMinimizeEventSpy = spyOn(titlebarService, 'sendWindowMinimizeEvent');
+			const sendWindowMinimizeEventSpy = spyOn(titlebarService, 'sendWindowMinimizeEvent').and.callThrough();
 			component.minimizeWindow();
 			expect(sendWindowMinimizeEventSpy).toHaveBeenCalled();
 		});
 
 		it(`#maximizeWindow should call #sendWindowMaximizeEvent from TitlebarService`, () => {
-			const sendWindowMaximizeEventSpy = spyOn(titlebarService, 'sendWindowMaximizeEvent');
+			const sendWindowMaximizeEventSpy = spyOn(titlebarService, 'sendWindowMaximizeEvent').and.callThrough();
 			component.maximizeWindow();
 			expect(sendWindowMaximizeEventSpy).toHaveBeenCalled();
 		});
 
 		it(`#restoreWindow should call #sendWindowRestoreEvent from TitlebarService`, () => {
-			const sendWindowRestoreEventSpy = spyOn(titlebarService, 'sendWindowRestoreEvent');
+			const sendWindowRestoreEventSpy = spyOn(titlebarService, 'sendWindowRestoreEvent').and.callThrough();
 			component.restoreWindow();
 			expect(sendWindowRestoreEventSpy).toHaveBeenCalled();
 		});
 
 		it(`#closeWindow should call #sendWindowCloseEvent from TitlebarService`, () => {
-			const sendWindowCloseEventSpy = spyOn(titlebarService, 'sendWindowCloseEvent');
+			const sendWindowCloseEventSpy = spyOn(titlebarService, 'sendWindowCloseEvent').and.callThrough();
 			component.closeWindow();
 			expect(sendWindowCloseEventSpy).toHaveBeenCalled();
 		});
