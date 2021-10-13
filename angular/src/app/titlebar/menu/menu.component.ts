@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 // External libraries
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-menu',
@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class MenuComponent implements OnInit, OnChanges {
 
-	@Input() focusLoseSubject: Subject<void>;
+	@Input() focusLose: Observable<void>;
 
 	menuItems: MenuItem[] = [
 		{
@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges() {
-		this.focusLoseSubject?.subscribe(() => {
+		this.focusLose?.subscribe(() => {
 			this.clickedMenuItem = null;
 		});
 	}

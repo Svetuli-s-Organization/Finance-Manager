@@ -17,7 +17,7 @@ class WelcomeComponentStub {
 	template: ``,
 })
 class TitlebarComponentStub {
-	@Input() focusLoseSubject: any;
+	@Input() focusLose: any;
 }
 
 describe('AppComponent', () => {

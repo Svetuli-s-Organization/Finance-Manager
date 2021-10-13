@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 
 // External libraries
-import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 // Services
 import { TitlebarService } from './titlebar.service';
@@ -13,7 +13,7 @@ import { TitlebarService } from './titlebar.service';
 })
 export class TitlebarComponent implements OnInit {
 
-	@Input() focusLoseSubject: Subject<void>;
+	@Input() focusLose: Observable<void>;
 
 	maximized: boolean;
 

@@ -15,7 +15,7 @@ import { getTitlebarServiceStub } from './titlebar.service.stub';
 	template: ``,
 })
 class MenuComponentStub {
-	@Input() focusLoseSubject: any;
+	@Input() focusLose: any;
 }
 
 describe('TitlebarComponent', () => {

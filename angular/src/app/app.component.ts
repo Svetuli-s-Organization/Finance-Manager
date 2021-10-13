@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { Subject } from 'rxjs';
+// External libraries
+import { Observable, Subject } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
@@ -9,6 +10,7 @@ import { Subject } from 'rxjs';
 })
 export class AppComponent {
 
-	clickSubject: Subject<void> = new Subject();
+	welcomeScreenClickSubject: Subject<void> = new Subject();
+	welcomeScreenClick: Observable<void> = this.welcomeScreenClickSubject.asObservable();
 
 }
