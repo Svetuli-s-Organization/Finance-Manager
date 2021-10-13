@@ -21,4 +21,12 @@ export class TitlebarServiceStub {
 	windowMaximized: Observable<void> = this.windowMaximizedSubject.asObservable();
 	windowUnmaximized: Observable<void> = this.windowUnmaximizedSubject.asObservable();
 
+	sendWindowMinimizeEvent() {}
+
+	sendWindowMaximizeEvent() {}
+
+	sendWindowRestoreEvent() {}
+
+	sendWindowCloseEvent() {}
+
 }
