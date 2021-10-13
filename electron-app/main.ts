@@ -51,6 +51,22 @@ app.whenReady().then(() => {
 		});
 	});
 
+	ipcMain.on('execute-window-minimize', () => {
+		win.minimize();
+	});
+
+	ipcMain.on('execute-window-maximize', () => {
+		win.maximize();
+	});
+
+	ipcMain.on('execute-window-restore', () => {
+		win.restore();
+	});
+
+	ipcMain.on('execute-window-close', () => {
+		win.close();
+	});
+
 	// Build an empty menu because the menu is part of the renderer
 	Menu.setApplicationMenu(null);
 });
