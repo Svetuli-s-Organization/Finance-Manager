@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Components
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from './welcome.component';
 
 @NgModule({
 	declarations: [

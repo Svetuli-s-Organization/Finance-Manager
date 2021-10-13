@@ -4,11 +4,11 @@ import { IpcRenderer, IpcRendererEvent } from 'electron';
 
 // Services
 import { UserService } from './user.service';
-import { ElectronService } from '@core/services/electron/electron.service';
+import { ElectronService } from '@core/electron/electron.service';
 
 // Service stubs
-import { ElectronServiceStub } from '@core/services/electron/electron.service.stub';
-import { UserMetadata } from '@app/structures/user';
+import { ElectronServiceStub } from '@core/electron/electron.service.stub';
+import { UserMetadata } from '@structures/user';
 
 describe('UserService', () => {
 	let service: UserService;
@@ -33,7 +33,7 @@ describe('UserService', () => {
 	});
 
 	describe(`constructor`, () => {
-		type ListenerFunction = (event: IpcRendererEvent, ...args: any[]) => void;
+		type ListenerFunction = (data: any) => void;
 		let sendSpy: jasmine.Spy<(channel: string, ...args: any[]) => void>;
 		let onSpy: jasmine.Spy<(channel: string, listener: ListenerFunction) => IpcRenderer>;
 
@@ -47,10 +47,9 @@ describe('UserService', () => {
 		beforeEach(() => {
 			initService();
 
-			sendSpy = spyOn(electronService.ipcRenderer, 'send');
-			onSpy = spyOn(electronService.ipcRenderer, 'on').and.callFake((channel: string, listener: ListenerFunction) => {
-				listener({} as IpcRendererEvent, mockMetadata);
-				return {} as IpcRenderer;
+			sendSpy = spyOn(electronService, 'send');
+			onSpy = spyOn(electronService, 'on').and.callFake((channel: string, listener: ListenerFunction) => {
+				listener(mockMetadata);
 			});
 		});
 
@@ -65,7 +64,7 @@ describe('UserService', () => {
 			expect(onSpy).toHaveBeenCalledTimes(1);
 		}));
 
-		it(`should send event to channel "user-service-ready" using the IpcRenderer`, () => {
+		it(`should send event to channel "user-service-ready" using the ElectronService`, () => {
 			initService();
 			expect(sendSpy).toHaveBeenCalledWith('user-service-ready');
 			expect(sendSpy).toHaveBeenCalledTimes(1);

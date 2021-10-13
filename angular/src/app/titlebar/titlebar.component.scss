@@ -1,0 +1,42 @@
+$height: 30px;
+
+:host {
+	display: block;
+}
+
+.titlebar {
+	display: flex;
+	justify-content: space-between;
+	height: $height;
+	background-color: var(--secondary-dark);
+	color: var(--secondary-text);
+
+	.window-icons {
+		display: flex;
+		flex-shrink: 0;
+
+		.window-icon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 46px;
+
+			&:hover {
+				background-color: var(--secondary-bg);
+			}
+
+			&.window-icon-close:hover {
+				background-color: #e81123e6;
+			}
+
+			svg {
+				height: 100%;
+			}
+		}
+	}
+
+	.titlebar-drag {
+		flex: 1;
+		-webkit-app-region: drag;
+	}
+}

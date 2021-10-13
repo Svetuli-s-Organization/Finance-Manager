@@ -1,1 +1,2 @@
-<app-welcome></app-welcome>
+<app-titlebar [focusLose]="welcomeScreenClick"></app-titlebar>
+<app-welcome (clickEvent)="welcomeScreenClickSubject.next()"></app-welcome>

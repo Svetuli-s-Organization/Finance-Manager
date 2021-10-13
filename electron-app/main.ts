@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, ipcMain } from 'electron';
 import dotenv from 'dotenv';
 import updater from 'update-electron-app';
 
@@ -18,11 +18,12 @@ app.whenReady().then(() => {
 	const win = new BrowserWindow({
 		width: 1600,
 		height: 900,
-		frame:  true,
+		frame: false,
 		webPreferences: {
 			contextIsolation: true,
 			preload: path.join(__dirname, 'preload.js'),
-		}
+		},
+		show: false,
 	});
 
 	if (isProd()) {
@@ -34,5 +35,38 @@ app.whenReady().then(() => {
 		win.webContents.toggleDevTools();
 	}
 
-	win.maximize();
+	win.on('ready-to-show', () => {
+		win.maximize();
+	});
+
+	ipcMain.once('renderer-ready', () => {
+		win.webContents.send('window-maximize');
+
+		win.on('maximize', () => {
+			win.webContents.send('window-maximize');
+		});
+
+		win.on('unmaximize', () => {
+			win.webContents.send('window-unmaximize');
+		});
+	});
+
+	ipcMain.on('execute-window-minimize', () => {
+		win.minimize();
+	});
+
+	ipcMain.on('execute-window-maximize', () => {
+		win.maximize();
+	});
+
+	ipcMain.on('execute-window-restore', () => {
+		win.restore();
+	});
+
+	ipcMain.on('execute-window-close', () => {
+		win.close();
+	});
+
+	// Build an empty menu because the menu is part of the renderer
+	Menu.setApplicationMenu(null);
 });

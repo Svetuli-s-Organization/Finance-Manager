@@ -1,6 +1,4 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { ElectronService } from '@app/modules/core/services/electron/electron.service';
-import { ElectronServiceStub } from '@app/modules/core/services/electron/electron.service.stub';
 
 // Components
 import { WelcomeComponent } from './welcome.component';
@@ -14,9 +12,7 @@ describe('WelcomeComponent', () => {
 			declarations: [
 				WelcomeComponent,
 			],
-			providers: [
-				{ provide: ElectronService, useClass: ElectronServiceStub },
-			],
+			providers: [],
 		}).compileComponents();
 	});
 
@@ -25,7 +21,21 @@ describe('WelcomeComponent', () => {
 		component = fixture.componentInstance;
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+	describe(`class`, () => {
+		it('should create', () => {
+			expect(component).toBeTruthy();
+		});
+
+		it(`#ngOnInit should do nothing`, () => {
+			component.ngOnInit();
+			expect(true).toBeTrue();
+		});
+
+		it(`#handleClick should emit to the #clickEvent Output`, () => {
+			component.clickEvent.subscribe(() => {
+				expect(true).toBeTrue();
+			});
+			component.handleClick();
+		});
 	});
 });

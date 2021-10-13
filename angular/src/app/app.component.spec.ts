@@ -1,8 +1,9 @@
+import { Component, DebugElement, Input } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 // Components
 import { AppComponent } from './app.component';
-import { Component } from '@angular/core';
 
 @Component({
 	selector: 'app-welcome',
@@ -11,15 +12,25 @@ import { Component } from '@angular/core';
 class WelcomeComponentStub {
 }
 
+@Component({
+	selector: 'app-titlebar',
+	template: ``,
+})
+class TitlebarComponentStub {
+	@Input() focusLose: any;
+}
+
 describe('AppComponent', () => {
 	let component: AppComponent;
 	let fixture: ComponentFixture<AppComponent>;
+	let de: DebugElement;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				AppComponent,
 				WelcomeComponentStub,
+				TitlebarComponentStub,
 			],
 		}).compileComponents();
 	});
@@ -27,9 +38,24 @@ describe('AppComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;
+		de = fixture.debugElement;
 	});
 
 	it('should create the app', () => {
 		expect(component).toBeTruthy();
+	});
+
+	describe(`template`, () => {
+		beforeEach(() => {
+			fixture.detectChanges();
+		});
+
+		it(`should display the menu and welcome components`, () => {
+			const titlebarComponent = de.query(By.css('app-titlebar'));
+			const welcomeComponent = de.query(By.css('app-welcome'));
+
+			expect(titlebarComponent).toBeTruthy();
+			expect(welcomeComponent).toBeTruthy();
+		});
 	});
 });

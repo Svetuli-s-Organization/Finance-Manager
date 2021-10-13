@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable } from 'rxjs';
 
 // Services
-import { ElectronService } from '@core/services/electron/electron.service';
+import { ElectronService } from '@core/electron/electron.service';
 
 // Classes and Interfaces
 import { UserMetadata } from '@structures/user';
@@ -18,13 +18,13 @@ export class UserService {
 	public userMetadata: Observable<UserMetadata> = this.userMetadataSubject.asObservable();
 
 	constructor(private electronService: ElectronService) {
-		this.electronService.ipcRenderer.send('user-service-ready');
+		this.electronService.send('user-service-ready');
 
 		this.setUserMetadata();
 	}
 
 	private setUserMetadata() {
-		this.electronService.ipcRenderer.on('user-metadata', (event, data) => {
+		this.electronService.on('user-metadata', (data: UserMetadata) => {
 			this.userMetadataSubject.next(data);
 		});
 	}

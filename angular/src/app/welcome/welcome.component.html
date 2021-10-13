@@ -1,0 +1,30 @@
+<h1 id="header">Finance Manager</h1>
+
+<div id="wrapper">
+  <div id="section-wrapper">
+    <div id="left-section" class="section-item">
+      <ul class="list">
+        <!-- <li class="list-item"><a (click)="openFile()">Open file</a></li> -->
+        <li class="list-item clickable"><a>Open file</a></li>
+        <!-- <li class="list-item clickable"><a (click)="createNewFile()">Create new file</a></li> -->
+        <li class="list-item clickable"><a>Create new file</a></li>
+        <li class="separator horizontal"></li>
+        <li class="list-item"><a>Recent files:</a></li>
+        <ul class="list second-lever-list">
+          <!-- <li class="list-item" *ngFor="let recentFile of recentFiles; let i = index">
+            <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
+          </li> -->
+          <li class="list-item clickable">
+            <a title="asdf">file.fmn</a>
+          </li>
+        </ul>
+      </ul>
+    </div>
+
+    <div class="separator vertical"></div>
+
+    <div id="right-section" class="section-item">
+      <p>Donate</p>
+    </div>
+  </div>
+</div>

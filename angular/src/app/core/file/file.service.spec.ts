@@ -5,7 +5,7 @@ import { FileService } from './file.service';
 
 // Classes and Interfaces
 import { AppFile } from '@structures/file';
-import { testBehaviorSubjectStream } from '@app/utils/testing/observable';
+import { testBehaviorSubjectStream } from '@utils/testing/observable';
 
 describe('FileService', () => {
 	let service: FileService;
