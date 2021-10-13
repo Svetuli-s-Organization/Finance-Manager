@@ -34,4 +34,20 @@ export class TitlebarComponent implements OnInit {
 		});
 	}
 
+	minimizeWindow() {
+		this.titlebarService.sendWindowMinimizeEvent();
+	}
+
+	maximizeWindow() {
+		this.titlebarService.sendWindowMaximizeEvent();
+	}
+
+	restoreWindow() {
+		this.titlebarService.sendWindowRestoreEvent();
+	}
+
+	closeWindow() {
+		this.titlebarService.sendWindowCloseEvent();
+	}
+
 }
