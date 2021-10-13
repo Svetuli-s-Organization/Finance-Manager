@@ -21,7 +21,21 @@ describe('WelcomeComponent', () => {
 		component = fixture.componentInstance;
 	});
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
+	describe(`class`, () => {
+		it('should create', () => {
+			expect(component).toBeTruthy();
+		});
+
+		it(`#ngOnInit should do nothing`, () => {
+			component.ngOnInit();
+			expect(true).toBeTrue();
+		});
+
+		it(`#handleClick should emit to the #clickEvent Output`, () => {
+			component.clickEvent.subscribe(() => {
+				expect(true).toBeTrue();
+			});
+			component.handleClick();
+		});
 	});
 });
