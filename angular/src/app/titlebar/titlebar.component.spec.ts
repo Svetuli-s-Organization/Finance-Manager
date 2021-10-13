@@ -44,7 +44,7 @@ describe('TitlebarComponent', () => {
 			titlebarService = TestBed.inject(TitlebarService);
 		});
 
-		it(`#ngOnInit should handle window maximize and unminimize events`, () => {
+		it(`#ngOnInit should handle window maximize and unmaximize events`, () => {
 			component.ngOnInit();
 			expect(component.maximized).toBeUndefined();
 
