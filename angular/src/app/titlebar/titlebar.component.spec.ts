@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -10,6 +10,14 @@ import { TitlebarService } from './titlebar.service';
 // Service stubs
 import { getTitlebarServiceStub } from './titlebar.service.stub';
 
+@Component({
+	selector: 'app-menu',
+	template: ``,
+})
+class MenuComponentStub {
+	@Input() focusLoseSubject: any;
+}
+
 describe('TitlebarComponent', () => {
 	let component: TitlebarComponent;
 	let fixture: ComponentFixture<TitlebarComponent>;
@@ -20,6 +28,7 @@ describe('TitlebarComponent', () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				TitlebarComponent,
+				MenuComponentStub,
 			],
 			providers: [
 				{ provide: TitlebarService, useValue: titlebarServiceStub },
