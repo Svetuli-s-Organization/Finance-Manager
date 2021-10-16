@@ -1,18 +1,26 @@
 import { app, BrowserWindow, Menu, ipcMain } from 'electron';
+import path from 'path';
+
+// External libraries
 import dotenv from 'dotenv';
 import updater from 'update-electron-app';
-
-import path from 'path';
+import Store from 'electron-store';
 
 import { isProd } from './environment';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
-  app.quit();
+	app.quit();
 }
 
 dotenv.config();
 updater();
+
+const metadataStore = new Store({
+	name: 'metadata',
+	fileExtension: 'fmnconf',
+	encryptionKey: '21[1as0#6a2@7q3g4F}4s',
+});
 
 app.whenReady().then(() => {
 	const win = new BrowserWindow({
