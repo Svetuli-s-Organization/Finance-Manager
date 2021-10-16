@@ -39,6 +39,13 @@ app.whenReady().then(() => {
 		win.maximize();
 	});
 
+	handleRendererCommunication(win);
+
+	// Build an empty menu because the menu is part of the renderer
+	Menu.setApplicationMenu(null);
+});
+
+function handleRendererCommunication(win: BrowserWindow) {
 	ipcMain.once('renderer-ready', () => {
 		win.webContents.send('window-maximize');
 
@@ -66,7 +73,4 @@ app.whenReady().then(() => {
 	ipcMain.on('execute-window-close', () => {
 		win.close();
 	});
-
-	// Build an empty menu because the menu is part of the renderer
-	Menu.setApplicationMenu(null);
-});
+}
