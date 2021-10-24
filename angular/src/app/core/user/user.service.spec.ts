@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IpcRenderer, IpcRendererEvent } from 'electron';
-
 // Services
 import { UserService } from './user.service';
 import { ElectronService } from '@core/electron/electron.service';
@@ -9,6 +7,9 @@ import { ElectronService } from '@core/electron/electron.service';
 // Service stubs
 import { ElectronServiceStub } from '@core/electron/electron.service.stub';
 import { UserMetadata } from '@structures/user';
+
+// Classes and Interfaces
+import { RendererAPIOnFn, RendererAPISendFn } from '@electron-app/preload';
 
 describe('UserService', () => {
 	let service: UserService;
@@ -34,8 +35,8 @@ describe('UserService', () => {
 
 	describe(`constructor`, () => {
 		type ListenerFunction = (data: any) => void;
-		let sendSpy: jasmine.Spy<(channel: string, ...args: any[]) => void>;
-		let onSpy: jasmine.Spy<(channel: string, listener: ListenerFunction) => IpcRenderer>;
+		let sendSpy: jasmine.Spy<RendererAPISendFn>;
+		let onSpy: jasmine.Spy<RendererAPIOnFn>;
 
 		const mockMetadata: UserMetadata = {
 			recentFilePaths: [
