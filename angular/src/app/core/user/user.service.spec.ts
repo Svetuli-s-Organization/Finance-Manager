@@ -64,11 +64,5 @@ describe('UserService', () => {
 			expect(onSpy.calls.allArgs()[0][0]).toEqual('user-metadata');
 			expect(onSpy).toHaveBeenCalledTimes(1);
 		}));
-
-		it(`should send event to channel "user-service-ready" using the ElectronService`, () => {
-			initService();
-			expect(sendSpy).toHaveBeenCalledWith('user-service-ready');
-			expect(sendSpy).toHaveBeenCalledTimes(1);
-		});
 	});
 });

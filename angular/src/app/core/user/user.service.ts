@@ -18,8 +18,6 @@ export class UserService {
 	public userMetadata: Observable<UserMetadata> = this.userMetadataSubject.asObservable();
 
 	constructor(private electronService: ElectronService) {
-		this.electronService.send('user-service-ready');
-
 		this.setUserMetadata();
 	}
 
