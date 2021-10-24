@@ -54,15 +54,14 @@ describe('UserService', () => {
 			});
 		});
 
-		it(`should retrieve the user metadata from the electron ipc and push it to the #userMetadata stream`, (done => {
+		it(`should retrieve the user metadata from the electron ipc and push it to the #userMetadata stream`, () => {
 			initService();
 
 			service.userMetadata.subscribe(metaData => {
 				expect(metaData).toEqual(mockMetadata);
-				done();
 			});
 			expect(onSpy.calls.allArgs()[0][0]).toEqual('user-metadata');
 			expect(onSpy).toHaveBeenCalledTimes(1);
-		}));
+		});
 	});
 });
