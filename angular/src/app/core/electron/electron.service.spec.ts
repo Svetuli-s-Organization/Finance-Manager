@@ -3,16 +3,11 @@ import { TestBed } from '@angular/core/testing';
 // Services
 import { WINDOW } from '@core/window/window.service';
 import { ElectronService } from './electron.service';
+// Service Stubs
+import { WindowStub } from '@core/window/window.stub';
 
 // Utils
 import { customMatchers } from '@utils/testing/jasmine-custom-matchers';
-
-class WindowStub {
-	rendererAPI = {
-		on: () => {},
-		send: () => {},
-	};
-}
 
 describe('ElectronService', () => {
 	let service: ElectronService;
