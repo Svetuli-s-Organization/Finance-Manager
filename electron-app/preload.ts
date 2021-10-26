@@ -1,7 +1,9 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import * as path from 'path';
 
 export type RendererAPIOnFn = <T>(channel: string, listener: (data: T) => void) => void;
 export type RendererAPISendFn = <T>(channel: string, data?: T) => void;
+export type RendererAPIPath = typeof path;
 
 /**
  * An interface that describes the API that is exposed to the renderer process.
@@ -12,10 +14,16 @@ export interface RendererAPI {
 	 * object passed to it.
 	 */
 	on: RendererAPIOnFn;
+
 	/**
 	 * Like the method `ipcRenderer.send`, but accepts only 1 data argument.
 	 */
 	send: RendererAPISendFn;
+
+	/**
+	 * The nodejs `path` module.
+	 */
+	path: RendererAPIPath;
 }
 
 /**
@@ -28,6 +36,7 @@ const rendererAPI: RendererAPI = {
 	send: (channel, data) => {
 		ipcRenderer.send(channel, data);
 	},
+	path,
 }
 
 contextBridge.exposeInMainWorld('rendererAPI', rendererAPI);
