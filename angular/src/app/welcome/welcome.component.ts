@@ -1,4 +1,8 @@
-import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter, Inject } from '@angular/core';
+
+// Services
+import { WINDOW } from '@core/window/window.service';
+import { UserService } from '@core/user/user.service';
 
 @Component({
 	selector: 'app-welcome',
@@ -9,9 +13,28 @@ export class WelcomeComponent implements OnInit {
 
 	@Output() clickEvent: EventEmitter<void> = new EventEmitter();
 
-	constructor() { }
+	recentFiles: RecentFile[] = [];
+
+	constructor(
+		@Inject(WINDOW) private window: Window,
+		private userService: UserService,
+	) { }
 
 	ngOnInit() {
+		const path = this.window.rendererAPI.path;
+
+		this.userService.userMetadata.subscribe(({ recentFilePaths }) => {
+			if (recentFilePaths) {
+				this.recentFiles = recentFilePaths.map(recentFilePath => {
+					return {
+						name: path.basename(recentFilePath),
+						fullPath: recentFilePath,
+					};
+				});
+			} else {
+				this.recentFiles = [];
+			}
+		});
 	}
 
 	@HostListener('click')
@@ -19,4 +42,9 @@ export class WelcomeComponent implements OnInit {
 		this.clickEvent.next();
 	}
 
+}
+
+export interface RecentFile {
+	name: string;
+	fullPath: string;
 }

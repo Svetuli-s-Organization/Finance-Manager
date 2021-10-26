@@ -1,24 +1,47 @@
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
+
+// Services
+import { WINDOW } from '@core/window/window.service';
+import { UserService } from '@core/user/user.service';
+// Service Stubs
+import { getUserServiceStub } from '@core/user/user.service.stub';
+import { WindowStub } from '@core/window/window.stub';
 
 // Components
 import { WelcomeComponent } from './welcome.component';
 
+// Classes and Interfaces
+import { UserMetadata } from '@structures/user';
+
 describe('WelcomeComponent', () => {
 	let component: WelcomeComponent;
 	let fixture: ComponentFixture<WelcomeComponent>;
+
+	let userService: UserService;
+	let window: Window;
+
+	const { userServiceStub, userMetadataSubject } = getUserServiceStub();
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
 			declarations: [
 				WelcomeComponent,
 			],
-			providers: [],
+			providers: [
+				{ provide: WINDOW, useClass: WindowStub },
+				{ provide: UserService, useValue: userServiceStub },
+			],
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(WelcomeComponent);
 		component = fixture.componentInstance;
+
+		userService = TestBed.inject(UserService);
+		window = TestBed.inject(WINDOW) as Window;
 	});
 
 	describe(`class`, () => {
@@ -26,9 +49,40 @@ describe('WelcomeComponent', () => {
 			expect(component).toBeTruthy();
 		});
 
-		it(`#ngOnInit should do nothing`, () => {
-			component.ngOnInit();
-			expect(true).toBeTrue();
+		describe(`initial values`, () => {
+			it(`#recentFiles should be [] initially`, () => {
+				expect(component.recentFiles).toEqual([]);
+			});
+		});
+
+		describe(`#ngOnInit`, () => {
+			it(`should set #recentFiles to the recent file paths when they are present in the user metadata`, () => {
+				component.ngOnInit();
+				expect(component.recentFiles).toEqual([]);
+
+				userMetadataSubject.next({
+					recentFilePaths: [
+						'folder-1/file-1.fmn',
+						'folder-1/file-2.fmn',
+					],
+				});
+				expect(component.recentFiles).toEqual([
+					{ name: 'file-1.fmn', fullPath: 'folder-1/file-1.fmn' },
+					{ name: 'file-2.fmn', fullPath: 'folder-1/file-2.fmn' },
+				]);
+			});
+
+			it(`should set #recentFiles to [] when the recent file paths are not present in the user metadata`, () => {
+				component.ngOnInit();
+				expect(component.recentFiles).toEqual([]);
+
+				component.recentFiles = [
+					{ name: 'file-1.fmn', fullPath: 'folder-1/file-1.fmn' },
+					{ name: 'file-2.fmn', fullPath: 'folder-1/file-2.fmn' },
+				];
+				userMetadataSubject.next({} as UserMetadata);
+				expect(component.recentFiles).toEqual([]);
+			});
 		});
 
 		it(`#handleClick should emit to the #clickEvent Output`, () => {
@@ -36,6 +90,38 @@ describe('WelcomeComponent', () => {
 				expect(true).toBeTrue();
 			});
 			component.handleClick();
+		});
+	});
+
+	describe(`template`, () => {
+		let de: DebugElement;
+
+		beforeEach(() => {
+			fixture.detectChanges();
+			de = fixture.debugElement;
+		});
+
+		it(`should display #recentFiles when it exists`, () => {
+			component.recentFiles = [
+				{ name: 'file-1.fmn', fullPath: 'path-a/file-1.fmn'},
+				{ name: 'file-2.fmn', fullPath: 'path-a/file-2.fmn'},
+				{ name: 'file.fmn', fullPath: 'path-b/file.fmn'},
+			];
+			fixture.detectChanges();
+
+			const recentFilesList = de.query(By.css('#recent-files-list'));
+			const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
+			const recentFilesListItemsText = recentFilesListItems.map(item => item.nativeElement.innerText);
+			expect(recentFilesListItemsText).toEqual(['file-1.fmn', 'file-2.fmn', 'file.fmn']);
+		});
+
+		it(`should not display #recentFiles`, () => {
+			component.recentFiles = [];
+			fixture.detectChanges();
+
+			const recentFilesList = de.query(By.css('#recent-files-list'));
+			const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
+			expect(recentFilesListItems).toEqual([]);
 		});
 	});
 });
