@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener, Output, EventEmitter, Inject } from '@
 // Services
 import { WINDOW } from '@core/window/window.service';
 import { UserService } from '@core/user/user.service';
+import { ElectronService } from '@core/electron/electron.service';
 
 @Component({
 	selector: 'app-welcome',
@@ -17,6 +18,7 @@ export class WelcomeComponent implements OnInit {
 
 	constructor(
 		@Inject(WINDOW) private window: Window,
+		private electronService: ElectronService,
 		private userService: UserService,
 	) { }
 
@@ -35,6 +37,10 @@ export class WelcomeComponent implements OnInit {
 				this.recentFiles = [];
 			}
 		});
+	}
+
+	openFile() {
+		this.electronService.send('open-file');
 	}
 
 	@HostListener('click')

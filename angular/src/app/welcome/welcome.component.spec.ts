@@ -4,8 +4,10 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 // Services
 import { WINDOW } from '@core/window/window.service';
+import { ElectronService } from '@app/core/electron/electron.service';
 import { UserService } from '@core/user/user.service';
 // Service Stubs
+import { ElectronServiceStub } from '@app/core/electron/electron.service.stub';
 import { getUserServiceStub } from '@core/user/user.service.stub';
 import { WindowStub } from '@core/window/window.stub';
 
@@ -19,6 +21,7 @@ describe('WelcomeComponent', () => {
 	let component: WelcomeComponent;
 	let fixture: ComponentFixture<WelcomeComponent>;
 
+	let electronService: ElectronService;
 	let userService: UserService;
 	let window: Window;
 
@@ -31,6 +34,7 @@ describe('WelcomeComponent', () => {
 			],
 			providers: [
 				{ provide: WINDOW, useClass: WindowStub },
+				{ provide: ElectronService, useClass: ElectronServiceStub },
 				{ provide: UserService, useValue: userServiceStub },
 			],
 		}).compileComponents();
@@ -40,6 +44,7 @@ describe('WelcomeComponent', () => {
 		fixture = TestBed.createComponent(WelcomeComponent);
 		component = fixture.componentInstance;
 
+		electronService = TestBed.inject(ElectronService);
 		userService = TestBed.inject(UserService);
 		window = TestBed.inject(WINDOW) as Window;
 	});
@@ -85,6 +90,13 @@ describe('WelcomeComponent', () => {
 			});
 		});
 
+		it(`#openFile should send event to channel "open-file" using the ElectronService`, () => {
+			const sendSpy = spyOn(electronService, 'send');
+			component.openFile();
+			expect(sendSpy).toHaveBeenCalledWith('open-file');
+			expect(sendSpy).toHaveBeenCalledTimes(1);
+		});
+
 		it(`#handleClick should emit to the #clickEvent Output`, () => {
 			component.clickEvent.subscribe(() => {
 				expect(true).toBeTrue();
@@ -101,27 +113,36 @@ describe('WelcomeComponent', () => {
 			de = fixture.debugElement;
 		});
 
-		it(`should display #recentFiles when it exists`, () => {
-			component.recentFiles = [
-				{ name: 'file-1.fmn', fullPath: 'path-a/file-1.fmn'},
-				{ name: 'file-2.fmn', fullPath: 'path-a/file-2.fmn'},
-				{ name: 'file.fmn', fullPath: 'path-b/file.fmn'},
-			];
-			fixture.detectChanges();
-
-			const recentFilesList = de.query(By.css('#recent-files-list'));
-			const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
-			const recentFilesListItemsText = recentFilesListItems.map(item => item.nativeElement.innerText);
-			expect(recentFilesListItemsText).toEqual(['file-1.fmn', 'file-2.fmn', 'file.fmn']);
+		it(`should call #openFile when the "Open file" item is clicked`, () => {
+			const openFileSpy = spyOn(component, 'openFile');
+			const openFileButton = de.query(By.css('#open-file a'));
+			openFileButton.nativeElement.click();
+			expect(openFileSpy).toHaveBeenCalled();
 		});
 
-		it(`should not display #recentFiles`, () => {
-			component.recentFiles = [];
-			fixture.detectChanges();
+		describe(`recent files`, () => {
+			it(`should display #recentFiles when it exists`, () => {
+				component.recentFiles = [
+					{ name: 'file-1.fmn', fullPath: 'path-a/file-1.fmn'},
+					{ name: 'file-2.fmn', fullPath: 'path-a/file-2.fmn'},
+					{ name: 'file.fmn', fullPath: 'path-b/file.fmn'},
+				];
+				fixture.detectChanges();
 
-			const recentFilesList = de.query(By.css('#recent-files-list'));
-			const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
-			expect(recentFilesListItems).toEqual([]);
+				const recentFilesList = de.query(By.css('#recent-files-list'));
+				const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
+				const recentFilesListItemsText = recentFilesListItems.map(item => item.nativeElement.innerText);
+				expect(recentFilesListItemsText).toEqual(['file-1.fmn', 'file-2.fmn', 'file.fmn']);
+			});
+
+			it(`should not display #recentFiles`, () => {
+				component.recentFiles = [];
+				fixture.detectChanges();
+
+				const recentFilesList = de.query(By.css('#recent-files-list'));
+				const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
+				expect(recentFilesListItems).toEqual([]);
+			});
 		});
 	});
 });
