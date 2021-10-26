@@ -2,11 +2,16 @@ import { app, BrowserWindow, Menu, ipcMain } from 'electron';
 import path from 'path';
 
 // External libraries
+import sourceMapSupport from 'source-map-support';
 import dotenv from 'dotenv';
 import updater from 'update-electron-app';
 import Store from 'electron-store';
 
 import { isProd } from './environment';
+
+if (!isProd()) {
+	sourceMapSupport.install();
+}
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -47,14 +52,27 @@ app.whenReady().then(() => {
 		win.maximize();
 	});
 
-	handleRendererCommunication(win);
+	try {
+		handleRendererCommunication(win);
+	} catch (err) {
+		console.error('ERROR:', err);
+	}
 
 	// Build an empty menu because the menu is part of the renderer
 	Menu.setApplicationMenu(null);
 });
 
 function handleRendererCommunication(win: BrowserWindow) {
-	ipcMain.once('renderer-ready', () => {
+	/**
+	 * This is so that when the app's in dev mode and the angular app reloads,
+	 * the event will be handled so that you don't have to restart the electron app.
+	 */
+	const ipcMainOnce: typeof ipcMain.once =
+		isProd() ?
+		ipcMain.once.bind(ipcMain) :
+		ipcMain.on.bind(ipcMain);
+
+	ipcMainOnce('renderer-ready', () => {
 		win.webContents.send('window-maximize');
 
 		win.on('maximize', () => {
@@ -64,6 +82,10 @@ function handleRendererCommunication(win: BrowserWindow) {
 		win.on('unmaximize', () => {
 			win.webContents.send('window-unmaximize');
 		});
+	});
+
+	ipcMainOnce('user-service-ready', () => {
+		win.webContents.send('user-metadata', metadataStore.store);
 	});
 
 	ipcMain.on('execute-window-minimize', () => {
