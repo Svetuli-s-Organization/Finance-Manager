@@ -6,10 +6,10 @@ import { ElectronService } from '@core/electron/electron.service';
 
 // Service stubs
 import { ElectronServiceStub } from '@core/electron/electron.service.stub';
-import { UserMetadata } from '@structures/user';
 
 // Classes and Interfaces
 import { RendererAPIOnFn, RendererAPISendFn } from '@electron-app/preload';
+import { UserMetadata } from '@root/shared/types';
 
 describe('UserService', () => {
 	let service: UserService;

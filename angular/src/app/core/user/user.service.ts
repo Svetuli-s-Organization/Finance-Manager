@@ -7,7 +7,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { ElectronService } from '@core/electron/electron.service';
 
 // Classes and Interfaces
-import { UserMetadata } from '@structures/user';
+import { UserMetadata } from '@root/shared/types';
 
 @Injectable({
 	providedIn: 'root'

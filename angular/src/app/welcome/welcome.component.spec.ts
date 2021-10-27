@@ -15,7 +15,7 @@ import { WindowStub } from '@core/window/window.stub';
 import { WelcomeComponent } from './welcome.component';
 
 // Classes and Interfaces
-import { UserMetadata } from '@structures/user';
+import { UserMetadata } from '@root/shared/types';
 
 describe('WelcomeComponent', () => {
 	let component: WelcomeComponent;

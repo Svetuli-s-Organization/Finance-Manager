@@ -2,7 +2,7 @@
 import { Observable, Subject } from 'rxjs';
 
 // Classes and Interfaces
-import { UserMetadata } from '@structures/user';
+import { UserMetadata } from '@root/shared/types';
 
 export const getUserServiceStub = () => {
 	const userMetadataSubject: Subject<UserMetadata> = new Subject();
