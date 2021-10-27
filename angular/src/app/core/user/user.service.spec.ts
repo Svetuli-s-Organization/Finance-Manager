@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { NgZone } from '@angular/core';
 
 // Services
 import { UserService } from './user.service';
@@ -11,13 +12,18 @@ import { ElectronServiceStub } from '@core/electron/electron.service.stub';
 import { RendererAPIOnFn, RendererAPISendFn } from '@electron-app/preload';
 import { UserMetadata } from '@root/shared/types';
 
+// Utils
+import { NgZoneStub } from '@utils/testing/zone.stub';
+
 describe('UserService', () => {
 	let service: UserService;
+	let zone: NgZone;
 	let electronService: ElectronService;
 
 	const initService = () => {
+		zone = new NgZoneStub() as NgZone;
 		electronService = TestBed.inject(ElectronService);
-		service = new UserService(electronService);
+		service = new UserService(zone, electronService);
 	};
 
 	beforeEach(() => {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 
 // External libraries
 import { ReplaySubject, Observable } from 'rxjs';
@@ -17,7 +17,10 @@ export class UserService {
 	private userMetadataSubject: ReplaySubject<UserMetadata> = new ReplaySubject(1);
 	public userMetadata: Observable<UserMetadata> = this.userMetadataSubject.asObservable();
 
-	constructor(private electronService: ElectronService) {
+	constructor(
+		private zone: NgZone,
+		private electronService: ElectronService,
+	) {
 		this.electronService.send('user-service-ready');
 
 		this.setUserMetadata();
@@ -25,7 +28,9 @@ export class UserService {
 
 	private setUserMetadata() {
 		this.electronService.on('user-metadata', (data: UserMetadata) => {
-			this.userMetadataSubject.next(data);
+			this.zone.run(() => {
+				this.userMetadataSubject.next(data);
+			});
 		});
 	}
 
