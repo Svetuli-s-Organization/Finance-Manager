@@ -15,7 +15,8 @@
             <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
           </li> -->
           <li class="list-item clickable" *ngFor="let recentFile of recentFiles">
-            {{ recentFile.name }}
+            <a class="list-item-file-name">{{ recentFile.name }}</a>
+            <a class="list-item-file-full-path">{{ recentFile.fullPath }}</a>
           </li>
         </ul>
       </ul>

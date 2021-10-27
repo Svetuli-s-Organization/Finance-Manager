@@ -54,27 +54,38 @@
   padding: 0;
 
   li {
-    margin-bottom: 4px;
-		height: 25px;
+		width: 100%;
 
 		a {
 			display: block;
-			width: 100%;
-			height: 100%;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
 
 		&.list-item {
+			display: flex;
+			justify-content: space-between;
 			height: 35px;
 			line-height: 30px;
-			padding: 0px 8px;
+			padding: 0px .5rem;
 
 			&.clickable:hover {
 				background-color: var(--secondary-bg);
-				color: var(--secondary-text);
 				box-shadow: 3px 3px 8px 1px #e6e6e6;
+
+				&, > * {
+					color: var(--secondary-text);
+				}
+			}
+
+			.list-item-file-name {
+				flex: 1;
+			}
+
+			.list-item-file-full-path {
+				flex-shrink: 0;
+				color: var(--secondary-bg-muted);
 			}
 		}
   }
@@ -94,6 +105,7 @@
 		width: 100% !important;
 		height: $size !important;
 		min-height: $size !important;
+		margin: .25rem 0;
 	}
 
 	&.vertical {

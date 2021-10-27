@@ -121,6 +121,9 @@ describe('WelcomeComponent', () => {
 		});
 
 		describe(`recent files`, () => {
+			const getRecentFilesList = () => de.query(By.css('#recent-files-list'));
+			const getRecentFilesListItems = (recentFilesList: DebugElement) => recentFilesList.queryAll(By.css('li'));
+
 			it(`should display #recentFiles when it exists`, () => {
 				component.recentFiles = [
 					{ name: 'file-1.fmn', fullPath: 'path-a/file-1.fmn'},
@@ -129,18 +132,27 @@ describe('WelcomeComponent', () => {
 				];
 				fixture.detectChanges();
 
-				const recentFilesList = de.query(By.css('#recent-files-list'));
-				const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
-				const recentFilesListItemsText = recentFilesListItems.map(item => item.nativeElement.innerText);
-				expect(recentFilesListItemsText).toEqual(['file-1.fmn', 'file-2.fmn', 'file.fmn']);
+				const recentFilesList = getRecentFilesList();
+				const recentFilesListItems = getRecentFilesListItems(recentFilesList);
+				const recentFilesListItemsText: string[][] = recentFilesListItems.map(item => item.queryAll(By.css('a'))).map(item => item.map(subItem => subItem.nativeElement.innerText));
+				expect(recentFilesListItemsText).toEqual([
+					['file-1.fmn', 'path-a/file-1.fmn'],
+					['file-2.fmn', 'path-a/file-2.fmn'],
+					['file.fmn', 'path-b/file.fmn'],
+				]);
 			});
 
 			it(`should not display #recentFiles`, () => {
+				component.recentFiles = [
+					{ name: 'file.fmn', fullPath: 'path-b/file.fmn'},
+				];
+				fixture.detectChanges();
+
 				component.recentFiles = [];
 				fixture.detectChanges();
 
-				const recentFilesList = de.query(By.css('#recent-files-list'));
-				const recentFilesListItems = recentFilesList.queryAll(By.css('li'));
+				const recentFilesList = getRecentFilesList();
+				const recentFilesListItems = getRecentFilesListItems(recentFilesList);
 				expect(recentFilesListItems).toEqual([]);
 			});
 		});
