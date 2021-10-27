@@ -3,16 +3,11 @@ import { TestBed } from '@angular/core/testing';
 // Services
 import { WINDOW } from '@core/window/window.service';
 import { ElectronService } from './electron.service';
+// Service Stubs
+import { WindowStub } from '@core/window/window.stub';
 
 // Utils
 import { customMatchers } from '@utils/testing/jasmine-custom-matchers';
-
-class WindowStub {
-	rendererAPI = {
-		on: () => {},
-		send: () => {},
-	};
-}
 
 describe('ElectronService', () => {
 	let service: ElectronService;
@@ -43,7 +38,7 @@ describe('ElectronService', () => {
 		});
 
 		it(`#on should call #on from the rendererAPI`, () => {
-			const onSpy = spyOn(window.rendererAPI, 'on');
+			const onSpy = spyOn(window.rendererAPI, 'on').and.callThrough();
 
 			initService();
 			const channel = 'test-channel-1';
@@ -55,7 +50,7 @@ describe('ElectronService', () => {
 		});
 
 		it(`#send should call #send from the rendererAPI`, () => {
-			const sendSpy = spyOn(window.rendererAPI, 'send');
+			const sendSpy = spyOn(window.rendererAPI, 'send').and.callThrough();
 
 			initService();
 			const channel = 'test-channel-1';

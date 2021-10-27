@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { IpcRenderer, IpcRendererEvent } from 'electron';
+import { NgZone } from '@angular/core';
 
 // Services
 import { UserService } from './user.service';
@@ -8,15 +7,23 @@ import { ElectronService } from '@core/electron/electron.service';
 
 // Service stubs
 import { ElectronServiceStub } from '@core/electron/electron.service.stub';
-import { UserMetadata } from '@structures/user';
+
+// Classes and Interfaces
+import { RendererAPIOnFn, RendererAPISendFn } from '@electron-app/preload';
+import { UserMetadata } from '@root/shared/types';
+
+// Utils
+import { NgZoneStub } from '@utils/testing/zone.stub';
 
 describe('UserService', () => {
 	let service: UserService;
+	let zone: NgZone;
 	let electronService: ElectronService;
 
 	const initService = () => {
+		zone = new NgZoneStub() as NgZone;
 		electronService = TestBed.inject(ElectronService);
-		service = new UserService(electronService);
+		service = new UserService(zone, electronService);
 	};
 
 	beforeEach(() => {
@@ -34,8 +41,8 @@ describe('UserService', () => {
 
 	describe(`constructor`, () => {
 		type ListenerFunction = (data: any) => void;
-		let sendSpy: jasmine.Spy<(channel: string, ...args: any[]) => void>;
-		let onSpy: jasmine.Spy<(channel: string, listener: ListenerFunction) => IpcRenderer>;
+		let sendSpy: jasmine.Spy<RendererAPISendFn>;
+		let onSpy: jasmine.Spy<RendererAPIOnFn>;
 
 		const mockMetadata: UserMetadata = {
 			recentFilePaths: [
@@ -53,16 +60,15 @@ describe('UserService', () => {
 			});
 		});
 
-		it(`should retrieve the user metadata from the electron ipc and push it to the #userMetadata stream`, (done => {
+		it(`should retrieve the user metadata from the electron ipc and push it to the #userMetadata stream`, () => {
 			initService();
 
 			service.userMetadata.subscribe(metaData => {
 				expect(metaData).toEqual(mockMetadata);
-				done();
 			});
 			expect(onSpy.calls.allArgs()[0][0]).toEqual('user-metadata');
 			expect(onSpy).toHaveBeenCalledTimes(1);
-		}));
+		});
 
 		it(`should send event to channel "user-service-ready" using the ElectronService`, () => {
 			initService();
