@@ -41,6 +41,8 @@
 	#left-section {
 		flex: 4;
 		padding-right: 10px;
+		// Set to visible so that the box-shadow on hover on the last element is not cut off
+		overflow: visible;
 	}
 
 	#right-section {
@@ -72,7 +74,7 @@
 
 			&.clickable:hover {
 				background-color: var(--secondary-bg);
-				box-shadow: 3px 3px 8px 1px #e6e6e6;
+				box-shadow: 3px 3px 6px 1px var(--primary-bg-shadow-heavy);
 
 				&, > * {
 					color: var(--secondary-text);
