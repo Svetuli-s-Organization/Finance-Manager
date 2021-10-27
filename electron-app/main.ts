@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, ipcMain } from 'electron';
+import { app, BrowserWindow, Menu, ipcMain, dialog } from 'electron';
 import path from 'path';
 
 // External libraries
@@ -8,6 +8,9 @@ import updater from 'update-electron-app';
 import Store from 'electron-store';
 
 import { isProd } from './environment';
+
+// Classes and Interfaces
+import { UserMetadata } from '../shared/types';
 
 if (!isProd()) {
 	sourceMapSupport.install();
@@ -21,10 +24,13 @@ if (require('electron-squirrel-startup')) {
 dotenv.config();
 updater();
 
-const metadataStore = new Store({
+const metadataStore = new Store<UserMetadata>({
 	name: 'metadata',
 	fileExtension: 'fmnconf',
 	encryptionKey: '21[1as0#6a2@7q3g4F}4s',
+	defaults: {
+		recentFilePaths: [],
+	},
 });
 
 app.whenReady().then(() => {
@@ -86,6 +92,17 @@ function handleRendererCommunication(win: BrowserWindow) {
 
 	ipcMainOnce('user-service-ready', () => {
 		win.webContents.send('user-metadata', metadataStore.store);
+	});
+
+	ipcMain.on('open-file', async () => {
+		const value = await dialog.showOpenDialog(win, { properties: ['openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }] });
+		if (!value.canceled) {
+			const file = value.filePaths[0];
+			const recentFilePaths = metadataStore.get('recentFilePaths');
+			const newRecentFilePaths = Array.from(new Set([file, ...recentFilePaths])).slice(0, 4);
+			metadataStore.set('recentFilePaths', newRecentFilePaths);
+			win.webContents.send('user-metadata', metadataStore.store);
+		}
 	});
 
 	ipcMain.on('execute-window-minimize', () => {
