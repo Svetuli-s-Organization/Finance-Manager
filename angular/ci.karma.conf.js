@@ -15,19 +15,17 @@ module.exports = function (config) {
 		client: {
 			clearContext: false // leave Jasmine Spec Runner output visible in browser
 		},
-		reporters: [
-			'progress',
-			'coverage',
-		],
 		coverageReporter: {
 			dir: require('path').join(__dirname, './coverage/finance-manager'),
 			reporters: [
-				// generates ./coverage/lcov.info
-				{ type:'lcovonly', subdir: '.' },
-				// generates ./coverage/coverage-final.json
-				{ type:'json', subdir: '.' },
+				// generates ./coverage/finance-manager/lcov.info
+				{ type: 'lcovonly', subdir: '.' },
+				// generates ./coverage/finance-manager/coverage-final.json
+				{ type: 'json', subdir: '.' },
+				{ type: 'text-summary', subdir: '.' },
 			],
 		},
+		reporters: ['progress', 'coverage'],
 		port: 9876,
 		colors: true,
 		logLevel: config.LOG_INFO,
