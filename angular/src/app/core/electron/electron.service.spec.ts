@@ -38,7 +38,7 @@ describe('ElectronService', () => {
 		});
 
 		it(`#on should call #on from the rendererAPI`, () => {
-			const onSpy = spyOn(window.rendererAPI, 'on');
+			const onSpy = spyOn(window.rendererAPI, 'on').and.callThrough();
 
 			initService();
 			const channel = 'test-channel-1';
@@ -50,7 +50,7 @@ describe('ElectronService', () => {
 		});
 
 		it(`#send should call #send from the rendererAPI`, () => {
-			const sendSpy = spyOn(window.rendererAPI, 'send');
+			const sendSpy = spyOn(window.rendererAPI, 'send').and.callThrough();
 
 			initService();
 			const channel = 'test-channel-1';
