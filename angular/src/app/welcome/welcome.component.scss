@@ -33,6 +33,7 @@
 	font-weight: 700;
 	font-size: 13px;
 	background-color: var(--primary-bg);
+	border-radius: 2px;
 
 	.section-item {
 		overflow: hidden;
@@ -75,6 +76,7 @@
 			&.clickable:hover {
 				background-color: var(--secondary-bg);
 				box-shadow: 3px 3px 6px 1px var(--primary-bg-shadow-heavy);
+				border-radius: 2px;
 
 				&, > * {
 					color: var(--secondary-text);
