@@ -5,18 +5,18 @@
     <div id="left-section" class="section-item">
       <ul class="list">
         <!-- <li class="list-item"><a (click)="openFile()">Open file</a></li> -->
-        <li class="list-item clickable" id="open-file"><a (click)="openFile()">Open file</a></li>
+        <li class="list-item clickable" id="open-file" (click)="openFile()">Open file</li>
         <!-- <li class="list-item clickable"><a (click)="createNewFile()">Create new file</a></li> -->
-        <li class="list-item clickable"><a>Create new file</a></li>
+        <li class="list-item clickable">Create new file</li>
         <li class="separator horizontal"></li>
-        <li class="list-item"><a>Recent files:</a></li>
+        <li class="list-item">Recent files:</li>
         <ul class="list second-lever-list" id="recent-files-list">
           <!-- <li class="list-item" *ngFor="let recentFile of recentFiles; let i = index">
             <a [title]="recentFile" (click)="openFile(recentFilesPaths[i])">{{ recentFile }}</a>
           </li> -->
           <li class="list-item clickable" *ngFor="let recentFile of recentFiles">
-            <a class="list-item-file-name">{{ recentFile.name }}</a>
-            <a class="list-item-file-full-path">{{ recentFile.fullPath }}</a>
+            <div class="list-item-file-name">{{ recentFile.name }}</div>
+            <div class="list-item-file-full-path">{{ recentFile.fullPath }}</div>
           </li>
         </ul>
       </ul>

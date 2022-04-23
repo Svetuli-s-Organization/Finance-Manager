@@ -115,7 +115,7 @@ describe('WelcomeComponent', () => {
 
 		it(`should call #openFile when the "Open file" item is clicked`, () => {
 			const openFileSpy = spyOn(component, 'openFile');
-			const openFileButton = de.query(By.css('#open-file a'));
+			const openFileButton = de.query(By.css('#open-file'));
 			openFileButton.nativeElement.click();
 			expect(openFileSpy).toHaveBeenCalled();
 		});
@@ -134,7 +134,7 @@ describe('WelcomeComponent', () => {
 
 				const recentFilesList = getRecentFilesList();
 				const recentFilesListItems = getRecentFilesListItems(recentFilesList);
-				const recentFilesListItemsText: string[][] = recentFilesListItems.map(item => item.queryAll(By.css('a'))).map(item => item.map(subItem => subItem.nativeElement.innerText));
+				const recentFilesListItemsText: string[][] = recentFilesListItems.map(item => item.queryAll(By.css('div'))).map(item => item.map(subItem => subItem.nativeElement.innerText));
 				expect(recentFilesListItemsText).toEqual([
 					['file-1.fmn', 'path-a/file-1.fmn'],
 					['file-2.fmn', 'path-a/file-2.fmn'],
