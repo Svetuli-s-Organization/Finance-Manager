@@ -1,6 +1,6 @@
 {
   "name": "finance-manager-electron",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "App for managing your expenses and finances.",
   "main": "./dist/bundle.js",
   "scripts": {
