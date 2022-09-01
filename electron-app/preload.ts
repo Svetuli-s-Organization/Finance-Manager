@@ -3,7 +3,9 @@ import * as path from 'path';
 
 export type RendererAPIOnFn = <T>(channel: string, listener: (data: T) => void) => void;
 export type RendererAPISendFn = <T>(channel: string, data?: T) => void;
-export type RendererAPIPath = typeof path;
+export interface RendererAPIPath {
+	basename: (path: string, ext?: string) => string;
+};
 
 /**
  * An interface that describes the API that is exposed to the renderer process.
@@ -36,7 +38,9 @@ const rendererAPI: RendererAPI = {
 	send: (channel, data) => {
 		ipcRenderer.send(channel, data);
 	},
-	path,
+	path: {
+		basename: (p: string, ext?: string) => path.basename(p, ext),
+	},
 }
 
 contextBridge.exposeInMainWorld('rendererAPI', rendererAPI);
