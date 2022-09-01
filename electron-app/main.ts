@@ -41,6 +41,8 @@ app.whenReady().then(() => {
 		webPreferences: {
 			contextIsolation: true,
 			preload: path.join(__dirname, 'preload.js'),
+			sandbox: false,
+			nodeIntegration: true,
 		},
 		show: false,
 	});
