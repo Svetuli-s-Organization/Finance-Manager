@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // External libraries
 import { Observable, Subject } from 'rxjs';
@@ -8,9 +8,22 @@ import { Observable, Subject } from 'rxjs';
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-	welcomeScreenClickSubject: Subject<void> = new Subject();
-	welcomeScreenClick: Observable<void> = this.welcomeScreenClickSubject.asObservable();
+	appClickSubject: Subject<void> = new Subject();
+	appClick: Observable<void> = this.appClickSubject.asObservable();
+
+	showWelcome: boolean;
+
+	constructor() {}
+
+	ngOnInit() {
+		// Logic for showing the welcome or not
+		this.showWelcome = true;
+	}
+
+	sendClickToMenu() {
+		this.appClickSubject.next();
+	}
 
 }
