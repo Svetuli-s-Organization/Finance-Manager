@@ -1,2 +1,4 @@
-<app-titlebar [focusLose]="welcomeScreenClick"></app-titlebar>
-<app-welcome (clickEvent)="welcomeScreenClickSubject.next()"></app-welcome>
+<app-titlebar [focusLose]="appClick"></app-titlebar>
+<div class="app-wrapper" (click)="sendClickToMenu()">
+	<app-welcome *ngIf="showWelcome"></app-welcome>
+</div>

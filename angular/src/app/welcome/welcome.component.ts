@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 // Services
 import { WINDOW } from '@core/window/window.service';
@@ -11,8 +11,6 @@ import { ElectronService } from '@core/electron/electron.service';
 	styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-
-	@Output() clickEvent: EventEmitter<void> = new EventEmitter();
 
 	recentFiles: RecentFile[] = [];
 
@@ -41,11 +39,6 @@ export class WelcomeComponent implements OnInit {
 
 	openFile() {
 		this.electronService.send('open-file');
-	}
-
-	@HostListener('click')
-	handleClick() {
-		this.clickEvent.next();
 	}
 
 }
