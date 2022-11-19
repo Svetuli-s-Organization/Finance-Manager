@@ -10,21 +10,38 @@
     "module": "es2020",
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "lib": [
       "es2018",
       "dom"
-		],
-		"paths": {
-      "@root/*": ["../../*"],
-      "@electron-app/*": ["../../electron-app/*"],
-			"@app/*": ["app/*"],
-			"@structures/*": ["app/structures/*"],
-			"@utils/*": ["app/utils/*"],
-			"@core/*": ["app/core/*"],
-			"@welcome/*": ["app/welcome/*"],
-			"@titlebar/*": ["app/titlebar/*"],
-		}
+    ],
+    "paths": {
+      "@root/*": [
+        "../../*"
+      ],
+      "@electron-app/*": [
+        "../../electron-app/*"
+      ],
+      "@app/*": [
+        "app/*"
+      ],
+      "@structures/*": [
+        "app/structures/*"
+      ],
+      "@utils/*": [
+        "app/utils/*"
+      ],
+      "@core/*": [
+        "app/core/*"
+      ],
+      "@welcome/*": [
+        "app/welcome/*"
+      ],
+      "@titlebar/*": [
+        "app/titlebar/*"
+      ]
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
