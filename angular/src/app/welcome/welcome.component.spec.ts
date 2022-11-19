@@ -96,13 +96,6 @@ describe('WelcomeComponent', () => {
 			expect(sendSpy).toHaveBeenCalledWith('open-file');
 			expect(sendSpy).toHaveBeenCalledTimes(1);
 		});
-
-		it(`#handleClick should emit to the #clickEvent Output`, () => {
-			component.clickEvent.subscribe(() => {
-				expect(true).toBeTrue();
-			});
-			component.handleClick();
-		});
 	});
 
 	describe(`template`, () => {
