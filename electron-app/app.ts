@@ -37,7 +37,8 @@ export const whenReady = () => {
 		win.loadFile(path.join(__dirname, './angular/index.html'));
 	} else {
 		console.log('DEV');
-		win.loadURL('http://localhost:4200');
+		// Logic for loading the welcome or the main screen
+		win.loadURL('http://localhost:4200/welcome');
 		win.webContents.toggleDevTools();
 	}
 
