@@ -13,13 +13,9 @@ export class AppComponent implements OnInit {
 	appClickSubject: Subject<void> = new Subject();
 	appClick: Observable<void> = this.appClickSubject.asObservable();
 
-	showWelcome: boolean;
-
 	constructor() {}
 
 	ngOnInit() {
-		// Logic for showing the welcome or not
-		this.showWelcome = true;
 	}
 
 	sendClickToMenu() {

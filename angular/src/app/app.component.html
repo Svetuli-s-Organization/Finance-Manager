@@ -1,4 +1,4 @@
 <app-titlebar [focusLose]="appClick"></app-titlebar>
 <div class="app-wrapper" (click)="sendClickToMenu()">
-	<app-welcome *ngIf="showWelcome"></app-welcome>
+	<router-outlet></router-outlet>
 </div>
