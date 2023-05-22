@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { TitlebarComponent } from './titlebar/titlebar.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
+// Component stubs
+import { RouterOutletStub } from '@utils/testing/router.stub';
+
 @Component({
 	selector: 'app-titlebar',
 	template: ``,
@@ -35,6 +38,7 @@ describe('AppComponent', () => {
 				AppComponent,
 				TitlebarComponentStub,
 				WelcomeComponentStub,
+				RouterOutletStub,
 			],
 		}).compileComponents();
 	});
