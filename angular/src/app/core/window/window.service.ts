@@ -2,7 +2,7 @@ import { ClassProvider, FactoryProvider, InjectionToken, PLATFORM_ID, Injectable
 import { isPlatformBrowser } from '@angular/common';
 
 /** Create a new injection token for injecting the window into a component. */
-export const WINDOW = new InjectionToken('WindowToken');
+export const WINDOW = new InjectionToken<Window | Object>('WindowToken');
 
 /** Define abstract class for obtaining reference to the global window object. */
 export abstract class WindowRef {
