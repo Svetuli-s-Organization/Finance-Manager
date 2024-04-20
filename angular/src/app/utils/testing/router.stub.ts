@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { NavigationExtras, RouterOutlet } from "@angular/router";
 
 @Component({
 	selector: 'router-outlet',
@@ -8,3 +8,11 @@ import { RouterOutlet } from "@angular/router";
 })
 export class RouterOutletStub {
 }
+
+export interface RouterStub {
+	navigate(commands: any[], extras?: NavigationExtras): any;
+}
+
+export const getRouterSpy = () => jasmine.createSpyObj<RouterStub>('routerSpy', {
+	navigate: (commands: any[], extras?: NavigationExtras) => { },
+});

@@ -1,5 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, Menu } from 'electron';
-import path from 'path';
+import path from 'node:path';
+import { readFile } from 'node:fs/promises';
 
 // External libraries
 import Store from 'electron-store';
@@ -63,8 +64,8 @@ function handleRendererCommunication(win: BrowserWindow) {
 	 */
 	const ipcMainOnce: typeof ipcMain.once =
 		isProd() ?
-		ipcMain.once.bind(ipcMain) :
-		ipcMain.on.bind(ipcMain);
+			ipcMain.once.bind(ipcMain) :
+			ipcMain.on.bind(ipcMain);
 
 	ipcMainOnce('renderer-ready', () => {
 		win.webContents.send('window-maximize');
@@ -83,13 +84,35 @@ function handleRendererCommunication(win: BrowserWindow) {
 	});
 
 	ipcMain.on('open-file', async () => {
-		const value = await dialog.showOpenDialog(win, { properties: ['openFile'], filters: [{ name: 'Finance Manager File',  extensions: ['fmn'] }] });
+		const value = await dialog.showOpenDialog(win, { properties: ['openFile'], filters: [{ name: 'Finance Manager File', extensions: ['fmn'] }] });
 		if (!value.canceled) {
 			const file = value.filePaths[0];
 			const recentFilePaths = metadataStore.get('recentFilePaths');
 			const newRecentFilePaths = Array.from(new Set([file, ...recentFilePaths])).slice(0, 4);
 			metadataStore.set('recentFilePaths', newRecentFilePaths);
 			win.webContents.send('user-metadata', metadataStore.store);
+		}
+	});
+
+	ipcMain.on('get-file-by-path', async (_, filePath) => {
+		if (typeof filePath !== 'string') {
+			console.error(`Expected filePath to be of type 'string' but it's type is ${typeof filePath}`)
+			return;
+		}
+
+		try {
+			const resolvedFilePath = path.resolve(filePath);
+			const contents = await readFile(resolvedFilePath, { encoding: "utf-8" });
+			if (!contents?.length) {
+				console.error('No content in file');
+				return;
+			}
+			// TODO: Validate data
+			const data = JSON.parse(contents)
+			win.webContents.send('file-contents', data);
+		} catch (error) {
+			// TODO: handle file not found or other expected errors and log accordingly
+			console.error(error);
 		}
 	});
 

@@ -9,7 +9,8 @@
         <li class="separator horizontal"></li>
         <li class="list-item">Recent files:</li>
         <ul class="list second-lever-list" id="recent-files-list">
-          <li class="list-item clickable" *ngFor="let recentFile of recentFiles">
+          <li class="list-item clickable" *ngFor="let recentFile of recentFiles"
+            (click)="handleSelectRecentFile(recentFile)">
             <div class="list-item-file-name">{{ recentFile.name }}</div>
             <div class="list-item-file-full-path">{{ recentFile.fullPath }}</div>
           </li>
