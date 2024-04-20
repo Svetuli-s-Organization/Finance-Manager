@@ -1,9 +1,14 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Services
 import { WINDOW } from '@core/window/window.service';
 import { UserService } from '@core/user/user.service';
 import { ElectronService } from '@core/electron/electron.service';
+import { FileService } from '@core/file/file.service';
+
+// Classes and Interfaces
+import { AppFile } from '@structures/file';
 
 @Component({
 	selector: 'app-welcome',
@@ -16,8 +21,10 @@ export class WelcomeComponent implements OnInit {
 
 	constructor(
 		@Inject(WINDOW) private window: Window,
+		private router: Router,
 		private electronService: ElectronService,
 		private userService: UserService,
+		private fileService: FileService,
 	) { }
 
 	ngOnInit() {
@@ -35,10 +42,19 @@ export class WelcomeComponent implements OnInit {
 				this.recentFiles = [];
 			}
 		});
+
+		this.electronService.on('file-contents', (fileContents: AppFile) => {
+			this.fileService.file = fileContents;
+		});
 	}
 
 	openFile() {
 		this.electronService.send('open-file');
+	}
+
+	handleSelectRecentFile(recentFile: RecentFile) {
+		this.electronService.send('get-file-by-path', recentFile.fullPath);
+		this.router.navigate(['/main']);
 	}
 
 }

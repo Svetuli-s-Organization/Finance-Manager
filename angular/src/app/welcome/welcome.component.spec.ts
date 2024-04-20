@@ -1,4 +1,5 @@
 import { DebugElement } from '@angular/core';
+import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
@@ -6,13 +7,15 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { WINDOW } from '@core/window/window.service';
 import { ElectronService } from '@app/core/electron/electron.service';
 import { UserService } from '@core/user/user.service';
+import { FileService } from '@core/file/file.service';
 // Service Stubs
-import { ElectronServiceStub } from '@app/core/electron/electron.service.stub';
+import { getRouterSpy, RouterStub } from '@utils/testing/router.stub';
+import { ElectronServiceStubInterface, getElectronServiceSpy } from '@core/electron/electron.service.stub';
 import { getUserServiceStub } from '@core/user/user.service.stub';
 import { WindowStub } from '@core/window/window.stub';
 
 // Components
-import { WelcomeComponent } from './welcome.component';
+import { RecentFile, WelcomeComponent } from './welcome.component';
 
 // Classes and Interfaces
 import { UserMetadata } from '@root/shared/types';
@@ -21,21 +24,28 @@ describe('WelcomeComponent', () => {
 	let component: WelcomeComponent;
 	let fixture: ComponentFixture<WelcomeComponent>;
 
-	let electronService: ElectronService;
+	let routerSpy: jasmine.SpyObj<RouterStub>;
+	let electronServiceSpy: jasmine.SpyObj<ElectronServiceStubInterface>;
 	let userService: UserService;
+	let fileService: FileService;
 	let window: Window;
 
 	const { userServiceStub, userMetadataSubject } = getUserServiceStub();
 
 	beforeEach(async () => {
+		routerSpy = getRouterSpy();
+		electronServiceSpy = getElectronServiceSpy();
+
 		await TestBed.configureTestingModule({
 			declarations: [
 				WelcomeComponent,
 			],
 			providers: [
 				{ provide: WINDOW, useClass: WindowStub },
-				{ provide: ElectronService, useClass: ElectronServiceStub },
+				{ provide: Router, useValue: routerSpy },
+				{ provide: ElectronService, useValue: electronServiceSpy },
 				{ provide: UserService, useValue: userServiceStub },
+				FileService,
 			],
 		}).compileComponents();
 	});
@@ -44,8 +54,8 @@ describe('WelcomeComponent', () => {
 		fixture = TestBed.createComponent(WelcomeComponent);
 		component = fixture.componentInstance;
 
-		electronService = TestBed.inject(ElectronService);
 		userService = TestBed.inject(UserService);
+		fileService = TestBed.inject(FileService);
 		window = TestBed.inject(WINDOW) as Window;
 	});
 
@@ -91,10 +101,28 @@ describe('WelcomeComponent', () => {
 		});
 
 		it(`#openFile should send event to channel "open-file" using the ElectronService`, () => {
-			const sendSpy = spyOn(electronService, 'send');
 			component.openFile();
-			expect(sendSpy).toHaveBeenCalledWith('open-file');
-			expect(sendSpy).toHaveBeenCalledTimes(1);
+			expect(electronServiceSpy.send).toHaveBeenCalledWith('open-file');
+			expect(electronServiceSpy.send).toHaveBeenCalledTimes(1);
+		});
+
+		describe(`#handleSelectRecentFile`, () => {
+			const recentFile: RecentFile = {
+				name: 'file-1',
+				fullPath: "path/to/file/file-1",
+			};
+
+			beforeEach(() => {
+				component.handleSelectRecentFile(recentFile);
+			});
+
+			it(`should send the file's full path to the main process`, () => {
+				expect(electronServiceSpy.send).toHaveBeenCalledOnceWith('get-file-by-path', recentFile.fullPath);
+			});
+
+			it(`should navigate to /main`, () => {
+				expect(routerSpy.navigate).toHaveBeenCalledOnceWith(['/main']);
+			});
 		});
 	});
 
@@ -113,15 +141,30 @@ describe('WelcomeComponent', () => {
 			expect(openFileSpy).toHaveBeenCalled();
 		});
 
+		it(`should call #handleSelectRecentFile when a file is clicked`, () => {
+			const handleSelectRecentFileSpy = spyOn(component, 'handleSelectRecentFile');
+			userMetadataSubject.next({
+				recentFilePaths: [
+					'folder-1/file-1.fmn',
+					'folder-1/file-2.fmn',
+				],
+			});
+			fixture.detectChanges();
+
+			const firstRecentFile = de.query(By.css('#recent-files-list .list-item:first-child'));
+			firstRecentFile.nativeElement.click();
+			expect(handleSelectRecentFileSpy).toHaveBeenCalledWith(component.recentFiles[0]);
+		});
+
 		describe(`recent files`, () => {
 			const getRecentFilesList = () => de.query(By.css('#recent-files-list'));
 			const getRecentFilesListItems = (recentFilesList: DebugElement) => recentFilesList.queryAll(By.css('li'));
 
 			it(`should display #recentFiles when it exists`, () => {
 				component.recentFiles = [
-					{ name: 'file-1.fmn', fullPath: 'path-a/file-1.fmn'},
-					{ name: 'file-2.fmn', fullPath: 'path-a/file-2.fmn'},
-					{ name: 'file.fmn', fullPath: 'path-b/file.fmn'},
+					{ name: 'file-1.fmn', fullPath: 'path-a/file-1.fmn' },
+					{ name: 'file-2.fmn', fullPath: 'path-a/file-2.fmn' },
+					{ name: 'file.fmn', fullPath: 'path-b/file.fmn' },
 				];
 				fixture.detectChanges();
 
@@ -137,7 +180,7 @@ describe('WelcomeComponent', () => {
 
 			it(`should not display #recentFiles`, () => {
 				component.recentFiles = [
-					{ name: 'file.fmn', fullPath: 'path-b/file.fmn'},
+					{ name: 'file.fmn', fullPath: 'path-b/file.fmn' },
 				];
 				fixture.detectChanges();
 
