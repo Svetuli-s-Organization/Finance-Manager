@@ -4,9 +4,8 @@ import { NgZone } from '@angular/core';
 // Services
 import { UserService } from './user.service';
 import { ElectronService } from '@core/electron/electron.service';
-
 // Service stubs
-import { ElectronServiceStub } from '@core/electron/electron.service.stub';
+import { ElectronServiceStub, ListenerFunction } from '@core/electron/electron.service.stub';
 
 // Classes and Interfaces
 import { RendererAPIOnFn, RendererAPISendFn } from '@electron-app/preload';
@@ -40,7 +39,6 @@ describe('UserService', () => {
 	});
 
 	describe(`constructor`, () => {
-		type ListenerFunction = (data: any) => void;
 		let sendSpy: jasmine.Spy<RendererAPISendFn>;
 		let onSpy: jasmine.Spy<RendererAPIOnFn>;
 
@@ -55,7 +53,7 @@ describe('UserService', () => {
 			initService();
 
 			sendSpy = spyOn(electronService, 'send');
-			onSpy = spyOn(electronService, 'on').and.callFake((channel: string, listener: ListenerFunction) => {
+			onSpy = spyOn(electronService, 'on').and.callFake((_, listener: ListenerFunction) => {
 				listener(mockMetadata);
 			});
 		});

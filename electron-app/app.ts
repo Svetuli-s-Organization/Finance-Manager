@@ -9,6 +9,7 @@ import Store from 'electron-store';
 import { UserMetadata } from '../shared/types';
 
 import { isProd } from './environment';
+import { isFileNotFoundError } from './utils/error';
 
 const metadataStore = new Store<UserMetadata>({
 	name: 'metadata',
@@ -67,6 +68,28 @@ function handleRendererCommunication(win: BrowserWindow) {
 			ipcMain.once.bind(ipcMain) :
 			ipcMain.on.bind(ipcMain);
 
+	const getRecentFilePaths = () => metadataStore.get('recentFilePaths');
+
+	const setRecentFilePaths = (newRecentFilePaths: string[]) => {
+		const limit = 4;
+		metadataStore.set('recentFilePaths', newRecentFilePaths.slice(0, limit));
+		win.webContents.send('user-metadata', metadataStore.store);
+	};
+
+	const updateRecentFilePaths = (newFilePath: string) => {
+		const recentFilePaths = getRecentFilePaths();
+		const newRecentFilePaths = Array.from(new Set([newFilePath, ...recentFilePaths]));
+		setRecentFilePaths(newRecentFilePaths);
+	};
+
+	const removeFromRecentFilePaths = (filePath: string) => {
+		const recentFilePaths = getRecentFilePaths();
+		const set = new Set(recentFilePaths);
+		set.delete(filePath);
+		const newRecentFilePaths = Array.from(set);
+		setRecentFilePaths(newRecentFilePaths);
+	}
+
 	ipcMainOnce('renderer-ready', () => {
 		win.webContents.send('window-maximize');
 
@@ -87,10 +110,7 @@ function handleRendererCommunication(win: BrowserWindow) {
 		const value = await dialog.showOpenDialog(win, { properties: ['openFile'], filters: [{ name: 'Finance Manager File', extensions: ['fmn'] }] });
 		if (!value.canceled) {
 			const file = value.filePaths[0];
-			const recentFilePaths = metadataStore.get('recentFilePaths');
-			const newRecentFilePaths = Array.from(new Set([file, ...recentFilePaths])).slice(0, 4);
-			metadataStore.set('recentFilePaths', newRecentFilePaths);
-			win.webContents.send('user-metadata', metadataStore.store);
+			updateRecentFilePaths(file);
 		}
 	});
 
@@ -100,19 +120,27 @@ function handleRendererCommunication(win: BrowserWindow) {
 			return;
 		}
 
+		const resolvedFilePath = path.resolve(filePath);
+
 		try {
-			const resolvedFilePath = path.resolve(filePath);
 			const contents = await readFile(resolvedFilePath, { encoding: "utf-8" });
 			if (!contents?.length) {
 				console.error('No content in file');
 				return;
 			}
+			updateRecentFilePaths(resolvedFilePath);
+
 			// TODO: Validate data
-			const data = JSON.parse(contents)
+			const data = JSON.parse(contents);
 			win.webContents.send('file-contents', data);
 		} catch (error) {
-			// TODO: handle file not found or other expected errors and log accordingly
-			console.error(error);
+
+			if (isFileNotFoundError(error)) {
+				console.error(error);
+				removeFromRecentFilePaths(resolvedFilePath);
+			} else {
+				console.error(`Error opening file with path ${filePath}`, error);
+			}
 		}
 	});
 
