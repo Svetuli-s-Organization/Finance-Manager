@@ -7,7 +7,6 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { WINDOW } from '@core/window/window.service';
 import { ElectronService } from '@app/core/electron/electron.service';
 import { UserService } from '@core/user/user.service';
-import { FileService } from '@core/file/file.service';
 // Service Stubs
 import { getRouterSpy, RouterStub } from '@utils/testing/router.stub';
 import { ElectronServiceStubInterface, getElectronServiceSpy } from '@core/electron/electron.service.stub';
@@ -27,7 +26,6 @@ describe('WelcomeComponent', () => {
 	let routerSpy: jasmine.SpyObj<RouterStub>;
 	let electronServiceSpy: jasmine.SpyObj<ElectronServiceStubInterface>;
 	let userService: UserService;
-	let fileService: FileService;
 	let window: Window;
 
 	const { userServiceStub, userMetadataSubject } = getUserServiceStub();
@@ -45,7 +43,6 @@ describe('WelcomeComponent', () => {
 				{ provide: Router, useValue: routerSpy },
 				{ provide: ElectronService, useValue: electronServiceSpy },
 				{ provide: UserService, useValue: userServiceStub },
-				FileService,
 			],
 		}).compileComponents();
 	});
@@ -55,7 +52,6 @@ describe('WelcomeComponent', () => {
 		component = fixture.componentInstance;
 
 		userService = TestBed.inject(UserService);
-		fileService = TestBed.inject(FileService);
 		window = TestBed.inject(WINDOW) as Window;
 	});
 

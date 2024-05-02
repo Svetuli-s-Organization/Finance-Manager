@@ -1,8 +1,8 @@
 import { contextBridge, ipcRenderer } from 'electron';
 import * as path from 'path';
 
-export type RendererAPIOnFn = <T>(channel: string, listener: (data: T) => void) => void;
-export type RendererAPISendFn = <T>(channel: string, data?: T) => void;
+export type RendererAPIOnFn = <T>(channel: string, listener: (data: T) => any) => any;
+export type RendererAPISendFn = <T>(channel: string, data?: T) => any;
 export interface RendererAPIPath {
 	basename: (path: string, ext?: string) => string;
 };

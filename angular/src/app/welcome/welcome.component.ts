@@ -5,10 +5,6 @@ import { Router } from '@angular/router';
 import { WINDOW } from '@core/window/window.service';
 import { UserService } from '@core/user/user.service';
 import { ElectronService } from '@core/electron/electron.service';
-import { FileService } from '@core/file/file.service';
-
-// Classes and Interfaces
-import { AppFile } from '@structures/file';
 
 @Component({
 	selector: 'app-welcome',
@@ -24,7 +20,6 @@ export class WelcomeComponent implements OnInit {
 		private router: Router,
 		private electronService: ElectronService,
 		private userService: UserService,
-		private fileService: FileService,
 	) { }
 
 	ngOnInit() {
@@ -41,10 +36,6 @@ export class WelcomeComponent implements OnInit {
 			} else {
 				this.recentFiles = [];
 			}
-		});
-
-		this.electronService.on('file-contents', (fileContents: AppFile) => {
-			this.fileService.file = fileContents;
 		});
 	}
 
