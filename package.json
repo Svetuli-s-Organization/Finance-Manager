@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/Ftujio/Finance-Manager#readme",
   "dependencies": {
-    "electron": "^23.3.13"
+    "electron": "^35.7.5"
   }
 }
